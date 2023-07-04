@@ -8,5 +8,12 @@ Intelligent Travel Assistant
 4. Vishnu Nambiar
 5. Noah Chin
 
+### Running the current app
+1. Clone /AlgoNavigator directory
+2. Open terminal, cd into /AlgoNavigator
+3. pip install -r requirements.txt
+4. python main.py
+5. Enjoy
+
 ### Demo Video
 
