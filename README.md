@@ -18,5 +18,8 @@ Intelligent Travel Assistant
 4. python main.py (python3 main.py on MacOS)
 5. Enjoy
 
+### Main Objective
+
+
 ### Demo Video
 
