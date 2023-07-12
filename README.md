@@ -19,7 +19,7 @@ Intelligent Travel Assistant
 5. Enjoy
 
 ### Main Objective
-
+1. COOK
 
 ### Demo Video
 
