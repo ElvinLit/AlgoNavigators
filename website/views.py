@@ -3,8 +3,21 @@ from flask_login import login_required, current_user
 from .models import Note
 from . import db
 import json
+import os
+
+from .apikey import apikey 
+
+from langchain.llms import OpenAI
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain, SequentialChain 
+from langchain.memory import ConversationBufferMemory
+from langchain.utilities import WikipediaAPIWrapper 
 
 views = Blueprint('views', __name__)
+
+os.environ['OPENAI_API_KEY'] = apikey
+
+llm = OpenAI(temperature=1)
 
 """
 We are creating the different webpages on our website
@@ -19,10 +32,21 @@ def home():
         if len(note) < 1:
             flash('Note is too short!', category='error')
         else:
-            new_note = Note(data=note, user_id=current_user.id)
+            user_input = note
+            if user_input:
+                prompt_0 = f"You are now a travel agent designed to give me recommendations for my travel plans. Here is some critical information: \
+                {user_input}. Create a potential trip using this information. First, recite the name of the exact \
+                prompt after using the key 'LOCATION'. Second, recite a few potential activities to do at the\
+                location after using the key 'ACTIVITY' for each activity you plan to mention. Third, recite \
+                the number of days for this potential trip using the key 'TRIP_LENGTH'. If neither critical information"
+                response = llm(prompt_0)
+                prompt_1 = f"Use a JSON format to store this information: {response}"
+                response1 = llm(prompt_1)
+                new_note = Note(data=response1, user_id=current_user.id)
             db.session.add(new_note)
             db.session.commit()
             flash('Note added!', category='success')
+
 
     return render_template("home.html", user=current_user)
 
