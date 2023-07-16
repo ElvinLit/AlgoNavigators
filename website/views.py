@@ -38,15 +38,6 @@ def home():
             flash('Note is too short!', category='error')
         else:
             user_input = note
-            '''if user_input:
-                prompt_0 = f"You are now a travel agent designed to give me recommendations for my travel plans. Here is some critical information: \
-                {user_input}. Create a potential trip using this information. First, recite the name of the exact \
-                prompt after using the key 'LOCATION'. Second, recite a few potential activities to do at the\
-                location after using the key 'ACTIVITY' for each activity you plan to mention. Third, recite \
-                the number of days for this potential trip using the key 'TRIP_LENGTH'. If neither critical information"
-                response = llm(prompt_0)
-                prompt_1 = f"Use a JSON format to store this information: {response}"
-                response1 = llm(prompt_1)'''
             if user_input: 
                 prompt_0 = f"You are now a travel agent designed to give me recommendations for my travel plans. Here is some critical information: \
                 {user_input}. Create a potential trip using this information."
@@ -59,6 +50,7 @@ def home():
                     third_activity: str = Field(description="the third activity you want to do at the location")
                     trip_length: str = Field(description="the length of the trip in days")
 
+                # Creates a parser object for Trip class
                 parser = PydanticOutputParser(pydantic_object=Trip)
 
                 prompt = PromptTemplate(
@@ -67,17 +59,17 @@ def home():
                     partial_variables={"format_instructions": parser.get_format_instructions()},
                 )
 
-                _input = prompt.format_prompt(query=prompt_0)
+                # Output in JSON format, needs to be stored in database
+                output = parser.parse(llm(prompt.format_prompt(query=prompt_0).to_string()))
 
-                output = llm(_input.to_string())
+                # Visual text that is displayed on the website
+                note_output = f"Great! Let's visit {output.location}. Here you can {output.first_activity},\
+                {output.second_activity}, {output.third_activity}. You should stay for {output.trip_length}."
 
-                actual_input = parser.parse(output)
-
-                note_output = f"Great! Let's visit {actual_input.location}. Here you can {actual_input.first_activity},\
-                {actual_input.second_activity}, {actual_input.third_activity}. You should stay for {actual_input.trip_length}."
-
+                # Creates new Note object with our information
                 new_note = Note(data=note_output, user_id=current_user.id)
 
+            # Adds our new Note object to the database 
             db.session.add(new_note)
             db.session.commit()
             flash('Note added!', category='success')
