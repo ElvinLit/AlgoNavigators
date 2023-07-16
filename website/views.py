@@ -51,9 +51,12 @@ def home():
                 prompt_0 = f"You are now a travel agent designed to give me recommendations for my travel plans. Here is some critical information: \
                 {user_input}. Create a potential trip using this information."
 
+                #This class allows us to represent the entire trip in JSON
                 class Trip(BaseModel):
                     location: str = Field(description="the location of the trip")
-                    activity: str = Field(description="the activity that you do")
+                    first_activity: str = Field(description="the first activity you want to do at the location")
+                    second_activity: str = Field(description="the second activity you want to do at the location")
+                    third_activity: str = Field(description="the third activity you want to do at the location")
                     trip_length: str = Field(description="the length of the trip in days")
 
                 parser = PydanticOutputParser(pydantic_object=Trip)
@@ -68,8 +71,13 @@ def home():
 
                 output = llm(_input.to_string())
 
-                parser.parse(output)
-                new_note = Note(data=output, user_id=current_user.id)
+                actual_input = parser.parse(output)
+
+                note_output = f"Great! Let's visit {actual_input.location}. Here you can {actual_input.first_activity},\
+                {actual_input.second_activity}, {actual_input.third_activity}. You should stay for {actual_input.trip_length}."
+
+                new_note = Note(data=note_output, user_id=current_user.id)
+
             db.session.add(new_note)
             db.session.commit()
             flash('Note added!', category='success')
