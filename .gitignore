@@ -3,7 +3,7 @@ apikey.py
 instance/database.db
 
 # Byte-compiled / optimized / DLL files
-__pycache__/
+website/__pycache__/
 *.py[cod]
 *$py.class
 
