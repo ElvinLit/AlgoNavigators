@@ -1,21 +1,34 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-    %}
-    <h1 align="center">Notes</h1>
-    <ul class="list-group list-group-flush" id="notes">
-      {% for note in user.notes %}
-      <li class="list-group-item">
-        {{ note.data }}
-        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </li>
-      {% endfor %}
-    </ul>
-    <form method="POST">
-      <textarea name="note" id="note" class="form-control"></textarea>
-      <br />
-      <div align="center">
-        <button type="submit" class="btn btn-primary">Add Note</button>
-      </div>
-    </form>
-    {% endblock %}
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
+
+<h1 align="center" style="margin-block: 10px;" >Your Travel Agent</h1>
+
+<!-- Chatbox -->
+<div id="chatbox" style="height: 50vh; width: 100%; border: 1px solid #aeaeae; overflow: auto;">
+    {% for note in user.notes %}
+        <div class="chat-entry">
+            {{ note.data }}
+            <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Message Box & Button -->
+<form method="POST">
+    <div id="userInput" style="margin-top: 10px;">
+        <textarea name="note" id="userMessage" placeholder="Type a message..." class="form-control"></textarea>
+        <center> <button type="submit" style="margin-top: 10px" lass="btn btn-primary">Send</button> </center>
+    </div>
+</form>
+
+<script src="/static/functions.js"></script>
+
+<style>
+  .chat-entry {
+      border-bottom: 1px solid #cac6c6;
+      padding: 10px;
+  }
+</style>
+
+{% endblock %}
