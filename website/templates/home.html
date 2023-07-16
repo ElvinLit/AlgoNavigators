@@ -23,6 +23,8 @@
             <textarea name="note" id="userMessage" placeholder="Type a message..." class="form-control"></textarea>
             <center>
                 <button type="submit" style="margin-top: 10px" class="btn btn-primary">Send</button>
+                <span style="margin-left: 5px;"></span> <!-- Add a small space here -->
+                <button type="button" style="margin-top: 10px" class="btn btn-primary" onClick="deleteAllChats()">Start New Conversation</button>
             </center>
         </div>
     </form>
@@ -35,4 +37,12 @@
             padding: 10px;
         }
     </style>
+
+    <script>
+        function deleteAllChats() {
+            // Clear the chatbox HTML content
+            var chatbox = document.getElementById("chatbox");
+            chatbox.innerHTML = "";
+        }
+    </script>
 {% endblock %}
