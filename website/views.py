@@ -67,7 +67,7 @@ def home():
                 {output.second_activity}, {output.third_activity}. You should stay for {output.trip_length}."
 
                 # Creates new Note object with our information
-                new_note = Note(data=note_output, user_id=current_user.id)
+                new_note = Note(data=note_output, activities=[f"{output.first_activity}"], user_id=current_user.id)
 
             # Adds our new Note object to the database 
             db.session.add(new_note)

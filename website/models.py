@@ -1,6 +1,8 @@
 from . import db # importing from . means that we are importing from current directory location
 from flask_login import UserMixin
 from sqlalchemy.sql import func # func gets current date and time 
+from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy import JSON
 """
 We are making our database here
 """
@@ -8,6 +10,7 @@ We are making our database here
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(10000))
+    activities = db.Column(JSON)
     db.Column(db.DateTime(timezone=True), default=func.now)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id')) # Matches with class User's id
 
