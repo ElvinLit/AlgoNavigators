@@ -1,6 +1,6 @@
 # local environment file
 apikey.py
-instance/database.db
+instance/database.db/
 
 # Byte-compiled / optimized / DLL files
 website/__pycache__/
