@@ -9,14 +9,15 @@ from .apikey import apikey
 
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain, SequentialChain 
+from langchain.chains import LLMChain, SequentialChain, ConversationChain
 from langchain.memory import ConversationBufferMemory
 from langchain.utilities import WikipediaAPIWrapper 
 
 #imports for data structures
 from langchain.output_parsers import PydanticOutputParser
 from pydantic import BaseModel, Field, validator
-from typing import List
+from typing import List, Dict, Any
+from langchain.memory import ChatMessageHistory
 
 views = Blueprint('views', __name__)
 
@@ -28,9 +29,33 @@ llm = OpenAI(temperature=1)
 We are creating the different webpages on our website
 """
 
+history = ChatMessageHistory()
+output = ""
+
+TEMPLATE = "You are now a personal travel agent that will ONLY responds \
+    to requests related to these topics: inquiries about being a being a travel \
+    agent, inquiries about a potential trip, and inquiries about a trip's location, \
+    activities, and trip length. If I ask you to plan a trip for me, I must mention \
+    these two FACTORS: 1. Where I would like to go 2. What I enjoy doing on trips. \
+    If I do not mention these FACTORS, you will tell me to provide you with the \
+    FACTORS. Otherwise, you must respond with this specific format: 'Great! Let's \
+    take a trip to (location I provided). Here, you can do the (activities I am \
+    interested in). You will be on this trip for (An ideal length of time for \
+    this trip in days). Do not answer questions unrelated to traveling."
+
+conversation = ConversationChain(
+    llm=llm, 
+    verbose=True, 
+    memory=ConversationBufferMemory()
+)
+
+conversation.predict(input=TEMPLATE)
+
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+    new_conversation = True
+
     if request.method == 'POST':
         note = request.form.get('note')
         
@@ -38,36 +63,14 @@ def home():
             flash('Note is too short!', category='error')
         else:
             user_input = note
-            if user_input: 
-                prompt_0 = f"You are now a travel agent designed to give me recommendations for my travel plans. Here is some critical information: \
-                {user_input}. Create a potential trip using this information."
 
-                #This class allows us to represent the entire trip in JSON
-                class Trip(BaseModel):
-                    location: str = Field(description="the location of the trip")
-                    first_activity: str = Field(description="the first activity you want to do at the location")
-                    second_activity: str = Field(description="the second activity you want to do at the location")
-                    third_activity: str = Field(description="the third activity you want to do at the location")
-                    trip_length: str = Field(description="the length of the trip in days")
+            #This class allows us to represent the entire trip in JSON    
+            
+            if user_input:
 
-                # Creates a parser object for Trip class
-                parser = PydanticOutputParser(pydantic_object=Trip)
+                output = conversation.predict(input=user_input)
 
-                prompt = PromptTemplate(
-                    template="Answer the user query.\n{format_instructions}\n{query}\n",
-                    input_variables=["query"],
-                    partial_variables={"format_instructions": parser.get_format_instructions()},
-                )
-
-                # Output in JSON format, needs to be stored in database
-                output = parser.parse(llm(prompt.format_prompt(query=prompt_0).to_string()))
-
-                # Visual text that is displayed on the website
-                note_output = f"Great! Let's visit {output.location}. Here you can {output.first_activity},\
-                {output.second_activity}, {output.third_activity}. You should stay for {output.trip_length}."
-
-                # Creates new Note object with our information
-                new_note = Note(data=note_output, activities=[f"{output.first_activity}"], user_id=current_user.id)
+                new_note = Note(data=output, activities=["temp"], user_id=current_user.id)
 
             # Adds our new Note object to the database 
             db.session.add(new_note)
