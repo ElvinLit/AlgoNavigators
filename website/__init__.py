@@ -13,13 +13,13 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}' # Creates key with database as value
     db.init_app(app) 
 
-    from .views import views
+    from .chat import chat
     from .auth import auth
 
-    app.register_blueprint(views, url_prefix = '/')
+    app.register_blueprint(chat, url_prefix = '/')
     app.register_blueprint(auth, url_prefix = '/')
 
-    from .models import User, Note
+    from .db_objs import User, Note
     
     with app.app_context():
         db.create_all()
