@@ -3,7 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1 align="center" style="margin-block: 10px;">Your Travel Agent</h1>
+    <h1 align="center" style="margin-block: 10px;">AlgoNavigator</h1>
 
     <!-- Chatbox -->
     <div id="chatbox" style="height: 50vh; width: 100%; border: 1px solid #aeaeae; overflow: auto;">
@@ -25,8 +25,13 @@
                 <button type="submit" style="margin-top: 10px" class="btn btn-primary">Send</button>
                 <span style="margin-left: 5px;"></span> <!-- Add a small space here -->
                 <button type="button" style="margin-top: 10px" class="btn btn-primary" onClick="deleteAllChats()">Start New Conversation</button>
+
             </center>
         </div>
+    </form>
+
+    <form action="{{ url_for('views.test') }}" method="get">
+        <button type="submit">Click me!</button>
     </form>
 
     <script src="/static/functions.js"></script>
