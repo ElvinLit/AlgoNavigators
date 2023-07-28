@@ -5,22 +5,8 @@ from . import db
 import json
 import os
 
-from .apikey import apikey 
-
-from langchain.llms import OpenAI
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain, SequentialChain, ConversationChain
-from langchain.memory import ConversationBufferMemory
-from langchain.utilities import WikipediaAPIWrapper 
-
-#imports for data structures
-from langchain.output_parsers import PydanticOutputParser
-from pydantic import BaseModel, Field, validator
-from typing import List, Dict, Any
-from langchain.memory import ChatMessageHistory
-
 planner = Blueprint('planner', __name__)
 
 @planner.route('/planner')
 def my_plans():
-    return "test"
+    return render_template("planner.html", user=current_user)
