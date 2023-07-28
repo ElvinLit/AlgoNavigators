@@ -6,9 +6,15 @@
     <h1 align="center" style="margin-block: 10px;">AlgoNavigator</h1>
 
     <!-- Chatbox -->
-    <div id="chatbox" style="height: 50vh; width: 100%; border: 1px solid #aeaeae; overflow: auto; background-color: #FFF8E7;">
+    <div id="chatbox" style="height: 50vh; width: 100%; overflow: auto; background-color: #FAEBD7;">
         {% for note in user.notes %}
             <div class="chat-entry">
+                <style>
+                    .chat-entry {
+                        border: 2px solid #f0ddc4; 
+                        padding: 15px;
+                    }
+                </style>
                 {{ note.data }}
                 <button type="button" class="close" onClick="deleteNote({{ note.id }})">
                     <span aria-hidden="true">&times;</span>
@@ -20,19 +26,20 @@
     <!-- Message Box & Button -->
     <form method="POST">
         <div id="userInput" style="margin-top: 10px;">
+
             <textarea name="note" id="userMessage" placeholder="Type a message..." class="form-control" style="background-color: #FAEBD7;"></textarea>
             <center>
-                <button type="submit" style="margin-top: 10px; background-color: light;" class="btn btn-outline-primary">Send</button>
+                <button type="submit" style="margin-top: 10px; background-color: light; color: white; border: 1px solid white" class="btn btn-outline-primary">Send</button>
                 <span style="margin-left: 5px;"></span> <!-- Add a small space here -->
-                <button type="button" style="margin-top: 10px; background-color: light;" class="btn btn-outline-primary" onClick="deleteAllNotes()">Delete All Notes</button>
+                <button type="button" style="margin-top: 10px; background-color: light;" class="btn btn-outline-primary" onClick="startNewConversation()">Start New Conversation</button>
             </center>
         </div>
     </form>
     
     
     <script>
-        // Function to delete all notes
-        function deleteAllNotes() {
+        // Function to delete all notes and start new conversation
+        function startNewConversation() {
             fetch("/delete-all-notes", {
                 method: "POST",
                 body: JSON.stringify({}),
@@ -47,20 +54,7 @@
         <button type="submit">Click me!</button>
     </form>
 
-    <script src="/static/functions.js"></script>
 
-    <style>
-        .chat-entry {
-            border-bottom: 1px solid #cac6c6;
-            padding: 10px;
-        }
-    </style>
 
-    <script>
-        function deleteAllChats() {
-            // Clear the chatbox HTML content
-            var chatbox = document.getElementById("chatbox");
-            chatbox.innerHTML = "";
-        }
-    </script>
+
 {% endblock %}
