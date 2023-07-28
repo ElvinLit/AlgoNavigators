@@ -108,5 +108,6 @@ def delete_all_notes():
 
     # Commit the changes to the database
     db.session.commit()
-
+    history = ChatMessageHistory()
+    output = ""
     return jsonify({})
