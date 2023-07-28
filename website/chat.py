@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, session
 from flask_login import login_required, current_user
 from .db_objs import Note
 from . import db
@@ -32,6 +32,9 @@ We are creating the different webpages on our website
 history = ChatMessageHistory()
 output = ""
 
+global find_flight
+find_flight = False
+
 TEMPLATE = "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \
             As a personal travel agent that I am conversating with, at the start of our conversation you will remind me of the three \
@@ -56,12 +59,21 @@ conversation = ConversationChain(
     memory=ConversationBufferMemory()
 )
 
+class Flight_Plan(BaseModel):
+    initial_airport: str = Field(description="The three letter geocode of the airport they will leave from.")
+    final_airport: str = Field(description="The three letter geocode of the airport they will arrive to.")
+    leave_date: str = Field(description="The date in which the travelers will leave in the format YYYY-mm-dd.")
+    arrive_date: str = Field(description="The date in which the travelers will arrive in the format YYYY-mm-dd.")
+    activities: str = Field(description="The list of activities the traveler will do.")
+
 conversation.predict(input=TEMPLATE)
+
 
 @chat.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-    new_conversation = True
+
+    find_flight = session.get('find_flight', False)
 
     if request.method == 'POST':
         note = request.form.get('note')
@@ -79,11 +91,30 @@ def home():
             db.session.commit()
             flash('Note added!', category='success')
 
-    return render_template("home.html", user=current_user)
+    if find_flight == True:
+        query = "Convert the original trip information into JSON."
+        parser = PydanticOutputParser(pydantic_object=Flight_Plan)
+
+        prompt = PromptTemplate(
+            template="\n{format_instructions}\n{query}\n",
+            input_variables=["query"],
+            partial_variables={"format_instructions": parser.get_format_instructions()},
+        )
+        json_output = prompt.format_prompt(query=query)
+        output = conversation.predict(input=json_output.to_string())
+
+        new_note = Note(data=output, activities=["temp"], user_id=current_user.id)
+        db.session.add(new_note)
+        db.session.commit()
+        flash('Note added!', category='success')
+        session['find_flight'] = False
+    
+    return render_template("home.html", user=current_user), find_flight
 
 @chat.route('/test')
 def test():
-    return "test"
+    session['find_flight'] = True
+    return redirect(url_for('chat.home'))
 
 @chat.route('/delete-note', methods=['POST'])
 def delete_note():  
