@@ -6,7 +6,7 @@
     <h1 align="center" style="margin-block: 10px;">AlgoNavigator</h1>
 
     <!-- Chatbox -->
-    <div id="chatbox" style="height: 50vh; width: 100%; border: 1px solid #aeaeae; overflow: auto;">
+    <div id="chatbox" style="height: 50vh; width: 100%; border: 1px solid #aeaeae; overflow: auto; background-color: #FFF8E7;">
         {% for note in user.notes %}
             <div class="chat-entry">
                 {{ note.data }}
@@ -20,14 +20,15 @@
     <!-- Message Box & Button -->
     <form method="POST">
         <div id="userInput" style="margin-top: 10px;">
-            <textarea name="note" id="userMessage" placeholder="Type a message..." class="form-control"></textarea>
+            <textarea name="note" id="userMessage" placeholder="Type a message..." class="form-control" style="background-color: #FAEBD7;"></textarea>
             <center>
-                <button type="submit" style="margin-top: 10px" class="btn btn-outline-primary">Send</button>
+                <button type="submit" style="margin-top: 10px; background-color: light;" class="btn btn-outline-primary">Send</button>
                 <span style="margin-left: 5px;"></span> <!-- Add a small space here -->
-                <button type="button" style="margin-top: 10px" class="btn btn-outline-primary" onClick="deleteAllNotes()">Delete All Notes</button>
+                <button type="button" style="margin-top: 10px; background-color: light;" class="btn btn-outline-primary" onClick="deleteAllNotes()">Delete All Notes</button>
             </center>
         </div>
     </form>
+    
     
     <script>
         // Function to delete all notes
