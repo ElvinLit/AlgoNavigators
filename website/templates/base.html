@@ -34,6 +34,7 @@
         <div class="navbar-nav">
           {% if user.is_authenticated %} <!-- Checks if user is logged in, and show these pages if they are-->
           <a class="nav-item nav-link" id="home" href="/">Home</a>
+          <a class="nav-item nav-link" id="planner" href="/planner">Planner</a>
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
