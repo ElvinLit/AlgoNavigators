@@ -96,3 +96,17 @@ def delete_note():
             db.session.commit()
 
     return jsonify({})
+
+@chat.route('/delete-all-notes', methods=['POST'])
+def delete_all_notes():  
+    # Fetch all notes belonging to the current user
+    user_notes = Note.query.filter_by(user_id=current_user.id).all()
+
+    # Delete all the user's notes
+    for note in user_notes:
+        db.session.delete(note)
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    return jsonify({})
