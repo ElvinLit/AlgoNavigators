@@ -5,6 +5,12 @@ from . import db
 import json
 import os
 
+import pandas as pd
+import numpy as np
+import random
+import tqdm
+import selenium
+
 from .apikey import apikey 
 
 from langchain.llms import OpenAI
@@ -19,6 +25,8 @@ from pydantic import BaseModel, Field, validator
 from typing import List, Dict, Any
 from langchain.memory import ChatMessageHistory
 
+from google_flight_analysis.scrape import *
+
 chat = Blueprint('chat', __name__)
 
 os.environ['OPENAI_API_KEY'] = apikey
@@ -32,8 +40,7 @@ We are creating the different webpages on our website
 history = ChatMessageHistory()
 output = ""
 
-global find_flight
-find_flight = False
+
 
 TEMPLATE = "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \
@@ -64,15 +71,13 @@ class Flight_Plan(BaseModel):
     final_airport: str = Field(description="The three letter geocode of the airport they will arrive to.")
     leave_date: str = Field(description="The date in which the travelers will leave in the format YYYY-mm-dd.")
     arrive_date: str = Field(description="The date in which the travelers will arrive in the format YYYY-mm-dd.")
-    activities: str = Field(description="The list of activities the traveler will do.")
+    activities: str = Field(description="The list of activities the traveler will do as a singular string.")
 
 conversation.predict(input=TEMPLATE)
-
 
 @chat.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-
     find_flight = session.get('find_flight', False)
 
     if request.method == 'POST':
@@ -92,6 +97,9 @@ def home():
             flash('Note added!', category='success')
 
     if find_flight == True:
+        session['find_flight'] = False
+        
+        # Below is the JSON parser
         query = "Convert the original trip information into JSON."
         parser = PydanticOutputParser(pydantic_object=Flight_Plan)
 
@@ -100,15 +108,25 @@ def home():
             input_variables=["query"],
             partial_variables={"format_instructions": parser.get_format_instructions()},
         )
-        json_output = prompt.format_prompt(query=query)
-        output = conversation.predict(input=json_output.to_string())
+        prompt_template_input = prompt.format_prompt(query=query)
+        output = conversation.predict(input=prompt_template_input.to_string())
 
+        # Temporarily putting JSON object as string into the notes
         new_note = Note(data=output, activities=["temp"], user_id=current_user.id)
         db.session.add(new_note)
         db.session.commit()
         flash('Note added!', category='success')
-        session['find_flight'] = False
-    
+        
+        #Attempt at getting the parser to work
+        
+
+        obj = parser.parse(output)
+
+        result = Scrape(obj.initial_airport, obj.final_airport, obj.leave_date, obj.arrive_date)
+        print(result)
+        ScrapeObjects(result)
+        print(result.data)
+
     return render_template("home.html", user=current_user), find_flight
 
 @chat.route('/test')
