@@ -19,7 +19,7 @@ from pydantic import BaseModel, Field, validator
 from typing import List, Dict, Any
 from langchain.memory import ChatMessageHistory
 
-chat = Blueprint('views', __name__)
+chat = Blueprint('chat', __name__)
 
 os.environ['OPENAI_API_KEY'] = apikey
 

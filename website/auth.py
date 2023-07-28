@@ -17,7 +17,7 @@ def login():
             if check_password_hash(user.password, password): # Compares equality with first and second parameter
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True) # Sets a user as being logged in
-                return redirect(url_for('views.home'))
+                return redirect(url_for('chat.home'))
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
@@ -58,6 +58,6 @@ def sign_up():
             db.session.commit()
             login_user(user, remember=True)
             flash('Account created!', category='success')
-            return redirect(url_for('views.home')) # Redirecting to our homepage
+            return redirect(url_for('chat.home')) # Redirecting to our homepage
 
     return render_template("sign_up.html", user=current_user)
