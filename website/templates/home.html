@@ -8,9 +8,14 @@
     <!-- Chatbox -->
     <style>
         .chat-entry {
-            border: 2px solid #f0ddc4; 
+            margin-top: 4px;
+            margin-bottom: 4px;
+            margin-left: 4px;
+            margin-right: 4px;
+            border: 2px solid white; 
             padding: 15px;
             border-radius: 15px; /* Adjust the value to control the roundness of the edges */
+            background-color: #004b7a;
         }
     
         #chatbox {
@@ -20,7 +25,7 @@
             overflow: auto;
             background-color: transparent;
             color: white;
-            border-radius: 15px; /* Adjust the value to control the roundness of the edges */
+            border-radius: 20px; /* Adjust the value to control the roundness of the edges */
         }
     </style>
     
@@ -34,9 +39,6 @@
             </div>
         {% endfor %}
     </div>
-    
-    <!-- Rest of the code remains the same -->
-    
 
     <!-- Message Box & Button -->
     <style>
@@ -46,8 +48,6 @@
             border-radius: 15px; /* Adjust the value to control the roundness of the edges */
         }
     </style>
-    
-    <!-- Rest of your code remains the same -->
     
     <form method="POST">
         <div id="userInput" style="margin-top: 10px;">
