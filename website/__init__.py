@@ -17,11 +17,13 @@ def create_app():
     from .auth import auth
     from .planner import planner
     from .home import homepage
+    from .about import about
 
     app.register_blueprint(chat, url_prefix = '/')
     app.register_blueprint(auth, url_prefix = '/')
     app.register_blueprint(planner, url_prefix = '/')
     app.register_blueprint(homepage, url_prefix = '/')
+    app.register_blueprint(about, url_prefix = '/')
 
     from .db_objs import User, Note
     
