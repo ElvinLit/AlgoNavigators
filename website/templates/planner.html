@@ -10,8 +10,8 @@
     <div class="card" style="width: 18rem;">
       <img src="https://cdn.britannica.com/36/4336-004-6BD81071/Flag-Italy.jpg" class="card-img-top" alt="">
       <div class="card-body">
-        <h5 class="card-title">Trip to {Spain}</h5>
-        <p class="card-text">From DFW to BAR</p>
+        <h5 class="card-title" style="color: black;">Trip to {country}</h5>
+        <p class="card-text" style="color: black;">From DFW to BAR</p>
         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tripModal1">View Trip Details</a>
       </div>
     </div>
@@ -19,8 +19,8 @@
     <div class="card" style="width: 18rem;">
       <img src="https://cdn.britannica.com/36/4336-004-6BD81071/Flag-Italy.jpg" class="card-img-top" alt="">
       <div class="card-body">
-        <h5 class="card-title">Trip to {Spain}</h5>
-        <p class="card-text">From DFW to BAR</p>
+        <h5 class="card-title" style="color: black;">Trip to {country}</h5>
+        <p class="card-text" style="color: black;">From DFW to BAR</p>
         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tripModal2">View Trip Details</a>
       </div>
     </div>
@@ -32,17 +32,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tripModalLabel1">Trip Details for {Spain}</h5>
+        <h5 class="modal-title" id="tripModalLabel1" style="color: black;">Trip Details for {country}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <!-- Add your trip details content here -->
-        <!-- Example: -->
-        <p>Departure: DFW</p>
-        <p>Arrival: BAR</p>
-        <p>Other details...</p>
+        <p style="color: black;">Your flight from DFW to BAR</p>
+        <h6 style="color: black;">Activities</h6>
+        <p style="color: black;">Activity 1</p>
+        <p style="color: black;">Activity 2</p>
+        <h6 style="color: black;">Restaurants</h6>
+        <p style="color: black;">Restaurant 1</p>
+        <p style="color: black;">Restaurant 2</p>
       </div>
     </div>
   </div>
@@ -53,17 +56,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tripModalLabel2">Trip Details for {Spain}</h5>
+        <h5 class="modal-title" id="tripModalLabel2" style="color: black;">Trip Details for {country}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <!-- Add your trip details content here -->
-        <!-- Example: -->
-        <p>Departure: DFW</p>
-        <p>Arrival: BAR</p>
-        <p>Other details...</p>
+        <p style="color: black;">Your flight from DFW to BAR</p>
+        <h6 style="color: black;">Activities</h6>
+        <p style="color: black;">Activity 1</p>
+        <p style="color: black;">Activity 2</p>
+        <h6 style="color: black;">Restaurants</h6>
+        <p style="color: black;">Restaurant 1</p>
+        <p style="color: black;">Restaurant 2</p>
       </div>
     </div>
   </div>
@@ -83,6 +89,11 @@
 
   .card {
     margin-right: 10px;
+  }
+
+  /* Add the following style to make text color black */
+  .card-title, .card-text, .modal-title, .modal-body {
+    color: black;
   }
 </style>
 
