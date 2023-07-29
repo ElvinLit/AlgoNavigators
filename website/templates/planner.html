@@ -1,16 +1,48 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 
 {% block title %}Planner{% endblock %}
 
 {% block content %}
 <br></br>
 
-<div class="card" style="width: 18rem;">
-    <img src="https://cdn.britannica.com/36/4336-004-6BD81071/Flag-Italy.jpg" class="card-img-top" alt="">
-    <div class="card-body">
-      <h5 class="card-title">Trip to {Spain}</h5>
-      <p class="card-text">From DFW to BAR</p>
-      <a href="#" class="btn btn-primary">View Trip Details</a>
+<div class="cards-container">
+  <div class="card-container">
+    <div class="card" style="width: 18rem;">
+      <img src="https://cdn.britannica.com/36/4336-004-6BD81071/Flag-Italy.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title">Trip to {Spain}</h5>
+        <p class="card-text">From DFW to BAR</p>
+        <a href="#" class="btn btn-primary">View Trip Details</a>
+      </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+      <img src="https://cdn.britannica.com/36/4336-004-6BD81071/Flag-Italy.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title">Trip to {Spain}</h5>
+        <p class="card-text">From DFW to BAR</p>
+        <a href="#" class="btn btn-primary">View Trip Details</a>
+      </div>
     </div>
   </div>
+</div>
+
+<style>
+  .cards-container {
+    background-color: transparent; /* Set the container background to transparent */
+    padding: 20px; /* Add some padding to create space between cards and border */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Add a white box shadow to create a thin white border */
+  }
+
+  .card-container {
+    display: flex; /* This will make the cards sit side by side */
+    justify-content: space-between; /* This will add space between the cards */
+  }
+
+  /* Optional: Add margin between the cards */
+  .card {
+    margin-right: 10px;
+  }
+</style>
+
 {% endblock %}
