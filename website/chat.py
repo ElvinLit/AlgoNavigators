@@ -45,9 +45,11 @@ current_date = cdt.date()
 #Chat creation
 history = ChatMessageHistory()
 output = ""
-flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR
+flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
 
-TEMPLATE = "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
+TEMPLATE =  'test'
+"""
+            "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \
             The current date is: {current_date}. It is not currently 2020, this is the actual date at the moment and you will maintain this date throughout the conversation\
             As a personal travel agent that I am conversating with, at the start of our conversation you will remind me of the three \
@@ -65,6 +67,7 @@ TEMPLATE = "You are now a personal travel agent, and will ONLY respond to inquir
             travel time between each. In the third part, you will give me the name of a restaurant that satisfies the criteria I gave you \
             from the questions you asked me, as well as an estimated time to get there from the activities defined earlier. After confirming \
             that all three questions are met, you will respond in the format I just defined. You will do your best in fitting your presentation into one response."
+"""
 
 conversation = ConversationChain(
     llm=llm, 
@@ -130,11 +133,10 @@ def home():
         ScrapeObjects(result)
         print(result.data)
         
-
     return render_template("home.html", user=current_user), find_flight
 
-@chat.route('/test')
-def test():
+@chat.route('/flights')
+def flights():
     session['find_flight'] = flight_boolean
     return redirect(url_for('chat.home'))
 
