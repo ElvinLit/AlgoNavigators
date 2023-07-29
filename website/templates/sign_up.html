@@ -48,8 +48,23 @@
         />
     </div>
     <br />
+    <style>
+        /* Default outline button styles */
+        .btn-custom-outline {
+            margin-top: 10px;
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        /* Button styles on hover */
+        .btn-custom-outline:hover {
+            box-shadow: 0 0 10px 0.2px #00ffa28e;
+            border-color: #00ffa2; /* Change the border color on hover */
+            color: #00ffa2; /* Change the text color on hover */
+        }
+    </style>
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-custom-outline">Submit</button>
 </form>
 {% endblock %}
 
