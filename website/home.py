@@ -7,6 +7,6 @@ import os
 
 homepage = Blueprint('test', __name__)
 
-@homepage.route('/homepage')
+@homepage.route('/')
 def home():
     return render_template("home.html", user=current_user)

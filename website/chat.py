@@ -84,7 +84,7 @@ class Flight_Plan(BaseModel):
 
 conversation.predict(input=TEMPLATE)
 
-@chat.route('/', methods=['GET', 'POST'])
+@chat.route('/chat', methods=['GET', 'POST'])
 @login_required
 def home():
 
