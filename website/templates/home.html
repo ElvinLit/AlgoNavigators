@@ -10,9 +10,21 @@
         .chat-entry {
             border: 2px solid #f0ddc4; 
             padding: 15px;
+            border-radius: 15px; /* Adjust the value to control the roundness of the edges */
+        }
+    
+        #chatbox {
+            height: 50vh;
+            width: 100%;
+            border: 3px solid white;
+            overflow: auto;
+            background-color: transparent;
+            color: white;
+            border-radius: 15px; /* Adjust the value to control the roundness of the edges */
         }
     </style>
-    <div id="chatbox" style="height: 50vh; width: 100%; border: 3px solid white; overflow: auto; background-color: transparent; color: white">
+    
+    <div id="chatbox">
         {% for note in user.notes %}
             <div class="chat-entry">
                 {{ note.data }}
@@ -22,6 +34,9 @@
             </div>
         {% endfor %}
     </div>
+    
+    <!-- Rest of the code remains the same -->
+    
 
     <!-- Message Box & Button -->
     <form method="POST">
