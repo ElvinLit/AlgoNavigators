@@ -39,30 +39,41 @@
     
 
     <!-- Message Box & Button -->
+    <style>
+        /* Apply the same border-radius to the form elements */
+        #userInput textarea,
+        .btn-custom-outline {
+            border-radius: 15px; /* Adjust the value to control the roundness of the edges */
+        }
+    </style>
+    
+    <!-- Rest of your code remains the same -->
+    
     <form method="POST">
         <div id="userInput" style="margin-top: 10px;">
-            <textarea name="note" id="userMessage" placeholder="Type a message..." class="form-control" style="background-color: transparent; color: white; border: 3px solid white;"></textarea>
+            <textarea name="note" id="userMessage" placeholder="Type a message..." class="form-control" style="background-color: transparent; color: white; border: 3px solid white; border-radius: 15px;"></textarea>
             <center>
                 <style>
                     /* Default outline button styles */
                     .btn-custom-outline {
-                      margin-top: 10px;
-                      background-color: transparent;
-                      color: white;
-                      border: 2px solid white;
+                        margin-top: 10px;
+                        background-color: transparent;
+                        color: white;
+                        border: 2px solid white;
                     }
                     /* Button styles on hover */
                     .btn-custom-outline:hover {
-                      border-color: #FFD700; /* Change the border color on hover */
-                      color: #FFD700; /* Change the text color on hover */
+                        border-color: #FFD700; /* Change the border color on hover */
+                        color: #FFD700; /* Change the text color on hover */
                     }
-                  </style>
+                </style>
                 <button type="submit" class="btn btn-custom-outline">Send</button>
                 <span style="margin-left: 5px;"></span> <!-- Add a small space here -->
                 <button type="button" class="btn btn-custom-outline" onClick="startNewConversation()">Start New Conversation</button>
             </center>
         </div>
     </form>
+    
     
     
     <script>
