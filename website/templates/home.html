@@ -40,6 +40,21 @@
         {% endfor %}
     </div>
 
+    <script>
+        // Automatically scroll the chatbox to the bottom when the page is loaded or reloaded
+        document.addEventListener('DOMContentLoaded', function() {
+            var chatbox = document.getElementById('chatbox');
+            chatbox.scrollTop = chatbox.scrollHeight;
+        });
+    </script>
+
+    <style>
+        /* Styling the scrollbar for webkit-based browsers */
+        #chatbox::-webkit-scrollbar {
+        width: 0px; /* Set the width of the scrollbar */
+        }
+    </style>
+
     <!-- Message Box & Button -->
     <style>
         /* Apply the same border-radius to the form elements */
