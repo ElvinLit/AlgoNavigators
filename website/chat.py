@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, session
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session
 from flask_login import login_required, current_user
 from .db_objs import Note
 from . import db
@@ -84,7 +84,7 @@ def home():
         note = request.form.get('note')
         
         if len(note) < 1:
-            flash('Note is too short!', category='error')
+            pass
         else:
             user_input = note            
             if user_input:
@@ -94,7 +94,6 @@ def home():
             # Adds our new Note object to the database 
             db.session.add(new_note)
             db.session.commit()
-            flash('Note added!', category='success')
 
     if find_flight == True:
         session['find_flight'] = False
@@ -115,7 +114,6 @@ def home():
         new_note = Note(data=output, activities=["temp"], user_id=current_user.id)
         db.session.add(new_note)
         db.session.commit()
-        flash('Note added!', category='success')
         
         #Attempt at getting the parser to work
         
