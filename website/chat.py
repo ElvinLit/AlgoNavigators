@@ -41,12 +41,11 @@ We are creating the different webpages on our website
 #Date recognition
 cdt = datetime.today()
 current_date = cdt.date()
-global find_flight
-find_flight = False
 
 #Chat creation
 history = ChatMessageHistory()
 output = ""
+flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR
 
 TEMPLATE = "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \
@@ -86,7 +85,7 @@ conversation.predict(input=TEMPLATE)
 @login_required
 def home():
 
-    find_flight = session.get('find_flight', True)
+    find_flight = session.get('find_flight', not flight_boolean)
 
     if request.method == 'POST':
         note = request.form.get('note')
@@ -103,8 +102,8 @@ def home():
             db.session.add(new_note)
             db.session.commit()
 
-    if find_flight == False:
-        session.pop('find_flight', True)
+    if find_flight == flight_boolean:
+        session.pop('find_flight', not flight_boolean)
         
         # Below is the JSON parser
         query = "Convert the original trip information into JSON. Do not consider any questions regarding JSON unless if the query is formatted exactly like this."
@@ -136,7 +135,7 @@ def home():
 
 @chat.route('/test')
 def test():
-    session['find_flight'] = False
+    session['find_flight'] = flight_boolean
     return redirect(url_for('chat.home'))
 
 @chat.route('/delete-note', methods=['POST'])
