@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1 align="center" style="margin-block: 20px;">AlgoNavigator</h1>
+
+<!-- Global styles for the page -->
+<style>
+    .btn-custom-outline {
+        margin-top: 10px;
+        background-color: transparent;
+        color: white;
+        border: 2px solid white;
+        border-radius: 15px;
+    }
+    .btn-custom-outline:hover {
+        box-shadow: 0 0 10px 0.2px #00ffa2;
+        border-color: #00ffa2;
+        color: #00ffa2;
+    }
+    .chat-entry, #userInput textarea {
+        margin-top: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+        border: 2px solid white;
+        padding: 15px;
+        border-radius: 15px;
+        background-color: #394867;
+    }
+    #chatbox {
+        height: 50vh;
+        width: 100%;
+        border: 3px solid white;
+        overflow: auto;
+        background-color: transparent;
+        color: white;
+        border-radius: 20px;
+    }
+    #chatbox::-webkit-scrollbar {
+        width: 0px;
+    }
+    .colored-modal .modal-content {
+        background-color: #212A3E;
+        color: white;
+        border: 0px solid white;
+        border-radius: 15px;
+        width: 100%;
+        height: 800px;
+        box-shadow: 0 4px 40px black;
+    }
+    .colored-modal .modal-dialog {
+        max-width: 1000px;
+    }
+    .colored-modal .modal-header,
+    .colored-modal .modal-footer {
+        border-bottom: none;
+        border-top: none;
+    }
+    .clickable-box {
+        border: 2px solid white;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .box-text {
+        font-size: 16px;
+        color: white;
+        text-decoration: none;
+    }
+    .box-content {
+        margin-top: 10px;
+    }
+</style>
+
+<!-- Chatbox -->
+<div id="chatbox">
+    {% for note in user.notes %}
+    <div class="chat-entry">
+        {{ note.data }}
+        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Automatic scroll -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var chatbox = document.getElementById('chatbox');
+        chatbox.scrollTop = chatbox.scrollHeight;
+    });
+</script>
+
+<!-- Message Box & Button -->
+<form method="POST">
+    <div id="userInput" style="margin-top: 10px; margin-right: 7px;">
+        <textarea name="note" id="userMessage" placeholder="Type a message..." class="form-control" style="background-color: transparent; color: white;"></textarea>
+        <center>
+            <button type="submit" class="btn btn-custom-outline">Send</button>
+            <span style="margin-left: 5px;"></span>
+            <button type="button" class="btn btn-custom-outline" onClick="startNewConversation()">Start New Conversation</button>
+        </center>
+    </div>
+</form>
+
+<!-- Delete notes script -->
+<script>
+    function startNewConversation() {
+        fetch("/delete-all-notes", {
+            method: "POST",
+            body: JSON.stringify({}),
+        }).then((_res) => {
+            window.location.href = "/";
+        });
+    }
+</script>
+
+<div class="container mt-5 text-center">
+    <form action="{{ url_for('chat.flights') }}" method="get">
+        <button type="button" class="btn btn-custom-outline" data-toggle="modal" data-target="#myModal">Find Flights</button>
+    </form>
+
+    <!-- Modal (Popup) -->
+    <div class="modal fade colored-modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Flights</h4>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body ">
+                <div class="clickable-box" onclick="alert('You clicked the box!')">
+                    <p class="box-text">Jit da Jit da Jittison Jitling Jitmuangnon</p>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-custom-outline" data-dismiss="modal">Close</button>
+            </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

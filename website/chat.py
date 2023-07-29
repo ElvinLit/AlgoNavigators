@@ -133,7 +133,7 @@ def home():
         ScrapeObjects(result)
         print(result.data)
         
-    return render_template("home.html", user=current_user), find_flight
+    return render_template("chat.html", user=current_user), find_flight
 
 @chat.route('/flights')
 def flights():
