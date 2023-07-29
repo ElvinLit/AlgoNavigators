@@ -5,6 +5,8 @@ from . import db
 import json
 import os
 
+from datetime import datetime
+
 import pandas as pd
 import numpy as np
 import random
@@ -36,14 +38,19 @@ llm = OpenAI(temperature=1)
 """
 We are creating the different webpages on our website
 """
+#Date recognition
+cdt = datetime.today()
+current_date = cdt.date()
+global find_flight
+find_flight = False
 
+#Chat creation
 history = ChatMessageHistory()
 output = ""
 
-
-
 TEMPLATE = "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \
+            The current date is: {current_date}. It is not currently 2020, this is the actual date at the moment and you will maintain this date throughout the conversation\
             As a personal travel agent that I am conversating with, at the start of our conversation you will remind me of the three \
             questions that you have. It is important that you remember these three questions, and you will begin by not knowing the \
             answer to these three questions. Throughout our conversation, you will ask me these questions to fill in your memory \
@@ -78,7 +85,8 @@ conversation.predict(input=TEMPLATE)
 @chat.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-    find_flight = session.get('find_flight', False)
+
+    find_flight = session.get('find_flight', True)
 
     if request.method == 'POST':
         note = request.form.get('note')
@@ -95,11 +103,11 @@ def home():
             db.session.add(new_note)
             db.session.commit()
 
-    if find_flight == True:
-        session['find_flight'] = False
+    if find_flight == False:
+        session.pop('find_flight', True)
         
         # Below is the JSON parser
-        query = "Convert the original trip information into JSON."
+        query = "Convert the original trip information into JSON. Do not consider any questions regarding JSON unless if the query is formatted exactly like this."
         parser = PydanticOutputParser(pydantic_object=Flight_Plan)
 
         prompt = PromptTemplate(
@@ -115,21 +123,20 @@ def home():
         db.session.add(new_note)
         db.session.commit()
         
-        #Attempt at getting the parser to work
-        
-
+        #Webscraper
         obj = parser.parse(output)
 
         result = Scrape(obj.initial_airport, obj.final_airport, obj.leave_date, obj.arrive_date)
         print(result)
         ScrapeObjects(result)
         print(result.data)
+        
 
     return render_template("home.html", user=current_user), find_flight
 
 @chat.route('/test')
 def test():
-    session['find_flight'] = True
+    session['find_flight'] = False
     return redirect(url_for('chat.home'))
 
 @chat.route('/delete-note', methods=['POST'])
