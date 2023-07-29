@@ -1,49 +1,61 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %}
 
 {% block content %}
-<form method="POST">
-    <!-- POST request for our forms on the sign up page -->
-    <h3 align="center">Login</h3>
-    
-    <!-- Email -->
-    <div class="form-group">
-        <label for="email" class="custom">Email Address</label>
-        <input 
-            type="email" 
-            class="form-control" 
-            id="email" 
-            name="email"
-            placeholder="Enter email"
-        />
+<style>
+    .btn-custom-outline {
+        margin-top: 10px;
+        background-color: transparent;
+        color: #ffffff;
+        border: 2px solid #ffffff;
+        width: 100%;
+    }
+
+    .btn-custom-outline:hover {
+        box-shadow: 0 0 10px 0.2px #00ffa2;
+        border-color: #00ffa2;
+        color: #00ffa2;
+    }
+</style>
+
+<div class="login-background"></div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 rounded shadow" style="margin-top: 100px; background-color: #394867;">
+                <form method="POST">
+                    <h3 class="text-center" style="color: #ffffff;">Login</h3>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email" class="custom" style="color: #ffffff;">Email Address</label>
+                        <input 
+                            type="email" 
+                            class="form-control" 
+                            id="email" 
+                            name="email"
+                            placeholder="Enter email"
+                        />
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="password1" style="color: #ffffff;">Password</label>
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Enter password"
+                        />
+                    </div>
+                    <br />
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-custom-outline">Submit</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <!-- Password -->
-    <div class="form-group">
-        <label for="password1">Password</label>
-        <input 
-            type="password" 
-            class="form-control" 
-            id="password" 
-            name="password" 
-            placeholder="Enter password"
-        />
-    </div>
-    <br />
-    <style>
-        /* Default outline button styles */
-        .btn-custom-outline {
-            margin-top: 10px;
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        /* Button styles on hover */
-        .btn-custom-outline:hover {
-            box-shadow: 0 0 10px 0.2px #00ffa28e;
-            border-color: #00ffa2; /* Change the border color on hover */
-            color: #00ffa2; /* Change the text color on hover */
-        }
-    </style>
-    <!-- Submit button -->
-    <button type="submit" class="btn btn-custom-outline">Login</button>
-</form>
+</div>
 {% endblock %}
