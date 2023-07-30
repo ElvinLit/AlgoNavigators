@@ -1,0 +1,175 @@
+/* Base */
+body {
+    background-color: #212A3E;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif; /* Font for the entire body */
+}
+.navbar-nav .nav-link, .navbar-brand {
+    font-family: 'Lato', sans-serif; /* Font for the navbar */
+    color: #000000;
+    font-weight: bold;
+}
+.navbar-nav .nav-link:hover, .navbar-brand:hover {
+    color: #2A3B5A;
+    background-color: #a2bfcf;
+    border-radius: 5px;
+}
+.navbar-brand {
+    padding: 5px;
+}
+.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.btn-global-outline {
+    margin-top: 10px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+.btn-global-outline:hover {
+    box-shadow: 0 0 10px 0.2px #00ffa2;
+    border-color: #00ffa2;
+    color: #00ffa2;
+
+/* Chat */
+}
+.chat-entry, #userInput textarea {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: 2px solid white;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #394867;
+}
+#chatbox {
+    height: 50vh;
+    width: 100%;
+    border: 3px solid white;
+    overflow: auto;
+    background-color: transparent;
+    color: white;
+    border-radius: 20px;
+}
+#chatbox::-webkit-scrollbar {
+    width: 0px;
+}
+.find-flights-modal .modal-content {
+    background-color: #212A3E;
+    color: white;
+    border: 0px solid white;
+    border-radius: 15px;
+    width: 100%;
+    height: 800px;
+    box-shadow: 0 4px 40px black;
+}
+.find-flights-modal .modal-dialog {
+    max-width: 1000px;
+}
+.find-flights-modal .modal-header,
+.find-flights-modal .modal-footer {
+    border-bottom: none;
+    border-top: none;
+}
+.clickable-box {
+    border: 2px solid white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.find-flights-text {
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+}
+
+/* Home */
+.home-background {
+    background-image: url('https://source.unsplash.com/1920x1080/?travel,europe');
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.home-title-container {
+    text-align: center;
+    margin-top: 150px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.5); /* Adds a translucent white background */
+    padding: 20px;
+}
+.home-title {
+    font-family: 'Poppins', sans-serif;
+    color: black; /* Changes the text color for better contrast */
+    font-size: 3rem;
+}
+.home-subheader {
+    font-family: 'Poppins', sans-serif;
+    color: black; /* Changes the text color for better contrast */
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+.home-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    justify-content: center; /* Centers the cards */
+    margin-top: 50px;
+}
+.home-card {
+    width: 18rem;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(57, 72, 103, 0.8); /* Adds some transparency to the cards */
+    color: white;
+    margin: 20px;
+}
+.home-card a {
+    text-decoration: none;
+    color: #00ffa2;
+}
+.home-card a:hover {
+    text-decoration: underline;
+}
+
+/* Planner */
+.planner-cards-container {
+    background-color: #394867;
+    padding: 50px;
+    border-radius: 10px;
+}
+.planner-card-container {
+    display: flex;
+    justify-content: space-between;
+}
+.planner-card {
+    margin-right: 10px;
+}
+.planner-card-title, .planner-card-text {
+    color: black;
+}
+
+/* Login */
+.login-background::before {
+    content: "";
+    background-image: url('https://source.unsplash.com/1920x1080/?travel,europe');
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px);
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Signup */

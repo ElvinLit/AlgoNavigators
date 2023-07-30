@@ -15,7 +15,6 @@ def login():
         user = User.query.filter_by(email=email).first() # Query (think SQL ig)
         if user:
             if check_password_hash(user.password, password): # Compares equality with first and second parameter
-                flash('Logged in successfully!', category='success')
                 login_user(user, remember=True) # Sets a user as being logged in
                 return redirect(url_for('chat.home'))
             else:

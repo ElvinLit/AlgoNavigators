@@ -5,22 +5,22 @@
 {% block content %}
 <br></br>
 
-<div class="cards-container">
-  <div class="card-container">
+<!-- Overall Container -->
+<div class="planner-cards-container">
+  <!-- Container for a card -->
+  <div class="planner-card-container">
     <div class="card" style="width: 18rem;">
-      <img src="https://cdn.britannica.com/36/4336-004-6BD81071/Flag-Italy.jpg" class="card-img-top" alt="">
       <div class="card-body">
-        <h5 class="card-title" style="color: black;">Trip to {country}</h5>
-        <p class="card-text" style="color: black;">From DFW to BAR</p>
+        <h5 class="planner-card-title" style="color: black;">Trip to {country}</h5>
+        <p class="planner-card-text" style="color: black;">From DFW to BAR</p>
         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tripModal1">View Trip Details</a>
       </div>
     </div>
 
     <div class="card" style="width: 18rem;">
-      <img src="https://cdn.britannica.com/36/4336-004-6BD81071/Flag-Italy.jpg" class="card-img-top" alt="">
       <div class="card-body">
-        <h5 class="card-title" style="color: black;">Trip to {country}</h5>
-        <p class="card-text" style="color: black;">From DFW to BAR</p>
+        <h5 class="planner-card-title" style="color: black;">Trip to {country}</h5>
+        <p class="planner-card-text" style="color: black;">From DFW to BAR</p>
         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tripModal2">View Trip Details</a>
       </div>
     </div>
@@ -74,27 +74,5 @@
     </div>
   </div>
 </div>
-
-<style>
-  .cards-container {
-    background-color: #394867;
-    padding: 50px;
-    border-radius: 10px;
-  }
-
-  .card-container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .card {
-    margin-right: 10px;
-  }
-
-  /* Add the following style to make text color black */
-  .card-title, .card-text, .modal-title, .modal-body {
-    color: black;
-  }
-</style>
 
 {% endblock %}

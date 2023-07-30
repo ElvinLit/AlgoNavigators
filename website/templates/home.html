@@ -3,79 +3,26 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<style>
-    .home-background {
-        background-image: url('https://source.unsplash.com/1920x1080/?travel,europe');
-        background-size: cover;
-        background-position: center;
-        filter: blur(5px);
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: -1;
-    }
-    .title-container {
-        text-align: center;
-        margin-top: 150px;
-        border-radius: 5px;
-        background: rgba(255, 255, 255, 0.5); /* Adds a translucent white background */
-        padding: 20px;
-    }
-    .title {
-        font-family: 'Poppins', sans-serif;
-        color: black; /* Changes the text color for better contrast */
-        font-size: 3rem;
-    }
-    .subheader {
-        font-family: 'Poppins', sans-serif;
-        color: black; /* Changes the text color for better contrast */
-        font-size: 1.5rem;
-        margin-top: 20px;
-    }
-    .card-container {
-        display: flex;
-        flex-wrap: wrap;
-        border-radius: 5px;
-        justify-content: center; /* Centers the cards */
-        margin-top: 50px;
-    }
-    .card {
-        width: 18rem;
-        text-align: center;
-        padding: 20px;
-        background-color: rgba(57, 72, 103, 0.8); /* Adds some transparency to the cards */
-        color: white;
-        margin: 20px;
-    }
-    .card a {
-        text-decoration: none;
-        color: #00ffa2;
-    }
-    .card a:hover {
-        text-decoration: underline;
-    }
-</style>
+
 
 <div class="home-background"></div>
-<div class="title-container">
-    <h1 class="title">AlgoNavigator</h1>
-    <p class="subheader">Navigating you using our secret algorithm with the ultimate sauce.</p>
+<div class="home-title-container">
+    <h1 class="home-title">AlgoNavigator</h1>
+    <p class="home-subheader">Navigating you using our secret algorithm with the ultimate sauce.</p>
 </div>
 
-<div class="card-container">
-    <div class="card">
+<div class="home-card-container">
+    <div class="home-card">
         <h3>Chat</h3>
         <p>Interact with our chat system</p>
         <a href="/chat">Go to Chat</a>
     </div>
-    <div class="card">
+    <div class="home-card">
         <h3>Planner</h3>
         <p>View your trips here</p>
         <a href="/planner">Go to Planner</a>
     </div>
-    <div class="card">
+    <div class="home-card">
         <h3>Coming Soon</h3>
         <p>Click to see our features</p>
         <a href="/about">Learn More</a>

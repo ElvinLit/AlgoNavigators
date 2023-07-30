@@ -11,31 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #212A3E;
-            color: #ffffff;
-            font-family: 'Poppins', sans-serif; /* Font for the entire body */
-        }
-        .navbar-nav .nav-link, .navbar-brand {
-          font-family: 'Lato', sans-serif; /* Font for the navbar */
-          color: #000000;
-          font-weight: bold;
-        }
-        .navbar-nav .nav-link:hover, .navbar-brand:hover {
-          color: #2A3B5A;
-          background-color: #a2bfcf;
-          border-radius: 5px;
-        }
-        .navbar-brand {
-          padding: 5px;
-        }
-        .navbar-center {
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
 </head>
 
 <body>
