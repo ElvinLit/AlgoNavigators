@@ -17,7 +17,6 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #dcf1fd ; position: relative; box-shadow: 1px 2px 25px black;">
-      <!-- home plane logo -->
       <a class="navbar-brand" href="/"><span role="img" aria-label="plane">AlgoNavigators</span></a>
     
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
@@ -81,7 +80,7 @@
                 method: "POST",
                 body: JSON.stringify({ noteId: noteId }),
             }).then((_res) => {
-                window.location.href = "/";
+                window.location.href = "/chat";
             });
         }
     </script>
