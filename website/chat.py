@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session
 from flask_login import login_required, current_user
-from .db_objs import Note
+from .db_objs import Note, UserMessage
 from . import db
 import json
 import os
@@ -99,10 +99,12 @@ def home():
             user_input = note            
             if user_input:
                 output = conversation.predict(input=user_input)
+                user_msg = UserMessage(data=user_input, user_id=current_user.id)
                 new_note = Note(data=output, activities=["temp"], user_id=current_user.id)
 
             # Adds our new Note object to the database 
             db.session.add(new_note)
+            db.session.add(user_msg)
             db.session.commit()
 
     if find_flight == flight_boolean:
@@ -156,10 +158,13 @@ def delete_note():
 def delete_all_notes():  
     # Fetch all notes belonging to the current user
     user_notes = Note.query.filter_by(user_id=current_user.id).all()
+    user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
 
     # Delete all the user's notes
     for note in user_notes:
         db.session.delete(note)
+    for user_msg in user_messages:
+        db.session.delete(user_msg)
 
     # Commit the changes to the database
     db.session.commit()
