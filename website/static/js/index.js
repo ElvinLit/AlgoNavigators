@@ -3,17 +3,15 @@ function deleteNote(noteId) {
       method: "POST",
       body: JSON.stringify({ noteId: noteId }),
     }).then((_res) => {
-      window.location.href = "/";
+      window.location.href = "/chat";
     });
   }
 
-  function deleteAllNotes() {
+function startNewConversation() {
     fetch("/delete-all-notes", {
-      method: "POST",
-      body: JSON.stringify({}), // Since we are not specifying a specific noteId for all notes, we can just send an empty object as the body
+        method: "POST",
+        body: JSON.stringify({}),
     }).then((_res) => {
-      window.location.href = "/";
+        window.location.href = "/chat";
     });
   }
-
-  

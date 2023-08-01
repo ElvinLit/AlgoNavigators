@@ -45,7 +45,7 @@ current_date = cdt.date()
 #Chat creation
 history = ChatMessageHistory()
 output = ""
-flight_boolean = False # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
+flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
 
 TEMPLATE =  'test'
 """

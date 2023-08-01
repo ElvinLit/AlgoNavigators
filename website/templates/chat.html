@@ -46,18 +46,6 @@
     });
 </script>
 
-<!-- Delete notes script -->
-<script>
-    function startNewConversation() {
-        fetch("/delete-all-notes", {
-            method: "POST",
-            body: JSON.stringify({}),
-        }).then((_res) => {
-            window.location.href = "/chat";
-        });
-    }
-</script>
-
 <div class="container mt-5 text-center">
     <form action="{{ url_for('chat.flights') }}" method="get">
     </form>
