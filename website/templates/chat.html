@@ -6,23 +6,16 @@
 <div class="chat-container">
     <!-- Chatbox -->
     <div id="chatbox">
-        {% for note in user.notes %}
-        <div class="chat-entry-container">
-            <div class="chat-logo">&#9728;</div>
-            <div class="chat-entry">
-                {{ note.data }}
-            </div>
-            <div class="chat-close-container">
-                <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        {% for entry in chat_log %}
+        <div class="chat-entry-container" style="{% if entry.type == 'user' %}background-color: #212A3E{% else %}background-color: #394867{% endif %};">
+            <div class="chat-logo {% if entry.type == 'user' %}moon-logo{% endif %}">{% if entry.type == 'user' %}&#127769;{% else %}&#9728;{% endif %}</div>
+            <div class="chat-entry {% if entry.type == 'user' %}user-message{% else %}response-message{% endif %}">
+                {{ entry.data }}
             </div>
         </div>
-        {% if not loop.last %} <!-- only adding divider if not iteration -->
-            <div class="message-divider"></div>
-        {% endif %}
-        {% endfor %}        
+        {% endfor %}
     </div>
+    
 
     <!-- Message Box & Button -->
     <form method="POST" id="message-form">

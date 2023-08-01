@@ -45,7 +45,7 @@ current_date = cdt.date()
 #Chat creation
 history = ChatMessageHistory()
 output = ""
-flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
+flight_boolean = False # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
 
 TEMPLATE =  'test'
 """
@@ -135,7 +135,17 @@ def home():
         ScrapeObjects(result)
         print(result.data)
         
-    return render_template("chat.html", user=current_user), find_flight
+    user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
+    notes = Note.query.filter_by(user_id=current_user.id).all()
+
+    chat_log = []
+    for i in range(len(user_messages)):
+        chat_log.append({'type': 'user', 'data': user_messages[i].data, 'id': user_messages[i].id})
+        if i < len(notes):
+            chat_log.append({'type': 'response', 'data': notes[i].data, 'id': notes[i].id})
+
+    return render_template("chat.html", user=current_user, chat_log=chat_log), find_flight
+
 
 @chat.route('/flights')
 def flights():
