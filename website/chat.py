@@ -169,7 +169,6 @@ def delete_all_notes():
     # Fetch all notes belonging to the current user
     user_notes = Note.query.filter_by(user_id=current_user.id).all()
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
-
     # Delete all the user's notes
     for note in user_notes:
         db.session.delete(note)
@@ -179,5 +178,6 @@ def delete_all_notes():
     # Commit the changes to the database
     db.session.commit()
     history = ChatMessageHistory()
+    output = conversation.predict(input='forget everything i just said and let us create a new plan from stratch')
     output = ""
     return jsonify({})
