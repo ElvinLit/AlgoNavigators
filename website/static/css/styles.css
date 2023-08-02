@@ -56,9 +56,9 @@ body {
 .chat-logo {
     line-height: 1.5;
     font-size: 24px;
-    margin-right: 5%;
+    margin-right: 2%;
     padding: 15px;
-    align-self: flex-start;
+    align-self: center;
 }
 .chat-entry {
     margin: 5px 0;
@@ -66,22 +66,22 @@ body {
     width: 100%;
     text-align: left;
     color: #fff;
-    padding-left: 5%;
+    padding-left: 0%;
     padding-right: 5%;
 }
 .user-message {
-    background-color: #212A3E;
+    background-color: transparent;
     text-align: right;
     padding: 15px;
     width: 100%;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 0%;
+    padding-right: 7%;
 }
 .moon-logo {
     line-height: 1.5;
     font-size: 24px;
-    margin-right: 5%;
-    align-self: flex-start;
+    margin-right: 2%;
+    align-self: center;
 }
 #userInput {
     background-color: #394867;

@@ -8,7 +8,7 @@
     <div id="chatbox">
         {% for entry in chat_log %}
         <div class="chat-entry-container" style="{% if entry.type == 'user' %}background-color: #212A3E{% else %}background-color: #394867{% endif %};">
-            <div class="chat-logo {% if entry.type == 'user' %}moon-logo{% endif %}">{% if entry.type == 'user' %}&#127769;{% else %}&#9728;{% endif %}</div>
+            <div class="chat-logo {% if entry.type == 'user' %}moon-logo{% endif %}">{% if entry.type == 'user' %}😎{% else %}🤓{% endif %}</div>
             <div class="chat-entry {% if entry.type == 'user' %}user-message{% else %}response-message{% endif %}">
                 {{ entry.data }}
             </div>
@@ -16,7 +16,6 @@
         {% endfor %}
 
     </div>
-    
 
     <!-- Message Box & Button -->
     <form method="POST" id="message-form">
@@ -44,24 +43,20 @@
     <form action="{{ url_for('chat.flights') }}" method="get">
     </form>
 
-    <!-- Modal (Popup) -->
     <div class="modal fade find-flights-modal" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
 
-            <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Flights</h4>
             </div>
 
-            <!-- Modal body -->
             <div class="modal-body ">
                 <div class="clickable-box" onclick="alert('You clicked the box!')">
                     <p class="find-flights-text">Jit da Jit da Jittison Jitling Jitmuangnon</p>
                 </div>
             </div>
 
-            <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-global-outline" data-dismiss="modal">Close</button>
             </div>
