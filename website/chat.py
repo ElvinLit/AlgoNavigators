@@ -165,7 +165,10 @@ def delete_note():
     return jsonify({})
 
 @chat.route('/delete-all-notes', methods=['POST'])
-def delete_all_notes():  
+# ... (previous code)
+
+@chat.route('/delete-all-notes', methods=['POST'])
+def delete_all_notes():
     # Fetch all notes belonging to the current user
     user_notes = Note.query.filter_by(user_id=current_user.id).all()
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
@@ -177,7 +180,14 @@ def delete_all_notes():
 
     # Commit the changes to the database
     db.session.commit()
-    history = ChatMessageHistory()
-    output = conversation.predict(input='forget everything i just said and let us create a new plan from stratch')
+
+    # Reset chatbox memory by creating a new instance of ConversationChain
+    global conversation
+    conversation = ConversationChain(llm=llm, verbose=True, memory=ConversationBufferMemory())
+    
+    # Predict the response to the "forget everything" prompt
+    forget_prompt = "forget everything i just said and let us create a new plan from scratch"
+    output = conversation.predict(input=forget_prompt)
     output = ""
+
     return jsonify({})
