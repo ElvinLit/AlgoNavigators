@@ -21,7 +21,6 @@ from langchain.chains import LLMChain, SequentialChain, ConversationChain
 from langchain.memory import ConversationBufferMemory
 from langchain.utilities import WikipediaAPIWrapper 
 
-#imports for data structures
 from langchain.output_parsers import PydanticOutputParser
 from pydantic import BaseModel, Field, validator
 from typing import List, Dict, Any
@@ -30,14 +29,9 @@ from langchain.memory import ChatMessageHistory
 from google_flight_analysis.scrape import *
 
 chat = Blueprint('chat', __name__)
-
 os.environ['OPENAI_API_KEY'] = apikey
-
 llm = OpenAI(temperature=1)
 
-"""
-We are creating the different webpages on our website
-"""
 #Date recognition
 cdt = datetime.today()
 current_date = cdt.date()
@@ -102,10 +96,10 @@ def home():
                 user_msg = UserMessage(data=user_input, user_id=current_user.id)
                 new_note = Note(data=output, activities=["temp"], user_id=current_user.id)
 
-            # Adds our new Note object to the database 
             db.session.add(new_note)
             db.session.add(user_msg)
             db.session.commit()
+        return redirect(url_for('chat.home'))
 
     if find_flight == flight_boolean:
         session.pop('find_flight', not flight_boolean)
