@@ -38,6 +38,7 @@ body {
 /* Chat */
 .chat-container {
     position: relative;
+    box-shadow: 1px 2px 12px black;
     max-width: 1000px;
     margin: 0 auto;
     background-color: #394867;
@@ -45,7 +46,7 @@ body {
     padding-bottom: 60px;
 }
 #chatbox {
-    max-height: calc(100vh - 210px);
+    max-height: calc(100vh - 200px);
     overflow-y: auto;
 }
 .chat-entry-container {
@@ -91,26 +92,48 @@ body {
     left: 50%;
     transform: translateX(-50%);
     width: 1000px;
-    border-top: 2px solid #2A3B5A;
+    border-top: 2px solid #212A3E;
+    display: flex;
+    align-items: center;
 }
 #userInput textarea {
     background-color: #333;
+    border-radius: 5px;
     color: #fff;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+#userMessage {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    width: calc(100% - 100px);
+    padding: 10px;
+    resize: none;
 }
 .button-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 .button-container > .btn-middle-container {
     width: 30%;
     text-align: center;
 }
 .btn-send {
-    order: 3;
+    margin-left: auto;
+}
+.btn-icon {
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 7.5px;
 }
 #chatbox::-webkit-scrollbar {
     width: 0px;
+}
+.btn-icon:hover {
+    color: #00ffa2;
 }
 .close:hover {
     color: #00ffa2;

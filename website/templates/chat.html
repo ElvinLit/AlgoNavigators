@@ -22,15 +22,13 @@
         <div id="userInput">
             <textarea name="note" id="userMessage" placeholder="Type a message..." class="form-control"></textarea>
             <div class="text-center button-container">
-                <button type="button" class="btn btn-global-outline" onClick="startNewConversation()">Start New Conversation</button>
-                <div class="btn-middle-container">
-                    <button type="button" class="btn btn-global-outline" data-toggle="modal" data-target="#myModal">Find Flights</button>
-                </div>
-                <button type="submit" class="btn btn-global-outline btn-send">Send</button>
-            </div>         
+                <button type="button" class="btn-icon" onClick="startNewConversation()"><i class="fa fa-refresh"></i></button>
+                <button type="button" class="btn-icon" data-toggle="modal" data-target="#myModal"><i class="fa fa-plane"></i></button>
+                <button type="submit" class="btn-icon btn-send"><i class="fa fa-paper-plane"></i></button>
+            </div>
         </div>
-    </form>
-
+    </form>    
+    
 <!-- Automatic scroll -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
