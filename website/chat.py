@@ -26,7 +26,7 @@ from pydantic import BaseModel, Field, validator
 from typing import List, Dict, Any
 from langchain.memory import ChatMessageHistory
 
-from google_flight_analysis.scrape import *
+from .flight_webscrape import FlightScraper
 
 chat = Blueprint('chat', __name__)
 os.environ['OPENAI_API_KEY'] = apikey
@@ -104,8 +104,8 @@ def home():
     if find_flight == flight_boolean:
         session.pop('find_flight', not flight_boolean)
         
-        # Below is the JSON parser
-        query = "Convert the original trip information into JSON. Do not consider any questions regarding JSON unless if the query is formatted exactly like this."
+        # Below is the JSON parser --- TEMPORARILY DISABLED ---
+        '''query = "Convert the original trip information into JSON. Do not consider any questions regarding JSON unless if the query is formatted exactly like this."
         parser = PydanticOutputParser(pydantic_object=Flight_Plan)
 
         prompt = PromptTemplate(
@@ -119,15 +119,14 @@ def home():
         # Temporarily putting JSON object as string into the notes
         new_note = Note(data=output, activities=["temp"], user_id=current_user.id)
         db.session.add(new_note)
-        db.session.commit()
+        db.session.commit()'''
         
-        #Webscraper
-        obj = parser.parse(output)
+        #Webscraper --- TEMPORARY VALUES ARE INPUTTED FOR NOW ---
+        flight_dict = FlightScraper("LAX", "DFW", "2023/08/22", "2023/09/05", "Premium Economy")
 
-        result = Scrape(obj.initial_airport, obj.final_airport, obj.leave_date, obj.arrive_date)
-        print(result)
-        ScrapeObjects(result)
-        print(result.data)
+        # Use this to implement data into website, it is a nested dictionary
+        print(flight_dict)
+
         
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
     notes = Note.query.filter_by(user_id=current_user.id).all()
@@ -144,6 +143,7 @@ def home():
 @chat.route('/flights')
 def flights():
     session['find_flight'] = flight_boolean
+    print("Flight Button Works")
     return redirect(url_for('chat.home'))
 
 @chat.route('/delete-note', methods=['POST'])
