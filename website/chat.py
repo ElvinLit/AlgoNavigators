@@ -39,7 +39,7 @@ current_date = cdt.date()
 #Chat creation
 history = ChatMessageHistory()
 output = ""
-flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
+flight_boolean = False # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
 
 TEMPLATE =  'test'
 """
@@ -85,18 +85,18 @@ def home():
     find_flight = session.get('find_flight', not flight_boolean)
 
     if request.method == 'POST':
-        note = request.form.get('note')
+        form_input = request.form.get('note')
         
-        if len(note) < 1:
+        if len(form_input) < 1:
             pass
         else:
-            user_input = note            
+            user_input = form_input            
             if user_input:
                 output = conversation.predict(input=user_input)
                 user_msg = UserMessage(data=user_input, user_id=current_user.id)
-                new_note = Note(data=output, activities=["temp"], user_id=current_user.id)
+                ai_response = Note(data=output, activities=["temp"], user_id=current_user.id)
 
-            db.session.add(new_note)
+            db.session.add(ai_response)
             db.session.add(user_msg)
             db.session.commit()
         return redirect(url_for('chat.home'))
@@ -129,13 +129,13 @@ def home():
 
         
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
-    notes = Note.query.filter_by(user_id=current_user.id).all()
+    ai_responses = Note.query.filter_by(user_id=current_user.id).all()
 
     chat_log = []
     for i in range(len(user_messages)):
         chat_log.append({'type': 'user', 'data': user_messages[i].data, 'id': user_messages[i].id})
-        if i < len(notes):
-            chat_log.append({'type': 'response', 'data': notes[i].data, 'id': notes[i].id})
+        if i < len(ai_responses):
+            chat_log.append({'type': 'response', 'data': ai_responses[i].data, 'id': ai_responses[i].id})
 
     return render_template("chat.html", user=current_user, chat_log=chat_log), find_flight
 
@@ -146,29 +146,15 @@ def flights():
     print("Flight Button Works")
     return redirect(url_for('chat.home'))
 
-@chat.route('/delete-note', methods=['POST'])
-def delete_note():  
-    note = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
-    noteId = note['noteId']
-    note = Note.query.get(noteId)
-    if note:
-        if note.user_id == current_user.id:
-            db.session.delete(note)
-            db.session.commit()
 
-    return jsonify({})
-
-@chat.route('/delete-all-notes', methods=['POST'])
-# ... (previous code)
-
-@chat.route('/delete-all-notes', methods=['POST'])
-def delete_all_notes():
+@chat.route('/delete-conversation', methods=['POST'])
+def delete_conversation():
     # Fetch all notes belonging to the current user
-    user_notes = Note.query.filter_by(user_id=current_user.id).all()
+    ai_responses = Note.query.filter_by(user_id=current_user.id).all()
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
     # Delete all the user's notes
-    for note in user_notes:
-        db.session.delete(note)
+    for ai_response in ai_responses:
+        db.session.delete(ai_response)
     for user_msg in user_messages:
         db.session.delete(user_msg)
 
@@ -180,7 +166,7 @@ def delete_all_notes():
     conversation = ConversationChain(llm=llm, verbose=True, memory=ConversationBufferMemory())
     
     # Predict the response to the "forget everything" prompt
-    forget_prompt = "forget everything i just said and let us create a new plan from scratch"
+    forget_prompt = "Let's create a new plan from scratch. Disregard what we have just talked about for this plan."
     output = conversation.predict(input=forget_prompt)
     output = ""
 
