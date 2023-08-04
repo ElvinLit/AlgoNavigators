@@ -6,3 +6,5 @@ numpy
 langchain
 pydantic
 google-flight-analysis
+tqdm
+selenium
