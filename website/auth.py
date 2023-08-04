@@ -11,7 +11,7 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-
+        testsuck = "hello world"
         user = User.query.filter_by(email=email).first() # Query (think SQL ig)
         if user:
             if check_password_hash(user.password, password): # Compares equality with first and second parameter
