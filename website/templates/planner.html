@@ -13,8 +13,8 @@
         <div class="card-body">
             <h5 class="planner-card-title" style="color: black;">Trip to {country}</h5>
             <p class="planner-card-text" style="color: black;">
-                Departure Airport: DFW<br>
-                Destination Airport: BAR<br>
+                Departure Airport: {{ user.flight_information.first_departure_airport }}<br>
+                Destination Airport: {{ user.flight_information.first_arrival_airport }}<br>
                 Hotel: [Hotel Name]<br>
                 Airline: [Airline Name]<br>
                 Places to See: [Place 1], [Place 2], [Place 3], ...
