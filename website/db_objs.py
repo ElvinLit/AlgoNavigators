@@ -37,6 +37,12 @@ class Flights(db.Model):
     second_duration = db.Column(db.String(10000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+class Hotels(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    price = db.Column(db.Integer)
+    location = db.Column(db.String(10000))
+    rating = db.Column(db.String(10000))
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True) # unique=true guarantees that no two emails can be used for 2 users in our db

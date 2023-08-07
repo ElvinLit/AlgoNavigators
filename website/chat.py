@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session
 from flask_login import login_required, current_user
-from .db_objs import Note, UserMessage, Flights
+from .db_objs import Note, UserMessage, Flights, Hotels
 from . import db
 import json
 import os
@@ -27,6 +27,7 @@ from typing import List, Dict, Any
 from langchain.memory import ChatMessageHistory
 
 from .flight_webscrape import FlightScraper
+from .hotels import HotelScraper
 
 chat = Blueprint('chat', __name__)
 os.environ['OPENAI_API_KEY'] = apikey
@@ -39,7 +40,7 @@ current_date = cdt.date()
 #Chat creation
 history = ChatMessageHistory()
 output = ""
-flight_boolean = False # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
+flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
 
 TEMPLATE =  'test'
 """
@@ -60,7 +61,8 @@ TEMPLATE =  'test'
             estimated cost. Keep in mind, these activities should be relatively close distance-wise, and you will also tell me the \
             travel time between each. In the third part, you will give me the name of a restaurant that satisfies the criteria I gave you \
             from the questions you asked me, as well as an estimated time to get there from the activities defined earlier. After confirming \
-            that all three questions are met, you will respond in the format I just defined. You will do your best in fitting your presentation into one response."
+            that all three questions are met, you will respond in the format I just defined. Also, ask if I want to ask if the traveler \
+            wants Economy, Premium Economy, Business, or First Class. You will do your best in fitting your presentation into one response."
 """
 
 conversation = ConversationChain(
@@ -75,6 +77,7 @@ class Flight_Plan(BaseModel):
     leave_date: str = Field(description="The date in which the travelers will leave in the format YYYY-mm-dd.")
     arrive_date: str = Field(description="The date in which the travelers will arrive in the format YYYY-mm-dd.")
     activities: str = Field(description="The list of activities the traveler will do as a singular string.")
+    seat_quality: str = Field(description="The seat quality as one of the 4 choices: Economy, Premium Economy, Business, First")
 
 conversation.predict(input=TEMPLATE)
 
@@ -122,6 +125,7 @@ def home():
         db.session.commit()'''
         
         #Webscraper --- TEMPORARY VALUES ARE INPUTTED FOR NOW ---
+        #flight_dict = FlightScraper(output.initial_airport, output.final_airport, output.leave_date, output.arrive_date, output.seat_quality)
         flight_dict = FlightScraper("LAX", "DFW", "2023/08/22", "2023/09/05", "Premium Economy")
 
         # Use this to implement data into website, it is a nested dictionary
@@ -139,7 +143,8 @@ def home():
             second_arrival_airport = flight_dict["flight 1"]["second arrival airport"],
             second_departure_time = flight_dict["flight 1"]["second departure time"],
             second_arrival_time = flight_dict["flight 1"]["second arrival time"],
-            second_duration = flight_dict["flight 1"]["second duration"]
+            second_duration = flight_dict["flight 1"]["second duration"],
+            user_id = current_user.id
             )
 
         flight_two = Flights(
@@ -156,7 +161,8 @@ def home():
             second_arrival_airport = flight_dict["flight 2"]["second arrival airport"],
             second_departure_time = flight_dict["flight 2"]["second departure time"],
             second_arrival_time = flight_dict["flight 2"]["second arrival time"],
-            second_duration = flight_dict["flight 2"]["second duration"]
+            second_duration = flight_dict["flight 2"]["second duration"],
+            user_id = current_user.id
             )
 
         flight_three = Flights(
@@ -173,13 +179,42 @@ def home():
             second_arrival_airport = flight_dict["flight 3"]["second arrival airport"],
             second_departure_time = flight_dict["flight 3"]["second departure time"],
             second_arrival_time = flight_dict["flight 3"]["second arrival time"],
-            second_duration = flight_dict["flight 3"]["second duration"]
+            second_duration = flight_dict["flight 3"]["second duration"],
+            user_id = current_user.id
             )
         
         db.session.add(flight_one)
         db.session.add(flight_two)
         db.session.add(flight_three)
         db.session.commit()
+
+        #hotels_dict = HotelScraper(output.final_airport)
+        hotels_dict = HotelScraper("Toronto, Ontario, Canada")
+        
+        hotel_one = Hotels(
+            price = hotels_dict["hotel 1"]["Price"],
+            location = hotels_dict["hotel 1"]["Location"],
+            rating = hotels_dict["hotel 1"]["Rating"],
+            )
+
+        hotel_two = Hotels(
+            price = hotels_dict["hotel 2"]["Price"],
+            location = hotels_dict["hotel 2"]["Location"],
+            rating = hotels_dict["hotel 2"]["Rating"],
+            )
+
+        hotel_three = Hotels(
+            price = hotels_dict["hotel 3"]["Price"],
+            location = hotels_dict["hotel 3"]["Location"],
+            rating = hotels_dict["hotel 3"]["Rating"],
+            )
+
+        db.session.add(hotel_one)
+        db.session.add(hotel_two)
+        db.session.add(hotel_three)
+        db.session.commit()
+
+        
 
         
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
