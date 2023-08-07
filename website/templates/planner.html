@@ -10,22 +10,36 @@
   <!-- Container for a card -->
   <div class="planner-card-container">
     <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="planner-card-title" style="color: black;">Trip to {country}</h5>
-        <p class="planner-card-text" style="color: black;">From DFW to BAR</p>
-        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tripModal1">View Trip Details</a>
-      </div>
+        <div class="card-body">
+            <h5 class="planner-card-title" style="color: black;">Trip to {country}</h5>
+            <p class="planner-card-text" style="color: black;">
+                Departure Airport: DFW<br>
+                Destination Airport: BAR<br>
+                Hotel: [Hotel Name]<br>
+                Airline: [Airline Name]<br>
+                Places to See: [Place 1], [Place 2], [Place 3], ...
+            </p>
+            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tripModal1">View Trip Details</a>
+        </div>
     </div>
+</div>
 
-    <div class="card" style="width: 18rem;">
+<div class="planner-card-container">
+  <div class="card" style="width: 18rem;">
       <div class="card-body">
-        <h5 class="planner-card-title" style="color: black;">Trip to {country}</h5>
-        <p class="planner-card-text" style="color: black;">From DFW to BAR</p>
-        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tripModal2">View Trip Details</a>
+          <h5 class="planner-card-title" style="color: black;">Trip to {country}</h5>
+          <p class="planner-card-text" style="color: black;">
+              Departure Airport: DFW<br>
+              Destination Airport: BAR<br>
+              Hotel: [Hotel Name]<br>
+              Airline: [Airline Name]<br>
+              Places to See: [Place 1], [Place 2], [Place 3], ...
+          </p>
+          <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tripModal1">View Trip Details</a>
       </div>
-    </div>
   </div>
 </div>
+
 
 <!-- Modal 1 -->
 <div class="modal fade" id="tripModal1" tabindex="-1" role="dialog" aria-labelledby="tripModalLabel1" aria-hidden="true">
