@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session
 from flask_login import login_required, current_user
-from .db_objs import Note, UserMessage
+from .db_objs import Note, UserMessage, Flights
 from . import db
 import json
 import os
@@ -125,7 +125,61 @@ def home():
         flight_dict = FlightScraper("LAX", "DFW", "2023/08/22", "2023/09/05", "Premium Economy")
 
         # Use this to implement data into website, it is a nested dictionary
-        print(flight_dict)
+        flight_one = Flights(
+            first_cost = flight_dict["flight 1"]["first cost"],
+            first_airline = flight_dict["flight 1"]["first airline"],
+            first_departure_airport = flight_dict["flight 1"]["first departure airport"],
+            first_arrival_airport = flight_dict["flight 1"]["first arrival airport"],
+            first_departure_time = flight_dict["flight 1"]["first departure time"],
+            first_arrival_time = flight_dict["flight 1"]["first arrival time"],
+            first_duration = flight_dict["flight 1"]["first duration"],
+            second_cost = flight_dict["flight 1"]["second cost"],
+            second_airline = flight_dict["flight 1"]["second airline"],
+            second_departure_airport = flight_dict["flight 1"]["second departure airport"],
+            second_arrival_airport = flight_dict["flight 1"]["second arrival airport"],
+            second_departure_time = flight_dict["flight 1"]["second departure time"],
+            second_arrival_time = flight_dict["flight 1"]["second arrival time"],
+            second_duration = flight_dict["flight 1"]["second duration"]
+            )
+
+        flight_two = Flights(
+            first_cost = flight_dict["flight 2"]["first cost"],
+            first_airline = flight_dict["flight 2"]["first airline"],
+            first_departure_airport = flight_dict["flight 2"]["first departure airport"],
+            first_arrival_airport = flight_dict["flight 2"]["first arrival airport"],
+            first_departure_time = flight_dict["flight 2"]["first departure time"],
+            first_arrival_time = flight_dict["flight 2"]["first arrival time"],
+            first_duration = flight_dict["flight 2"]["first duration"],
+            second_cost = flight_dict["flight 2"]["second cost"],
+            second_airline = flight_dict["flight 2"]["second airline"],
+            second_departure_airport = flight_dict["flight 2"]["second departure airport"],
+            second_arrival_airport = flight_dict["flight 2"]["second arrival airport"],
+            second_departure_time = flight_dict["flight 2"]["second departure time"],
+            second_arrival_time = flight_dict["flight 2"]["second arrival time"],
+            second_duration = flight_dict["flight 2"]["second duration"]
+            )
+
+        flight_three = Flights(
+            first_cost = flight_dict["flight 3"]["first cost"],
+            first_airline = flight_dict["flight 3"]["first airline"],
+            first_departure_airport = flight_dict["flight 3"]["first departure airport"],
+            first_arrival_airport = flight_dict["flight 3"]["first arrival airport"],
+            first_departure_time = flight_dict["flight 3"]["first departure time"],
+            first_arrival_time = flight_dict["flight 3"]["first arrival time"],
+            first_duration = flight_dict["flight 3"]["first duration"],
+            second_cost = flight_dict["flight 3"]["second cost"],
+            second_airline = flight_dict["flight 3"]["second airline"],
+            second_departure_airport = flight_dict["flight 3"]["second departure airport"],
+            second_arrival_airport = flight_dict["flight 3"]["second arrival airport"],
+            second_departure_time = flight_dict["flight 3"]["second departure time"],
+            second_arrival_time = flight_dict["flight 3"]["second arrival time"],
+            second_duration = flight_dict["flight 3"]["second duration"]
+            )
+        
+        db.session.add(flight_one)
+        db.session.add(flight_two)
+        db.session.add(flight_three)
+        db.session.commit()
 
         
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()

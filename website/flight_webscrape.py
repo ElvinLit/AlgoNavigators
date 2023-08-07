@@ -114,7 +114,6 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
         # Convert duration to string format (e.g., "3 hr 8 min")
         duration_string_first = f"{duration_hours} hr {duration_minutes} min"  
 
-        print(description)
         count += 1
         if count == 1:
             flight_info_1 = {
@@ -202,8 +201,6 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
 
         # Convert duration to string format (e.g., "3 hr 8 min")
         duration_string_second = f"{duration_hours} hr {duration_minutes} min"
-
-        print(description)
         
         count += 1
 

@@ -26,3 +26,20 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     notes = db.relationship('Note') # Connect a relation with note id 
     user_messages = db.relationship('UserMessage')
+
+class Flights(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_cost = db.Column(db.Integer)
+    first_airline = db.Column(db.String(10000))
+    first_departure_airport = db.Column(db.String(10000))
+    first_arrival_airport = db.Column(db.String(10000))
+    first_departure_time = db.Column(db.String(10000))
+    first_arrival_time = db.Column(db.String(10000))
+    first_duration = db.Column(db.String(10000))
+    second_cost = db.Column(db.Integer)
+    second_airline = db.Column(db.String(10000))
+    second_departure_airport = db.Column(db.String(10000))
+    second_arrival_airport = db.Column(db.String(10000))
+    second_departure_time = db.Column(db.String(10000))
+    second_arrival_time = db.Column(db.String(10000))
+    second_duration = db.Column(db.String(10000))
