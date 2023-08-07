@@ -19,14 +19,6 @@ class UserMessage(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True) # unique=true guarantees that no two emails can be used for 2 users in our db
-    password = db.Column(db.String(150))
-    first_name = db.Column(db.String(150))
-    notes = db.relationship('Note') # Connect a relation with note id 
-    user_messages = db.relationship('UserMessage')
-
 class Flights(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_cost = db.Column(db.Integer)
@@ -43,3 +35,15 @@ class Flights(db.Model):
     second_departure_time = db.Column(db.String(10000))
     second_arrival_time = db.Column(db.String(10000))
     second_duration = db.Column(db.String(10000))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(150), unique=True) # unique=true guarantees that no two emails can be used for 2 users in our db
+    password = db.Column(db.String(150))
+    first_name = db.Column(db.String(150))
+    notes = db.relationship('Note') # Connect a relation with note id 
+    user_messages = db.relationship('UserMessage')
+    flight_information = db.relationship('Flights')
+
+
