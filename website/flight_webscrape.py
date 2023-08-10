@@ -11,7 +11,7 @@ import re
 
 def FlightScraper(start_input, destination_input, departure_date, return_date, seat):
 
-    user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
+    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
     opt = Options()
 
     opt.add_argument(r"--silent")
