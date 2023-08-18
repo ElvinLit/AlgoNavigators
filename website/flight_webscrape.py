@@ -20,7 +20,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     opt.add_argument(r"--disable-dev-shm-usage")
     opt.add_argument(r'--ignore-certificate-errors')
     opt.add_experimental_option("detach", True)
-    #opt.add_argument('headless')
+    opt.add_argument('headless')
     opt.add_argument(f'user-agent={user_agent}')
     opt.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(options=opt)
@@ -86,7 +86,6 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
             if count_1 == i:
                 WebDriverWait(driver, 15).until(EC.element_to_be_clickable(elemen)).click()
                 pagenew = driver.current_url
-                print(pagenew)
                 time.sleep(2)
                 driver.back()
                 time.sleep(2)
@@ -207,7 +206,6 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
             if count_1 == i:
                 WebDriverWait(driver, 15).until(EC.element_to_be_clickable(elemen)).click()
                 pagenew = driver.current_url
-                print(pagenew)
                 time.sleep(2)
                 driver.back()
                 time.sleep(2)
