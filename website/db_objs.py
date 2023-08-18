@@ -22,13 +22,11 @@ class UserMessage(db.Model):
 class Activities(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(10000))
-    price = db.Column(db.String(10000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Restaurants(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     restaurant = db.Column(db.String(10000))
-    price = db.Column(db.String(10000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Flights(db.Model):

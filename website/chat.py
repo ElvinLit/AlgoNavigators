@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session
 from flask_login import login_required, current_user
-from .db_objs import Note, UserMessage, Flights, Hotels
+from .db_objs import Note, UserMessage, Flights, Hotels, Activities, Restaurants
 from . import db
 import json
 import os
@@ -40,11 +40,9 @@ current_date = cdt.date()
 #Chat creation
 history = ChatMessageHistory()
 output = ""
-flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
+flight_boolean = False # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
 
-TEMPLATE =  'test'
-"""
-            "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
+TEMPLATE =  "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \
             The current date is: {current_date}. It is not currently 2020, this is the actual date at the moment and you will maintain this date throughout the conversation\
             As a personal travel agent that I am conversating with, at the start of our conversation you will remind me of the three \
@@ -63,7 +61,6 @@ TEMPLATE =  'test'
             from the questions you asked me, as well as an estimated time to get there from the activities defined earlier. After confirming \
             that all three questions are met, you will respond in the format I just defined. Also, ask if I want to ask if the traveler \
             wants Economy, Premium Economy, Business, or First Class. You will do your best in fitting your presentation into one response."
-"""
 
 conversation = ConversationChain(
     llm=llm, 
@@ -71,7 +68,7 @@ conversation = ConversationChain(
     memory=ConversationBufferMemory()
 )
 
-class Flight_Plan(BaseModel):
+class Travel_Plan(BaseModel):
     initial_airport: str = Field(description="The three letter geocode of the airport they will leave from.")
     final_airport: str = Field(description="The three letter geocode of the airport they will arrive to.")
     leave_date: str = Field(description="The date in which the travelers will leave in the format YYYY-mm-dd.")
@@ -79,7 +76,6 @@ class Flight_Plan(BaseModel):
     seat_quality: str = Field(description="The seat quality as one of the 4 choices: Economy, Premium Economy, Business, First")
     activities: str = Field(description="The list of activities the traveler will do as a singular string.")
     restaurants: str = Field(description="the list of restaurants suggested by the travel assistant")
-
 
 
 conversation.predict(input=TEMPLATE)
@@ -111,8 +107,8 @@ def home():
         session.pop('find_flight', not flight_boolean)
         
         # Below is the JSON parser --- TEMPORARILY DISABLED ---
-        '''query = "Convert the original trip information into JSON. Do not consider any questions regarding JSON unless if the query is formatted exactly like this."
-        parser = PydanticOutputParser(pydantic_object=Flight_Plan)
+        query = ""
+        parser = PydanticOutputParser(pydantic_object=Travel_Plan)
 
         prompt = PromptTemplate(
             template="\n{format_instructions}\n{query}\n",
@@ -120,13 +116,34 @@ def home():
             partial_variables={"format_instructions": parser.get_format_instructions()},
         )
         prompt_template_input = prompt.format_prompt(query=query)
-        output = conversation.predict(input=prompt_template_input.to_string())
+        output = (conversation.predict(input=prompt_template_input.to_string()))
+        # Slice string and convert to JSON
+        output = (output[output.find("{"):output.rfind("}") + 1])
 
         # Temporarily putting JSON object as string into the notes
         new_note = Note(data=output, user_id=current_user.id)
         db.session.add(new_note)
-        db.session.commit()'''
+        db.session.commit()
         
+        print(output)
+        print(type(output))
+        
+        """# Add activities 
+        activity_list = Activities(
+            description = output.activities,
+            user_id = current_user.id,
+        )
+        db.session.add(activity_list)
+        db.session.commit()
+
+        # Add restaurants
+        restaurants_list = Restaurants(
+            restaurant = output.restaurants,
+            user_id = current_user.id,
+        )
+        db.session.add(restaurants_list)
+        db.session.commit()"""
+
         #Webscraper --- TEMPORARY VALUES ARE INPUTTED FOR NOW ---
         #flight_dict = FlightScraper(output.initial_airport, output.final_airport, output.leave_date, output.arrive_date, output.seat_quality)
         flight_dict = FlightScraper("LAX", "DFW", "2023/08/22", "2023/09/05", "Premium Economy")
@@ -220,7 +237,6 @@ def home():
         db.session.add(hotel_three)
         db.session.commit()
 
-        
 
         
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
