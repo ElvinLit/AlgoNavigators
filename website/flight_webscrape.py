@@ -3,6 +3,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
@@ -11,7 +12,7 @@ import re
 
 def FlightScraper(start_input, destination_input, departure_date, return_date, seat):
 
-    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
+    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.11 Safari/537.36'
     opt = Options()
 
     opt.add_argument(r"--silent")
@@ -19,7 +20,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     opt.add_argument(r"--disable-dev-shm-usage")
     opt.add_argument(r'--ignore-certificate-errors')
     opt.add_experimental_option("detach", True)
-    opt.add_argument('headless')
+    #opt.add_argument('headless')
     opt.add_argument(f'user-agent={user_agent}')
     opt.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(options=opt)
@@ -51,24 +52,60 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
         WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
 
     box_start = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[1]/div/div/div[1]/div/div/input'
-    element = (By.XPATH, box_start)
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
+    element = driver.find_element(By.XPATH, box_start)
+    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).clear()
+    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(start_input)
 
-    start_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[6]/div[2]/div[2]/div[1]/div/input'
+    start_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[6]/div[3]/ul/li[1]'
     element = (By.XPATH, start_text)
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(start_input + '\n')
+    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
 
     box_destination = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[4]/div/div/div[1]/div/div/input'
     element = (By.XPATH, box_destination)
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
-
-    destination_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[6]/div[2]/div[2]/div[1]/div/input'
-    element = (By.XPATH, destination_text)
+    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).clear()
     WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(destination_input + '\n')
+
+    destination_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[6]/div[3]/ul/li[1]'
+    element = (By.XPATH, destination_text)
+    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
 
     departure_date_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div/input'
     element = (By.XPATH, departure_date_text)
     WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(departure_date + '\n')
+
+    time.sleep(2)
+
+
+
+    for i in range(0, 3):
+        elements = driver.find_elements(By.CLASS_NAME, "pIav2d")
+        count_1 = 0 
+
+        for elemen in elements:
+            pagenew = ""
+            if count_1 == i:
+                WebDriverWait(driver, 15).until(EC.element_to_be_clickable(elemen)).click()
+                pagenew = driver.current_url
+                print(pagenew)
+                time.sleep(2)
+                driver.back()
+                time.sleep(2)
+                if count_1 == 0:
+                    flight_info_1_5 ={
+                        "first link": pagenew
+                    }
+                if count_1 == 1:
+                    flight_info_2_5 ={
+                        "first link": pagenew
+                    }
+
+                if count_1 == 2:
+                    flight_info_3_5 ={
+                        "first link": pagenew
+                    }
+                
+            count_1 += 1
+ 
 
     time.sleep(4)
 
@@ -147,6 +184,10 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
             }
             break
 
+    flight_info_1.update(flight_info_1_5)
+    flight_info_2.update(flight_info_2_5)
+    flight_info_3.update(flight_info_3_5)
+
     switch_flights = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[3]/button'
     element = (By.XPATH, switch_flights)
     WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
@@ -154,6 +195,38 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     departure_date_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div/input'
     element = (By.XPATH, departure_date_text)
     WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(return_date + '\n')
+
+    time.sleep(2)
+
+    for i in range(0, 3):
+        elements = driver.find_elements(By.CLASS_NAME, "pIav2d")
+        count_1 = 0 
+
+        for elemen in elements:
+            pagenew = ""
+            if count_1 == i:
+                WebDriverWait(driver, 15).until(EC.element_to_be_clickable(elemen)).click()
+                pagenew = driver.current_url
+                print(pagenew)
+                time.sleep(2)
+                driver.back()
+                time.sleep(2)
+                if count_1 == 0:
+                    flight_info_4_5 ={
+                        "second link": pagenew
+                    }
+                if count_1 == 1:
+                    flight_info_5_5 ={
+                        "second link": pagenew
+                    }
+                if count_1 == 2:
+                    flight_info_6_5 ={
+                        "second link": pagenew
+                    }
+
+            count_1 += 1
+
+            
 
     time.sleep(4)
 
@@ -235,7 +308,11 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
                 "second duration": duration_string_second,
             }
             break
-        
+
+    flight_info_4.update(flight_info_4_5)
+    flight_info_5.update(flight_info_5_5)
+    flight_info_6.update(flight_info_6_5)
+
     flight_info_1.update(flight_info_4)
 
     flight_info_2.update(flight_info_5)
@@ -249,3 +326,4 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     }
 
     return flight_info
+
