@@ -17,13 +17,18 @@
 
     </div>
 
+    <form action="{{ url_for('chat.flights') }}" method="get">
+        <button style="display: none;" type="submit" class="btn-icon" data-toggle="modal" data-target="#myModal"><i class="fa fa-plane" id="flight_button"></i></button>
+    </form>
+
     <!-- Message Box & Button -->
     <form method="POST" id="message-form">
         <div id="userInput">
             <textarea name="note" id="userMessage" placeholder="Type a message..." class="form-control"></textarea>
             <div class="text-center button-container">
                 <button type="button" class="btn-icon" onClick="startNewConversation()"><i class="fa fa-refresh"></i></button>
-                
+                <label style="font-size: 1.8em;" for="flight_button" class="btn-icon" data-toggle="modal" data-target="#myModal"><i class="fa fa-plane" id="flight_button"></i></label>
+
                 <button id="sendButton" type="submit" class="btn-icon btn-send"><i class="fa fa-paper-plane"></i></button>
                 <!-- Enter to submit -->
                 <script>
@@ -37,10 +42,10 @@
             </div>
         </div>
     </form>
+
     
-    <form action="{{ url_for('chat.flights') }}" method="get">
-        <button type="submit" class="btn-icon" data-toggle="modal" data-target="#myModal"><i class="fa fa-plane"></i></button>
-    </form>
+    
+    
 </div>
     
 <!-- Automatic scroll -->

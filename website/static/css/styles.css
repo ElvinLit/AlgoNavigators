@@ -270,4 +270,9 @@ body, html {
     z-index: -1;
 }
 
+label {
+    display: inline-block;
+    margin-top: 10px;
+    /*vertical-align: top;*/
+}
 /* Signup */
