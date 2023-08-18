@@ -38,6 +38,7 @@ class Flights(db.Model):
     first_departure_time = db.Column(db.String(10000))
     first_arrival_time = db.Column(db.String(10000))
     first_duration = db.Column(db.String(10000))
+    first_link = db.Column(db.String(10000))
     second_cost = db.Column(db.Integer)
     second_airline = db.Column(db.String(10000))
     second_departure_airport = db.Column(db.String(10000))
@@ -45,6 +46,7 @@ class Flights(db.Model):
     second_departure_time = db.Column(db.String(10000))
     second_arrival_time = db.Column(db.String(10000))
     second_duration = db.Column(db.String(10000))
+    second_link = db.Column(db.String(10000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Hotels(db.Model):

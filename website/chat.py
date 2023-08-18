@@ -161,6 +161,7 @@ def home():
             first_departure_time = flight_dict["flight 1"]["first departure time"],
             first_arrival_time = flight_dict["flight 1"]["first arrival time"],
             first_duration = flight_dict["flight 1"]["first duration"],
+            first_link = flight_dict["flight 1"]["first link"],
             second_cost = flight_dict["flight 1"]["second cost"],
             second_airline = flight_dict["flight 1"]["second airline"],
             second_departure_airport = flight_dict["flight 1"]["second departure airport"],
@@ -168,6 +169,7 @@ def home():
             second_departure_time = flight_dict["flight 1"]["second departure time"],
             second_arrival_time = flight_dict["flight 1"]["second arrival time"],
             second_duration = flight_dict["flight 1"]["second duration"],
+            second_link = flight_dict["flight 1"]["second link"],
             user_id = current_user.id
             )
 
@@ -179,6 +181,7 @@ def home():
             first_departure_time = flight_dict["flight 2"]["first departure time"],
             first_arrival_time = flight_dict["flight 2"]["first arrival time"],
             first_duration = flight_dict["flight 2"]["first duration"],
+            first_link = flight_dict["flight 2"]["first link"],
             second_cost = flight_dict["flight 2"]["second cost"],
             second_airline = flight_dict["flight 2"]["second airline"],
             second_departure_airport = flight_dict["flight 2"]["second departure airport"],
@@ -186,6 +189,7 @@ def home():
             second_departure_time = flight_dict["flight 2"]["second departure time"],
             second_arrival_time = flight_dict["flight 2"]["second arrival time"],
             second_duration = flight_dict["flight 2"]["second duration"],
+            second_link = flight_dict["flight 2"]["second link"],
             user_id = current_user.id
             )
 
@@ -197,6 +201,7 @@ def home():
             first_departure_time = flight_dict["flight 3"]["first departure time"],
             first_arrival_time = flight_dict["flight 3"]["first arrival time"],
             first_duration = flight_dict["flight 3"]["first duration"],
+            first_link = flight_dict["flight 3"]["first link"],
             second_cost = flight_dict["flight 3"]["second cost"],
             second_airline = flight_dict["flight 3"]["second airline"],
             second_departure_airport = flight_dict["flight 3"]["second departure airport"],
@@ -204,6 +209,7 @@ def home():
             second_departure_time = flight_dict["flight 3"]["second departure time"],
             second_arrival_time = flight_dict["flight 3"]["second arrival time"],
             second_duration = flight_dict["flight 3"]["second duration"],
+            second_link = flight_dict["flight 3"]["second link"],
             user_id = current_user.id
             )
         
