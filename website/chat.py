@@ -76,8 +76,11 @@ class Flight_Plan(BaseModel):
     final_airport: str = Field(description="The three letter geocode of the airport they will arrive to.")
     leave_date: str = Field(description="The date in which the travelers will leave in the format YYYY-mm-dd.")
     arrive_date: str = Field(description="The date in which the travelers will arrive in the format YYYY-mm-dd.")
-    activities: str = Field(description="The list of activities the traveler will do as a singular string.")
     seat_quality: str = Field(description="The seat quality as one of the 4 choices: Economy, Premium Economy, Business, First")
+    activities: str = Field(description="The list of activities the traveler will do as a singular string.")
+    restaurants: str = Field(description="the list of restaurants suggested by the travel assistant")
+
+
 
 conversation.predict(input=TEMPLATE)
 
@@ -97,7 +100,7 @@ def home():
             if user_input:
                 output = conversation.predict(input=user_input)
                 user_msg = UserMessage(data=user_input, user_id=current_user.id)
-                ai_response = Note(data=output, activities=["temp"], user_id=current_user.id)
+                ai_response = Note(data=output, user_id=current_user.id)
 
             db.session.add(ai_response)
             db.session.add(user_msg)
@@ -120,7 +123,7 @@ def home():
         output = conversation.predict(input=prompt_template_input.to_string())
 
         # Temporarily putting JSON object as string into the notes
-        new_note = Note(data=output, activities=["temp"], user_id=current_user.id)
+        new_note = Note(data=output, user_id=current_user.id)
         db.session.add(new_note)
         db.session.commit()'''
         
@@ -195,18 +198,21 @@ def home():
             price = hotels_dict["hotel 1"]["Price"],
             location = hotels_dict["hotel 1"]["Location"],
             rating = hotels_dict["hotel 1"]["Rating"],
+            user_id = current_user.id,
             )
 
         hotel_two = Hotels(
             price = hotels_dict["hotel 2"]["Price"],
             location = hotels_dict["hotel 2"]["Location"],
             rating = hotels_dict["hotel 2"]["Rating"],
+            user_id = current_user.id,
             )
 
         hotel_three = Hotels(
             price = hotels_dict["hotel 3"]["Price"],
             location = hotels_dict["hotel 3"]["Location"],
             rating = hotels_dict["hotel 3"]["Rating"],
+            user_id = current_user.id,
             )
 
         db.session.add(hotel_one)

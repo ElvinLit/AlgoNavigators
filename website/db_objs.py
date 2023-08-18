@@ -9,7 +9,7 @@ We are making our database here
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(100000))
-    activities = db.Column(JSON)
+    # activities = db.Column(JSON)
     db.Column(db.DateTime(timezone=True), default=func.now)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id')) # Matches with class User's id
 
@@ -17,6 +17,18 @@ class UserMessage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(10000))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+class Activities(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(10000))
+    price = db.Column(db.String(10000))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+class Restaurants(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    restaurant = db.Column(db.String(10000))
+    price = db.Column(db.String(10000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Flights(db.Model):
@@ -42,6 +54,7 @@ class Hotels(db.Model):
     price = db.Column(db.Integer)
     location = db.Column(db.String(10000))
     rating = db.Column(db.String(10000))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
