@@ -124,17 +124,15 @@ def home():
         db.session.commit()
 
         # Slice string and convert to JSON
-        output = (output[output.find("{"):output.rfind("}") + 1])
-        output = json.loads(output)
-
-        
+        output = (output[output.find("{"):output.rfind("}") + 1]) # Slicer
+        output = json.loads(output) # Convert to dict
         
         print(output)
         print(type(output))
 
-        """# Add activities 
+        # Add activities 
         activity_list = Activities(
-            description = output.activities,
+            description = output["activities"],
             user_id = current_user.id,
         )
         db.session.add(activity_list)
@@ -142,15 +140,15 @@ def home():
 
         # Add restaurants
         restaurants_list = Restaurants(
-            restaurant = output.restaurants,
+            restaurant = output["restaurants"],
             user_id = current_user.id,
         )
         db.session.add(restaurants_list)
-        db.session.commit()"""
+        db.session.commit()
 
         #Webscraper --- TEMPORARY VALUES ARE INPUTTED FOR NOW ---
-        #flight_dict = FlightScraper(output.initial_airport, output.final_airport, output.leave_date, output.arrive_date, output.seat_quality)
-        flight_dict = FlightScraper("LAX", "DFW", "2023/08/22", "2023/09/05", "Premium Economy")
+        flight_dict = FlightScraper(output["initial_airport"], output["final_airport"], output["leave_date"], output["arrive_date"], output["seat_quality"])
+        #flight_dict = FlightScraper("LAX", "DFW", "2023/08/22", "2023/09/05", "Premium Economy")
 
         # Use this to implement data into website, it is a nested dictionary
         flight_one = Flights(
@@ -218,8 +216,8 @@ def home():
         db.session.add(flight_three)
         db.session.commit()
 
-        #hotels_dict = HotelScraper(output.final_airport)
-        hotels_dict = HotelScraper("Toronto, Ontario, Canada")
+        hotels_dict = HotelScraper(output["final_airport"])
+        # hotels_dict = HotelScraper("Toronto, Ontario, Canada")
         
         hotel_one = Hotels(
             price = hotels_dict["hotel 1"]["Price"],
@@ -246,8 +244,6 @@ def home():
         db.session.add(hotel_two)
         db.session.add(hotel_three)
         db.session.commit()
-
-
         
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
     ai_responses = Note.query.filter_by(user_id=current_user.id).all()
