@@ -18,6 +18,10 @@ class UserMessage(db.Model):
     data = db.Column(db.String(10000))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    activities = db.Column(db.String(10000))
+    restaurants = db.Column(db.String(10000))
+
+
 
 class Flights(db.Model):
     id = db.Column(db.Integer, primary_key=True)
