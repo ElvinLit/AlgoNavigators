@@ -40,7 +40,7 @@ current_date = cdt.date()
 #Chat creation
 history = ChatMessageHistory()
 output = ""
-flight_boolean = False # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
+flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
 
 TEMPLATE =  "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \
@@ -107,7 +107,7 @@ def home():
         session.pop('find_flight', not flight_boolean)
         
         # Below is the JSON parser --- TEMPORARILY DISABLED ---
-        query = ""
+        query = "Write the JSON format in a single line string with no newline characters or tab characters"
         parser = PydanticOutputParser(pydantic_object=Travel_Plan)
 
         prompt = PromptTemplate(
@@ -117,17 +117,21 @@ def home():
         )
         prompt_template_input = prompt.format_prompt(query=query)
         output = (conversation.predict(input=prompt_template_input.to_string()))
-        # Slice string and convert to JSON
-        output = (output[output.find("{"):output.rfind("}") + 1])
 
         # Temporarily putting JSON object as string into the notes
         new_note = Note(data=output, user_id=current_user.id)
         db.session.add(new_note)
         db.session.commit()
+
+        # Slice string and convert to JSON
+        output = (output[output.find("{"):output.rfind("}") + 1])
+        output = json.loads(output)
+
+        
         
         print(output)
         print(type(output))
-        
+
         """# Add activities 
         activity_list = Activities(
             description = output.activities,
