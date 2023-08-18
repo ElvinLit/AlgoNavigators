@@ -3,90 +3,97 @@
 {% block title %}Planner{% endblock %}
 
 {% block content %}
-<br></br>
+<style>
+  body {
+    background-color: #05172b;
+  }
 
-<!-- Overall Container -->
-<div class="planner-cards-container">
-  <!-- Container for a card -->
-  <div class="planner-card-container">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="planner-card-title" style="color: black;">Trip to {country}</h5>
-            <p class="planner-card-text" style="color: black;">
-                Departure Airport: {{ user.flight_information.first_departure_airport }}<br>
-                Destination Airport: {{ user.flight_information.first_arrival_airport }}<br>
-                Hotel: [Hotel Name]<br>
-                Airline: [Airline Name]<br>
-                Places to See: [Place 1], [Place 2], [Place 3], ...
-            </p>
-            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tripModal1">View Trip Details</a>
-        </div>
-    </div>
-</div>
+  .planner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
 
-<div class="planner-card-container">
-  <div class="card" style="width: 18rem;">
-      <div class="card-body">
-          <h5 class="planner-card-title" style="color: black;">Trip to {country}</h5>
-          <p class="planner-card-text" style="color: black;">
-              Departure Airport: DFW<br>
-              Destination Airport: BAR<br>
-              Hotel: [Hotel Name]<br>
-              Airline: [Airline Name]<br>
-              Places to See: [Place 1], [Place 2], [Place 3], ...
-          </p>
-          <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tripModal1">View Trip Details</a>
-      </div>
+  .planner-card {
+    max-width: 500px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .planner-card-title {
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 10px;
+  }
+
+  .planner-card-text {
+    font-size: 16px;
+    color: #666666;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+
+  .modal-header {
+    background-color: #007bff;
+    color: #ffffff;
+  }
+
+  .modal-title {
+    font-size: 20px;
+    color: #ffffff;
+  }
+
+  .modal-body {
+    color: #333333;
+  }
+</style>
+
+<div class="planner-container">
+  <div class="planner-card">
+    <h5 class="planner-card-title">My Trip</h5>
+    <p class="planner-card-text">
+      Get ready for an exciting adventure! Plan your dream trip with our handy planner tool.
+    </p>
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tripModal1">View Trip Details</a>
   </div>
 </div>
-
 
 <!-- Modal 1 -->
 <div class="modal fade" id="tripModal1" tabindex="-1" role="dialog" aria-labelledby="tripModalLabel1" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tripModalLabel1" style="color: black;">Trip Details for {country}</h5>
+        <h5 class="modal-title" id="tripModalLabel1">Trip Details for {country}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <!-- Add your trip details content here -->
-        <p style="color: black;">Your flight from DFW to BAR</p>
-        <h6 style="color: black;">Activities</h6>
-        <p style="color: black;">Activity 1</p>
-        <p style="color: black;">Activity 2</p>
-        <h6 style="color: black;">Restaurants</h6>
-        <p style="color: black;">Restaurant 1</p>
-        <p style="color: black;">Restaurant 2</p>
+        <p>Your flight from DFW to BAR is booked. Get ready to explore!</p>
+        <h6>Activities</h6>
+        <ul>
+          <li>Visit the local museum</li>
+          <li>Take a guided city tour</li>
+        </ul>
+        <h6>Restaurants</h6>
+        <ul>
+          <li>Dine at the famous Seafood Haven</li>
+          <li>Experience local flavors at Spice Street Eatery</li>
+        </ul>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Modal 2 -->
-<div class="modal fade" id="tripModal2" tabindex="-1" role="dialog" aria-labelledby="tripModalLabel2" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="tripModalLabel2" style="color: black;">Trip Details for {country}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- Add your trip details content here -->
-        <p style="color: black;">Your flight from DFW to BAR</p>
-        <h6 style="color: black;">Activities</h6>
-        <p style="color: black;">Activity 1</p>
-        <p style="color: black;">Activity 2</p>
-        <h6 style="color: black;">Restaurants</h6>
-        <p style="color: black;">Restaurant 1</p>
-        <p style="color: black;">Restaurant 2</p>
-      </div>
-    </div>
-  </div>
-</div>
-
 {% endblock %}
