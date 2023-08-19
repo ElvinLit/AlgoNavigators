@@ -64,5 +64,6 @@ class User(db.Model, UserMixin):
     notes = db.relationship('Note') # Connect a relation with note id 
     user_messages = db.relationship('UserMessage')
     flight_information = db.relationship('Flights')
-
+    restaurant_suggestions = db.relationship('Restaurants')
+    activities_suggestions = db.relationship('Activities')
 
