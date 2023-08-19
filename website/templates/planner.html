@@ -25,16 +25,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Your flight from DFW to BAR is booked. Get ready to explore!</p>
+        <p>Your flight from {{ current_user.flight_information.first_departure_airport }} to {{ current_user.flight_information.first_arrival_airport }} is booked. Get ready to explore!</p>
         <h5>Activities</h5>
         <ul>
-          <li>Visit the local museum</li>
-          <li>Take a guided city tour</li>
+          <li>{{ current_user.activities_suggestions.description }}</li>
         </ul>
         <h5>Restaurants</h5>
         <ul>
-          <li>Dine at the famous Seafood Haven</li>
-          <li>Experience local flavors at Spice Street Eatery</li>
+          <li>{{ current_user.restaurant_suggestions.restaurant }}</li>
         </ul>
       </div>
     </div>
