@@ -1,8 +1,15 @@
 /* Base */
-body {
-    background-color: #212A3E;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, html {
+    height: 100%;
+    overflow: hidden;
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
+    background: linear-gradient(1deg, #32394d, #212a46);
 }
 .navbar-nav .nav-link, .navbar-brand {
     font-family: 'Lato', sans-serif;
@@ -36,7 +43,7 @@ body {
 }
 
 /* Chat */
-body, html {
+.chat-page body, .chat-page html {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -239,20 +246,68 @@ body, html {
 }
 
 /* Planner */
-.planner-cards-container {
-    background-color: #394867;
-    padding: 50px;
-    border-radius: 10px;
+.planner-container {
+    position: relative;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
 }
-.planner-card-container {
-    display: flex;
-    justify-content: space-between;
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    padding: 40px 50px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    text-align: center;
+    width: 80%;  
+    height: auto;
+    margin: auto;
+    position: relative;
+    max-width: 1000px;
+    z-index: 1;
 }
-.planner-card {
-    margin-right: 10px;
+.planner-card-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
-.planner-card-title, .planner-card-text {
-    color: black;
+.planner-card-text {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+.btn-primary {
+    margin: 10px 20px; 
+    transition: transform 0.3s;
+}
+.btn-primary:hover {
+    transform: scale(1.03);
+}
+.modal-header {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 15px;
+}
+.modal-title {
+    font-size: 24px;
+}
+.modal-body {
+    color: #333333;
+    padding: 15px;
+    line-height: 1.6;
+    margin-left: 15px;
+}
+.modal-body h5 {
+    margin-top: 20px;
+}
+.modal-body ul {
+    margin-bottom: 20px;
+}
+.planner-modal .modal-header {
+    padding: 15px; 
+}
+.planner-modal .modal-body {
+    padding: 15px;
+    line-height: 1.6; 
 }
 
 /* Login */
@@ -269,10 +324,9 @@ body, html {
     left: 0;
     z-index: -1;
 }
-
 label {
     display: inline-block;
     margin-top: 10px;
-    /*vertical-align: top;*/
 }
+
 /* Signup */

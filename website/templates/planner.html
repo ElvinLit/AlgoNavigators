@@ -3,83 +3,19 @@
 {% block title %}Planner{% endblock %}
 
 {% block content %}
-<style>
-  body {
-    background-color: #05172b;
-    color: #ffffff;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  .planner-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 85vh;
-  }
-
-  .planner-card {
-    max-width: 5000px;
-    width: 120%;
-    background-color: #d9d7f7;
-    border-radius: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 40px 20px; /* Adjusted padding for more height */
-    text-align: center;
-  }
-
-  .planner-card-title {
-    font-size: 28px;
-    color: #333333;
-    margin-bottom: 15px;
-  }
-
-  .planner-card-text {
-    font-size: 18px;
-    color: #1d1717;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: #ffffff;
-    transition: background-color 0.3s, border-color 0.3s;
-  }
-
-  .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-  }
-
-  .modal-header {
-    background-color: #007bff;
-    color: #ffffff;
-  }
-
-  .modal-title {
-    font-size: 24px;
-  }
-
-  .modal-body {
-    color: #333333;
-  }
-</style>
-
 <div class="planner-container">
-  <div class="planner-card">
+  <div class="glass-card">
     <h2 class="planner-card-title">Plan Your Dream Trip</h2>
     <p class="planner-card-text">
       Get ready for an exciting adventure! Use our handy planner tool to create your perfect trip itinerary.
     </p>
     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tripModal1">View Trip Details</a>
     <a href="/chat" class="btn btn-primary">Create your Dream Trip</a>
-
   </div>
 </div>
 
 <!-- Modal 1 -->
-<div class="modal fade" id="tripModal1" tabindex="-1" role="dialog" aria-labelledby="tripModalLabel1" aria-hidden="true">
+<div class="modal fade planner-modal" id="tripModal1" tabindex="-1" role="dialog" aria-labelledby="tripModalLabel1" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
