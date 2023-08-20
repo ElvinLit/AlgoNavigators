@@ -300,6 +300,7 @@ body, html {
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
+    
 }
 .planner-modal .modal-header {
     padding: 15px; 
@@ -370,20 +371,19 @@ body, html {
 .mcq-text {
     font-weight: bold;
 }
-.mcq-subtext-container-airport {
+.mcq-subtext-container {
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
-    margin-left: 250px;
-    color: #666;
 }
 .mcq-subtext-left {
     float: left;
-    margin-right: 250px;
 }
 .mcq-subtext-right {
     float: right;
-    margin-left: 250px;
+}
+.mcq-subtext-middle {
+    float: none;
 }
 
 /* Login */
