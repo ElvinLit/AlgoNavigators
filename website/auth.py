@@ -16,7 +16,7 @@ def login():
         if user:
             if check_password_hash(user.password, password): # Compares equality with first and second parameter
                 login_user(user, remember=True) # Sets a user as being logged in
-                return redirect(url_for('chat.home'))
+                return redirect(url_for('test.home'))
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
@@ -55,8 +55,8 @@ def sign_up():
             new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256')) # Adding this jit to our db
             db.session.add(new_user)
             db.session.commit()
-            login_user(user, remember=True)
+            login_user(new_user, remember=True)
             flash('Account created!', category='success')
-            return redirect(url_for('chat.home')) # Redirecting to our homepage
+            return redirect(url_for('test.home'))
 
     return render_template("sign_up.html", user=current_user)
