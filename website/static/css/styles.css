@@ -296,12 +296,17 @@ body, html {
     line-height: 1.6;
     margin-left: 15px;
 }
-.modal-body h5 {
-    margin-top: 20px;
+
+.modal-content {
+    
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    
 }
-.modal-body ul {
-    margin-bottom: 20px;
-}
+
 .planner-modal .modal-header {
     padding: 15px; 
 }
@@ -329,4 +334,88 @@ label {
     margin-top: 10px;
 }
 
+.rectangular-mcq-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    
+}
+
+.rectangular-mcq-label input {
+    display: none
+}
+  
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 100px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+  
+/* On mouse-over, add a grey background color */
+.rectangular-mcq-label:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+/* When the radio button is checked, add a blue background */
+.rectangular-mcq-label input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.submit-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #2980b9;
+}
+
+.rectangular-mcq-label {
+    display: inline-block;
+    position: relative;
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+  
+.rectangular-mcq-option:checked + .rectangular-mcq-label {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+  
+.mcq-text {
+    font-weight: bold;
+}
+
+.mcq-subtext-container-airport {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-left: 250px;
+    color: #666;
+}
+  
+
+.mcq-subtext-left {
+    float: left;
+    margin-right: 250px;
+}
+
+.mcq-subtext-right {
+    float: right;
+    margin-left: 250px;
+}
 /* Signup */

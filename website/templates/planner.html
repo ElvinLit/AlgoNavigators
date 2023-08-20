@@ -25,15 +25,94 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Your flight from {{ current_user.flight_information.first_departure_airport }} to {{ current_user.flight_information.first_arrival_airport }} is booked. Get ready to explore!</p>
-        <h5>Activities</h5>
-        <ul>
-          <li>{{ current_user.activities_suggestions.description }}</li>
-        </ul>
-        <h5>Restaurants</h5>
-        <ul>
-          <li>{{ current_user.restaurant_suggestions.restaurant }}</li>
-        </ul>
+        <!-- MCQ for selecting which flight -->
+        <form>
+          <div class="rectangular-mcq-container">
+            <label class="rectangular-mcq-label">
+              <input type="radio" name="mcq-option" value="Option 1" class="rectangular-mcq-option">
+              <div class="mcq-text" style="font-size: 25px">Flight 1</div>
+              <div class="mcq-subtext-container">
+                <div class="mcq-subtext-left" style="font-size: 20px">Airport 1</div>
+                <div class="mcq-subtext-right" style="font-size: 20px">Airport 2</div>
+              </div>
+              <div class="mcq-subtext-container">
+                <div class="mcq-subtext-left" style="font-size: 15px">First Departure Time</div>
+                <div class="mcq-subtext-right" style="font-size: 15px">First Arrival Time</div>
+              </div>
+              <div class="mcq-subtext-container">
+                <div class="mcq-subtext-left" style="font-size: 20px">Airport 2</div>
+                <div class="mcq-subtext-right" style="font-size: 20px">Airport 1</div>
+              </div>
+              <div class="mcq-subtext-container">
+                <div class="mcq-subtext-left" style="font-size: 15px">Second Departure Time</div>
+                <div class="mcq-subtext-right" style="font-size: 15px">Second Arrival Time</div>
+              </div>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          
+          <div class="rectangular-mcq-container">
+            <label class="rectangular-mcq-label">
+              <input type="radio" name="mcq-option" value="Option 2" class="rectangular-mcq-option">
+              <div class="mcq-text" style="font-size: 25px">Flight 2</div>
+              <div class="mcq-subtext-container">
+                <div class="mcq-subtext-left" style="font-size: 20px">Airport 1</div>
+                <div class="mcq-subtext-right" style="font-size: 20px">Airport 2</div>
+              </div>
+              <div class="mcq-subtext-container">
+                <div class="mcq-subtext-left" style="font-size: 15px">First Departure Time</div>
+                <div class="mcq-subtext-right" style="font-size: 15px">First Arrival Time</div>
+              </div>
+              <div class="mcq-subtext-container">
+                <div class="mcq-subtext-left" style="font-size: 20px">Airport 2</div>
+                <div class="mcq-subtext-right" style="font-size: 20px">Airport 1</div>
+              </div>
+              <div class="mcq-subtext-container">
+                <div class="mcq-subtext-left" style="font-size: 15px">Second Departure Time</div>
+                <div class="mcq-subtext-right" style="font-size: 15px">Second Arrival Time</div>
+              </div>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          
+          <div class="rectangular-mcq-container">
+            <label class="rectangular-mcq-label">
+              <input type="radio" name="mcq-option" value="Option 3" class="rectangular-mcq-option">
+              <div class="mcq-text" style="font-size: 25px">Flight 3</div>
+              <div class="mcq-subtext-container">
+                <div class="mcq-subtext-left" style="font-size: 20px">Airport 1</div>
+                <div class="mcq-subtext-right" style="font-size: 20px">Airport 2</div>
+              </div>
+              <div class="mcq-subtext-container">
+                <div class="mcq-subtext-left" style="font-size: 15px">First Departure Time</div>
+                <div class="mcq-subtext-right" style="font-size: 15px">First Arrival Time</div>
+              </div>
+              <div class="mcq-subtext-container">
+                <div class="mcq-subtext-left" style="font-size: 20px">Airport 2</div>
+                <div class="mcq-subtext-right" style="font-size: 20px">Airport 1</div>
+              </div>
+              <div class="mcq-subtext-container">
+                <div class="mcq-subtext-left" style="font-size: 15px">Second Departure Time</div>
+                <div class="mcq-subtext-right" style="font-size: 15px">Second Arrival Time</div>
+              </div>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+
+          <button type="submit" class="submit-button">Submit</button>
+        </form>
+
+        <script>
+          // JavaScript to handle selection
+          const mcqOptions = document.querySelectorAll('.rectangular-mcq-option');
+      
+          mcqOptions.forEach(option => {
+            option.addEventListener('click', () => {
+              mcqOptions.forEach(o => o.classList.remove('selected'));
+              option.classList.add('selected');
+            });
+          });
+        </script>
       </div>
     </div>
   </div>
