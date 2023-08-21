@@ -252,6 +252,10 @@ body, html {
     transition: all 0.2s ease;               
     background-color: rgba(0, 255, 162, 0.1);  
 }
+label {
+    display: inline-block;
+    margin-top: 10px;
+}
 
 /* Planner */
 .planner-container {

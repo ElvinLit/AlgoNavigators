@@ -129,7 +129,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
         departure_match = re.search(r'Leaves (.+?) at', description)
         departure_airport_first = departure_match.group(1).strip()
 
-        arrival_match = re.search(r'arrives at (.+?)\.', description)
+        arrival_match = re.search(r'arrives at (.+?)\ at', description)
         arrival_airport_first = arrival_match.group(1).strip()
 
         # Extracting the departure and arrival times
@@ -252,7 +252,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
         departure_match = re.search(r'Leaves (.+?) at', description)
         departure_airport_second = departure_match.group(1).strip()
 
-        arrival_match = re.search(r'arrives at (.+?)\.', description)
+        arrival_match = re.search(r'arrives at (.+?)\ at', description)
         arrival_airport_second = arrival_match.group(1).strip()
 
         # Extracting the departure and arrival times
