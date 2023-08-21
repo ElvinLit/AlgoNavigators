@@ -9,8 +9,7 @@ body, html {
     overflow: hidden;
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(1deg, #32394d, #212a46);
-}
+    background: linear-gradient(125deg, #3c4354, #0b1020);}
 .navbar-nav .nav-link, .navbar-brand {
     font-family: 'Lato', sans-serif;
     color: #000000;
@@ -30,16 +29,21 @@ body, html {
     transform: translateX(-50%);
 }
 .btn-global-outline {
-    margin-top: 10px;
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
+    text-decoration: none;
+    color: #00ffa2;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 8px 13px;
     border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: none; 
+    transition: all 0.2s ease;
+    position: relative; 
 }
 .btn-global-outline:hover {
-    box-shadow: 0 0 10px 0.2px #00ffa2;
-    border-color: #00ffa2;
-    color: #00ffa2;
+    text-decoration: none;
+    background-color: rgba(0, 255, 162, 0.1);
+    transition: all 0.2s ease;
 }
 
 /* Chat */
@@ -189,60 +193,64 @@ body, html {
 }
 
 /* Home */
-.home-background {
-    background-image: url('https://source.unsplash.com/1920x1080/?travel,europe');
-    background-size: cover;
-    background-position: center;
-    filter: blur(5px);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: -1;
-}
 .home-title-container {
     text-align: center;
     margin-top: 150px;
-    border-radius: 5px;
-    box-shadow: 1px 5px 20px black;
-    background: rgba(255, 255, 255, 0.5);
-    padding: 20px;
+    margin-bottom: 50px; /* New margin added */
+    border-radius: 15px;
+    padding: 20px 30px;
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    color: white; /* Font color changed to white */
 }
 .home-title {
     font-family: 'Poppins', sans-serif;
-    color: black;
+    color: white;
     font-size: 3rem;
 }
 .home-subheader {
     font-family: 'Poppins', sans-serif;
-    color: black;
+    color: white;
     font-size: 1.5rem;
     margin-top: 20px;
 }
 .home-card-container {
     display: flex;
     flex-wrap: wrap;
-    border-radius: 5px;
     justify-content: center;
     margin-top: 50px;
 }
 .home-card {
-    width: 18rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    padding: 20px 30px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     text-align: center;
-    padding: 20px;
-    box-shadow: 1px 2px 10px black;
-    border-radius: 5px;
-    background-color: rgba(57, 72, 103, 0.8);
+    width: 18rem;
     color: white;
     margin: 20px;
+    padding-bottom: 60px;
+    position: relative; 
 }
 .home-card a {
     text-decoration: none;
     color: #00ffa2;
+    font-weight: bold;                      
+    background: rgba(255, 255, 255, 0.03); 
+    padding: 5px 10px;                     
+    border-radius: 10px;                    
+    backdrop-filter: blur(10px);
+    position: absolute;                     
+    bottom: 25px;                           
+    left: 50%;                              
+    transform: translateX(-50%);            
 }
 .home-card a:hover {
-    text-decoration: underline;
+    text-decoration: none;  
+    transition: all 0.2s ease;               
+    background-color: rgba(0, 255, 162, 0.1);  
 }
 
 /* Planner */
@@ -254,7 +262,7 @@ body, html {
     margin-top: 200px;
 }
 .glass-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.03);
     border-radius: 15px;
     padding: 40px 50px;
     backdrop-filter: blur(20px);
@@ -386,22 +394,35 @@ body, html {
     float: none;
 }
 
-/* Login */
-.login-background::before {
-    content: "";
-    background-image: url('https://source.unsplash.com/1920x1080/?travel,europe');
-    background-size: cover;
-    background-position: center;
-    filter: blur(2px);
-    position: absolute;
-    width: 100%;
-    height: 80%;
-    top: 0;
-    left: 0;
-    z-index: -1;
+/* Login & Sign-up*/
+.card {
+    background: rgba(255, 255, 255, 0.03); /* Glass effect background */
+    border-radius: 15px; /* Rounded edges */
+    backdrop-filter: blur(20px); /* Blur effect */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Shadow effect */
 }
-label {
-    display: inline-block;
-    margin-top: 10px;
+.card h3 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+h3.text-center {
+    margin-bottom: 25px;
+}
+.card label {
+    color: #ffffff;
+}
+.form-control {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px 15px;
+    backdrop-filter: blur(10px);
+}
+.form-control:focus {
+    outline: none;
+    color: #bdbdbd;
+    box-shadow: none;
+    background-color: rgba(255, 255, 255, 0.08);
 }
 /* Signup */

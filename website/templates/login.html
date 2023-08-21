@@ -1,4 +1,5 @@
-{% extends "base.html" %} {% block title %}Login{% endblock %}
+{% extends "base.html" %} 
+{% block title %}Login{% endblock %}
 
 {% block content %}
 <div class="login-background"></div>
@@ -6,37 +7,25 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card p-4 rounded shadow" style="margin-top: 100px; background-color: #394867;">
+            <div class="glass-card" style="margin-top: 100px;">
                 <form method="POST">
-                    <h3 class="text-center" style="color: #ffffff;">Login</h3>
+                    <h3 class="text-center">Login</h3>
 
                     <!-- Email -->
                     <div class="form-group">
-                        <label for="email" class="custom" style="color: #ffffff;">Email Address</label>
-                        <input 
-                            type="email" 
-                            class="form-control" 
-                            id="email" 
-                            name="email"
-                            placeholder="Enter email"
-                        />
+                        <label for="email" class="custom">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />
                     </div>
 
                     <!-- Password -->
                     <div class="form-group">
-                        <label for="password1" style="color: #ffffff;">Password</label>
-                        <input 
-                            type="password" 
-                            class="form-control" 
-                            id="password" 
-                            name="password" 
-                            placeholder="Enter password"
-                        />
+                        <label for="password1">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" />
                     </div>
                     <br />
 
                     <!-- Submit button -->
-                    <button type="submit" class="btn btn-global-outline">Login</button>
+                    <button type="submit" class="btn-global-outline">Login</button>
                 </form>
             </div>
         </div>

@@ -1,62 +1,40 @@
-{% extends "base.html" %} {% block title %}Sign Up{% endblock %}
+{% extends "base.html" %} 
+{% block title %}Sign Up{% endblock %}
 
 {% block content %}
+<div class="login-background"></div>
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card p-4 rounded shadow" style="margin-top: 100px; background-color: #394867;">
+            <div class="glass-card" style="margin-top: 100px;">
                 <form method="POST">
-                    <h3 class="text-center" style="color: #ffffff;">Sign Up</h3>
+                    <h3 class="text-center">Sign Up</h3>
 
                     <!-- Email -->
                     <div class="form-group">
-                        <label for="email" style="color: #ffffff;">Email Address</label>
-                        <input 
-                            type="email" 
-                            class="form-control" 
-                            id="email" 
-                            name="email"
-                            placeholder="Enter email"
-                        />
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />
                     </div>
                     <!-- First Name -->
                     <div class="form-group">
-                        <label for="firstName" style="color: #ffffff;">First Name</label>
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            id="firstName" 
-                            name="firstName" 
-                            placeholder="Enter first name"
-                        />
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" />
                     </div>
                     <!-- Password -->
                     <div class="form-group">
-                        <label for="password1" style="color: #ffffff;">Password</label>
-                        <input 
-                            type="password" 
-                            class="form-control" 
-                            id="password1" 
-                            name="password1" 
-                            placeholder="Enter password"
-                        />
+                        <label for="password1">Password</label>
+                        <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter password" />
                     </div>
                     <!-- Confirm Password -->
                     <div class="form-group">
-                        <label for="password2" style="color: #ffffff;">Password (Confirm)</label>
-                        <input 
-                            type="password" 
-                            class="form-control" 
-                            id="password2" 
-                            name="password2" 
-                            placeholder="Confirm password"
-                        />
+                        <label for="password2">Password (Confirm)</label>
+                        <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm password" />
                     </div>
                     <br />
 
                     <!-- Submit Button -->
-                    <button type="submit" class="btn btn-global-outline">Sign Up</button>
+                    <button type="submit" class="btn-global-outline">Sign Up</button>
                 </form>
             </div>
         </div>
