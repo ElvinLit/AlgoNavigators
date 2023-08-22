@@ -9,24 +9,80 @@ body, html {
     overflow: hidden;
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(125deg, #3c4354, #0b1020);}
-.navbar-nav .nav-link, .navbar-brand {
-    font-family: 'Lato', sans-serif;
-    color: #000000;
-    font-weight: bold;
+    background: linear-gradient(150deg, #3c4354, #0b1020);
 }
-.navbar-nav .nav-link:hover, .navbar-brand:hover {
-    color: #2A3B5A;
-    background-color: #a2bfcf;
-    border-radius: 5px;
+.navbar {
+    background: rgba(0, 0, 0, 0.08) !important;
+    backdrop-filter: blur(30px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    padding: 10px 30px;
+    border-radius: 0;
+    position: relative;
+    overflow: hidden;
+}
+.navbar:before, .navbar:after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: 1;
+    background: linear-gradient(white, transparent, white);
+    pointer-events: none;
+    transform: rotate(-15deg);
+    opacity: 0.02; 
+}
+.navbar:after {
+    transform: rotate(15deg);
+    opacity: 0.01; 
 }
 .navbar-brand {
-    padding: 5px;
+    color: white !important;
+    font-weight: bold;
+    font-size: 1.4em;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: all 0.2s ease;
+}
+.navbar-nav .nav-link {
+    color: white !important;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+.navbar-brand:hover {
+    background: linear-gradient(120deg, #00ffa2, #0099cc);
+    -webkit-background-clip: text;
+    color: transparent !important;
+}
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
 }
 .navbar-center {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+}
+.navbar .btn:not(.navbar-brand) {
+    text-decoration: none;
+    color: #00ffa2;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 8px 13px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: none;
+    transition: all 0.2s ease;
+    position: relative;
+}
+.navbar .btn:not(.navbar-brand):hover {
+    text-decoration: none;
+    background-color: rgba(0, 255, 162, 0.1);
+    transition: all 0.2s ease;
 }
 .btn-global-outline {
     text-decoration: none;
@@ -398,7 +454,7 @@ label {
     float: none;
 }
 
-/* Login & Sign-up*/
+/* Logon */
 .card {
     background: rgba(255, 255, 255, 0.03); /* Glass effect background */
     border-radius: 15px; /* Rounded edges */
@@ -429,4 +485,74 @@ h3.text-center {
     box-shadow: none;
     background-color: rgba(255, 255, 255, 0.08);
 }
-/* Signup */
+
+/* About */
+.about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
+}
+.about-card {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 15px;
+    padding: 40px 50px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    text-align: center;
+    width: 80%;
+    height: auto;
+    margin: 20px 0;
+    position: relative;
+    max-width: 1000px;
+    z-index: 1;
+}
+.about-card h2, .about-card h3 {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+.about-card h2:hover, .about-card h3:hover {
+    background: linear-gradient(120deg, #00ffa2, #0099cc);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.tech-card ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+.tech-card ul li {
+    margin-bottom: 15px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    flex-wrap: nowrap;
+}
+.tech-card ul li h4 {
+    margin-right: 5px;
+}
+.tech-card ul li span {
+    margin: 0 5px;
+    margin-right: 0px;
+    font-weight: normal;
+    transition: color 0.3s ease;
+}
+.tech-card ul li span:hover {
+    color: #00ffa2;
+}
+.team-card ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+.team-card ul li {
+    text-align: center;
+    transition: color 0.3s ease;
+}
+.team-card ul li:hover {
+    color: #00ffa2;
+}
