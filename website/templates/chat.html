@@ -7,20 +7,17 @@
     <!-- Chatbox -->
     <div id="chatbox">
         {% for entry in chat_log %}
-        <div class="chat-entry-container" style="{% if entry.type == 'user' %}background-color: #212A3E{% else %}background-color: #394867{% endif %};">
-            <div class="chat-logo {% if entry.type == 'user' %}moon-logo{% endif %}">{% if entry.type == 'user' %}😎{% else %}🤓{% endif %}</div>
+        <div class="chat-entry-container" style="{% if entry.type == 'user' %}background-color: rgba(33, 42, 62, 0.3);{% else %}background-color: rgba(57, 72, 103, 0.3){% endif %};">
+            <div class="chat-logo {% if entry.type == 'user' %}moon-logo{% endif %}">{% if entry.type == 'user' %}😎{% else %}🤖{% endif %}</div>
             <div class="chat-entry {% if entry.type == 'user' %}user-message{% else %}response-message{% endif %}">
                 {{ entry.data }}
             </div>
         </div>
         {% endfor %}
-
     </div>
-
     <form action="{{ url_for('chat.flights') }}" method="get">
         <button style="display: none;" type="submit" class="btn-icon" id="flight_button"></button>
     </form>
-    
     <!-- Message Box & Button -->
     <form method="POST" id="message-form">
         <div id="userInput">
@@ -29,22 +26,28 @@
                 <button type="button" class="btn-icon" onClick="startNewConversation()"><i class="fa fa-refresh"></i></button>
                 <label style="font-size: 1.8em;" for="flight_button" class="btn-icon" data-toggle="modal" data-target="#myModal"><i class="fa fa-plane" id="flight_button_label"></i></label>
                 <button id="sendButton" type="submit" class="btn-icon btn-send"><i class="fa fa-paper-plane"></i></button>
-                <!-- Enter to submit -->
+                <div class="loading-spinner" id="loadingSpinner"></div>
                 <script>
+                    document.getElementById('sendButton').addEventListener('click', function(event) {
+                        document.getElementById('userMessage').style.backgroundColor = 'rgba(51, 51, 51, 0.5)'; // Change background color to indicate processing
+                        document.getElementById('loadingSpinner').style.display = 'inline-block'; // Show the spinner
+                    });
                     document.getElementById('userMessage').addEventListener('keydown', function(event) {
                         if (event.key === 'Enter' && !event.shiftKey) {
                             event.preventDefault();
+                            document.getElementById('userMessage').style.backgroundColor = 'rgba(51, 51, 51, 0.5)'; // Change background color to indicate processing
+                            document.getElementById('loadingSpinner').style.display = 'inline-block'; // Show the spinner
                             document.getElementById('sendButton').click();
                         }
                     });
+                    function onMessageProcessed() {
+                        document.getElementById('loadingSpinner').style.display = 'none';
+                        document.getElementById('userMessage').style.backgroundColor = 'transparent';
+                    }
                 </script>
             </div>
         </div>
     </form>
-
-    
-    
-    
 </div>
     
 <!-- Automatic scroll -->

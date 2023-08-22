@@ -110,7 +110,7 @@ body, html {
     overflow: hidden;
 }
 .chat-container {
-    background-color: #394867;
+    backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -166,18 +166,19 @@ body, html {
     align-self: center;
 }
 #userInput {
-    background-color: #394867;
+    background-color: rgba(57, 72, 103, 0.1);
     padding: 15px;
     width: 1000px;
-    border-top: 2px solid #212A3E;
+    border-top: 2px solid rgba(33, 42, 62, 0.2);
     display: flex;
     align-items: center;
     height: auto;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    position: relative;
 }
 #userInput textarea {
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.3);
     border-radius: 5px;
     color: #fff;
     flex-grow: 1;
@@ -190,6 +191,8 @@ body, html {
     width: calc(100% - 100px);
     padding: 10px;
     resize: none;
+    position: relative;
+    display: block;
 }
 .button-container {
     display: flex;
@@ -247,18 +250,43 @@ body, html {
     color: white;
     text-decoration: none;
 }
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #00ffa2;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    display: none; 
+    position: absolute;
+    right: 140px;
+    bottom: 60px;
+    z-index: 1000;
+}
+@keyframes buttonPress {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+.btn-icon:active {
+    animation: buttonPress 0.2s ease-in-out;
+}
 
 /* Home */
 .home-title-container {
     text-align: center;
     margin-top: 150px;
-    margin-bottom: 50px; /* New margin added */
+    margin-bottom: 50px;
     border-radius: 15px;
     padding: 20px 30px;
     backdrop-filter: blur(20px);
     background: rgba(255, 255, 255, 0.03);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    color: white; /* Font color changed to white */
+    color: white;
 }
 .home-title {
     font-family: 'Poppins', sans-serif;
@@ -456,10 +484,10 @@ label {
 
 /* Logon */
 .card {
-    background: rgba(255, 255, 255, 0.03); /* Glass effect background */
-    border-radius: 15px; /* Rounded edges */
-    backdrop-filter: blur(20px); /* Blur effect */
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Shadow effect */
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 .card h3 {
     color: #ffffff;
@@ -491,7 +519,7 @@ h3.text-center {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px 0;
+    padding: 20px 0;
 }
 .about-card {
     background: rgba(0, 0, 0, 0.03);
