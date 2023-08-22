@@ -108,7 +108,9 @@ def home():
         session.pop('find_flight', not flight_boolean)
         
         # Below is the JSON parser --- TEMPORARILY DISABLED ---
-        query = "Write the JSON format in a single line string with no newline characters or tab characters. Make sure there are comma delimiters present so that it is in a perfect JSON format that can be converted into a python dictionary."
+        query = "Write the JSON format in a single line string with no newline characters or tab characters. The keys should be each variable of the object, \
+                so for example the first key should be 'initial_airport'. Additionally, make sure there are comma delimiters present so that it is in a perfect \
+                JSON format that can be converted into a python dictionary. You will only return a perfectly created JSON format"
         parser = PydanticOutputParser(pydantic_object=Travel_Plan)
 
         prompt = PromptTemplate(
