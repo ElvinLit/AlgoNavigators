@@ -274,8 +274,8 @@ def home():
 
 @chat.route('/planner')
 def plan():
-
-
+    temp_var = flight_one.first_cost
+    return render_template("planner.html", user=current_user, temp=temp_var)
 
 
 @chat.route('/flights')
@@ -283,7 +283,6 @@ def flights():
     session['find_flight'] = flight_boolean
     print("Flight Button Works")
     return redirect(url_for('chat.home'))
-
 
 @chat.route('/delete-conversation', methods=['POST'])
 def delete_conversation():

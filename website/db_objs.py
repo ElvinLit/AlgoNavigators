@@ -70,7 +70,7 @@ class Hotels(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
-class FinalPlan(db.model):
+class FinalPlan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
     # Flight Details
