@@ -10,6 +10,7 @@ from .db_objs import Note, UserMessage, Flights, Hotels, FinalPlan
 my_plan = Blueprint('my_plan', __name__)
 
 @my_plan.route('/my-plan', methods=['GET', 'POST'])
+@login_required
 def my_plans():
     if request.method == 'POST':
         flight_option = request.form.get('mcq-option-flight')
