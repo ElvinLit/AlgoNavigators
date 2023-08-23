@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Planner Page{% endblock %}
+
+{% block content %}
+
+<p>
+    first flight cost: {{ user.final_plan[0].first_cost }}
+</p>
+<p>
+    first airline: {{ user.final_plan[0].first_airline }}
+</p>
+<p>
+    first departure airport: {{ user.final_plan[0].first_departure_airport}}
+</p>
+<p>
+    first departure time: {{user.final_plan[0].first_departure_time}}
+</p>
+<p>
+    first arrival time: {{user.final_plan[0].first_arrival_time}}
+</p>
+<p>
+    first flight duration: {{user.final_plan[0].first_duration}}
+</p>
+<p>
+    first flight URL: {{user.final_plan[0].first_flight_link}}
+</p>
+<p>
+    departure flight date: {{user.final_plan[0].departure_date}}
+</p>
+<p>
+    second flight cost: {{ user.final_plan[0].second_cost }}
+</p>
+<p>
+    second airline: {{ user.final_plan[0].second_airline }}
+</p>
+<p>
+    second departure airport: {{ user.final_plan[0].second_departure_airport }}
+</p>
+<p>
+    second arrival airport: {{ user.final_plan[0].second_arrival_airport }}
+</p>
+<p>
+    second departure time: {{ user.final_plan[0].second_departure_time }}
+</p>
+<p>
+    second arrival time: {{ user.final_plan[0].second_arrival_time }}
+</p>
+<p>
+    second flight duration: {{ user.final_plan[0].second_duration }}
+</p>
+<p>
+    second flight URL: {{ user.final_plan[0].second_flight_link }}
+</p>
+<p>
+    returning flight date: {{ user.final_plan[0].return_date }}
+</p>
+<p>
+    activities: {{ user.final_plan[0].activities }}
+</p>
+<p>
+    hotel price: {{ user.final_plan[0].hotel_price }}
+</p>
+<p>
+    hotel location: {{ user.final_plan[0].hotel_location }}
+</p>
+<p>
+    hotel rating: {{ user.final_plan[0].hotel_rating }}
+</p>
+<p>
+    restauraunts: {{ user.final_plan[0].restaurant }}
+</p>
+
+{% endblock %}

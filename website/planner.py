@@ -73,4 +73,4 @@ def my_plans():
         db.session.add(finalPlan)
         db.session.commit()
 
-    return render_template("planner_page.html", user=current_user)
+    return render_template("my_plan.html", user=current_user)
