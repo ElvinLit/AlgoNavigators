@@ -42,7 +42,7 @@ history = ChatMessageHistory()
 output = ""
 flight_boolean = False # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
 
-TEMPLATE =  "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
+'''TEMPLATE =  "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \
             The current date is: {current_date}. It is not currently 2020, this is the actual date at the moment and you will maintain this date throughout the conversation\
             As a personal travel agent that I am conversating with, at the start of our conversation you will remind me of the three \
@@ -62,7 +62,7 @@ TEMPLATE =  "You are now a personal travel agent, and will ONLY respond to inqui
             from the questions you asked me, as well as an estimated time to get there from the activities defined earlier. After confirming \
             that all three questions are met, you will respond in the format I just defined. Also, ask if I want to ask if the traveler \
             wants Economy, Premium Economy, Business, or First Class. You will do your best in fitting your presentation into one response."
-
+'''
 conversation = ConversationChain(
     llm=llm, 
     verbose=True, 
@@ -79,7 +79,7 @@ class Travel_Plan(BaseModel):
     restaurants: str = Field(description="the list of restaurants suggested by the travel assistant")
 
 
-conversation.predict(input=TEMPLATE)
+#conversation.predict(input=TEMPLATE)
 
 @chat.route('/chat', methods=['GET', 'POST'])
 @login_required
@@ -108,7 +108,7 @@ def home():
         session.pop('find_flight', not flight_boolean)
         
         # Below is the JSON parser --- TEMPORARILY DISABLED ---
-        query = "Write the JSON format in a single line string with no newline characters or tab characters. The keys should be each variable of the object, \
+        '''query = "Write the JSON format in a single line string with no newline characters or tab characters. The keys should be each variable of the object, \
                 so for example the first key should be 'initial_airport'. Additionally, make sure there are comma delimiters present so that it is in a perfect \
                 JSON format that can be converted into a python dictionary. You will only return a perfectly created JSON format"
         parser = PydanticOutputParser(pydantic_object=Travel_Plan)
@@ -147,11 +147,11 @@ def home():
             user_id = current_user.id,
         )
         db.session.add(restaurants_list)
-        db.session.commit()
+        db.session.commit()'''
 
         #Webscraper --- TEMPORARY VALUES ARE INPUTTED FOR NOW ---
-        flight_dict = FlightScraper(output["initial_airport"], output["final_airport"], output["leave_date"], output["arrive_date"], output["seat_quality"])
-        #flight_dict = FlightScraper("LAX", "DFW", "2023/08/22", "2023/09/05", "Premium Economy")
+        #flight_dict = FlightScraper(output["initial_airport"], output["final_airport"], output["leave_date"], output["arrive_date"], output["seat_quality"])
+        flight_dict = FlightScraper("LAX", "DFW", "2023/08/22", "2023/09/05", "Premium Economy")
 
         # Use this to implement data into website, it is a nested dictionary
         flight_one = Flights(
@@ -219,8 +219,8 @@ def home():
         db.session.add(flight_three)
         db.session.commit()
 
-        hotels_dict = HotelScraper(output["final_airport"])
-        #hotels_dict = HotelScraper("Toronto, Ontario, Canada")
+        #hotels_dict = HotelScraper(output["final_airport"])
+        hotels_dict = HotelScraper("Toronto, Ontario, Canada")
         
         hotel_one = Hotels(
             price = hotels_dict["hotel 1"]["Price"],
@@ -248,12 +248,12 @@ def home():
         db.session.add(hotel_three)
         db.session.commit()
 
-        activities_string = output["activities"]
-        restaurants_string = output["restaurants"]
-        #activities_string = "Activities String Placeholder"
-        #restaurants_string = "Restaurants String Placeholder"
+        #activities_string = output["activities"]
+        #restaurants_string = output["restaurants"]
+        activities_string = "Activities String Placeholder"
+        restaurants_string = "Restaurants String Placeholder"
 
-        return render_template("planner.html", flight_dict=flight_dict, hotels_dict=hotels_dict, activities_string=activities_string, restaurants_string=restaurants_string, user=current_user), find_flight
+        return redirect(url_for('chat.planner')) find_flight
         
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
     ai_responses = Note.query.filter_by(user_id=current_user.id).all()
@@ -265,6 +265,11 @@ def home():
             chat_log.append({'type': 'response', 'data': ai_responses[i].data, 'id': ai_responses[i].id})
 
     return render_template("chat.html", user=current_user, chat_log=chat_log), find_flight
+
+@chat.route('/planner')
+def plan():
+
+
 
 
 @chat.route('/flights')
