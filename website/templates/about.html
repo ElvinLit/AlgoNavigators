@@ -1,7 +1,30 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}About{% endblock %}
 
 {% block content %}
-
+<div class="about-container">
+    <div class="about-card mission-card">
+        <h2>Our Mission</h2>
+        <p>Our mission is simple: shake up the travel planning scene. We believe in the power of technology to create intricate, well-thought-out itineraries. With our AI-driven tool, we aim to redefine how individuals plan their travels from flights to activities. All designed and developed in a crunch for this hackathon. We're passionate about what we've built and hope it piques your interest as much as it did ours.</p>
+    </div>
+<div class="about-card tech-card">
+    <h3>Technologies</h3>
+    <ul>
+        <li>Languages: <span>HTML/CSS/JS</span>, <span>Python</span></li>
+        <li>Libraries: <span>Flask</span>, <span>LangChain</span>, <span>Selenium</span>, <span>Bootstrap</span></li>
+        <li>Key Concepts: <span>REST APIs</span>, <span>LLMs</span>, <span>UI/UX</span></li>
+    </ul>
+</div>
+    <div class="about-card team-card">
+        <h3>Team Members</h3>
+        <ul>
+            <li>Elvin Li</li>
+            <li>Akshat Sharma</li>
+            <li>Shrimoy Satpathy</li>
+            <li>Vishnu Nambiar</li>
+            <li>William Chin</li>
+        </ul>
+    </div>
+</div>
 {% endblock %}
