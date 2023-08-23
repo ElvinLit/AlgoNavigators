@@ -40,7 +40,7 @@ current_date = cdt.date()
 #Chat creation
 history = ChatMessageHistory()
 output = ""
-flight_boolean = False # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
+flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
 
 '''TEMPLATE =  "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \
@@ -273,9 +273,28 @@ def home():
     return render_template("chat.html", user=current_user, chat_log=chat_log), find_flight
 
 @chat.route('/planner')
-def plan():
-    temp_var = flight_one.first_cost
-    return render_template("planner.html", user=current_user, temp=temp_var)
+def planner():
+    
+    # Fetch each database
+    flight1 = Flights.query.filter_by(user_id=current_user.id, id=1).first()
+    flight2 = Flights.query.filter_by(user_id=current_user.id, id=2).first()
+    flight3 = Flights.query.filter_by(user_id=current_user.id, id=3).first()
+    
+    hotel1 = Hotels.query.filter_by(user_id=current_user.id, id=1).first()
+    hotel2 = Hotels.query.filter_by(user_id=current_user.id, id=2).first()
+    hotel3 = Hotels.query.filter_by(user_id=current_user.id, id=3).first()
+    #activities = Activities.query.filter_by(user_id=current_user.id).all()
+    #restaurants = Restaurants.query.filter_by(user_id=current_user.id).all()
+    
+    print(flight1.first_cost)
+
+    travel_dict = {
+        "flight1" : flight1,
+        "flight2" : flight2,
+        "flight3" : flight3
+    }
+
+    return render_template("planner.html", user=current_user, travel_dict=travel_dict)
 
 
 @chat.route('/flights')
