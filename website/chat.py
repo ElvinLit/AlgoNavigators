@@ -256,8 +256,6 @@ def home():
 
         #activities_string = output["activities"]
         #restaurants_string = output["restaurants"]
-        activities_string = "Activities String Placeholder"
-        restaurants_string = "Restaurants String Placeholder"
 
         return redirect(url_for('chat.planner')), find_flight
         
@@ -285,6 +283,8 @@ def planner():
     hotel3 = Hotels.query.filter_by(user_id=current_user.id, id=3).first()
     #activities = Activities.query.filter_by(user_id=current_user.id).all()
     #restaurants = Restaurants.query.filter_by(user_id=current_user.id).all()
+    activities = "Activities String Placeholder"
+    restaurants = "Restaurants String Placeholder"
     
     print(flight1.first_cost)
 
@@ -292,6 +292,11 @@ def planner():
         "flight1" : flight1,
         "flight2" : flight2,
         "flight3" : flight3
+        "hotel1" : hotel1
+        "hotel2" : hotel2
+        "hotel3" : hotel3
+        "activites" : activities
+        "restaurants" : restaurants
     }
 
     return render_template("planner.html", user=current_user, travel_dict=travel_dict)
