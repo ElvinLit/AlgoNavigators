@@ -72,5 +72,8 @@ def my_plans():
 
         db.session.add(finalPlan)
         db.session.commit()
+        
+    # Returns True if final plan empty, False otherwise
+    final_plan_empty = FinalPlan.query.filter_by(user_id=current_user.id).first() is None 
 
-    return render_template("my_plan.html", user=current_user)
+    return render_template("my_plan.html", user=current_user, final_plan_empty=final_plan_empty)
