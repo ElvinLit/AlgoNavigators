@@ -30,6 +30,8 @@ from .flight_webscrape import FlightScraper
 from .hotels import HotelScraper
 
 chat = Blueprint('chat', __name__)
+plan = Blueprint('planner', __name__)
+
 os.environ['OPENAI_API_KEY'] = apikey
 llm = OpenAI(temperature=1)
 
@@ -291,11 +293,11 @@ def planner():
     travel_dict = {
         "flight1" : flight1,
         "flight2" : flight2,
-        "flight3" : flight3
-        "hotel1" : hotel1
-        "hotel2" : hotel2
-        "hotel3" : hotel3
-        "activites" : activities
+        "flight3" : flight3,
+        "hotel1" : hotel1,
+        "hotel2" : hotel2,
+        "hotel3" : hotel3,
+        "activities" : activities,
         "restaurants" : restaurants
     }
 
