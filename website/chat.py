@@ -151,7 +151,7 @@ def home():
 
         #Webscraper --- TEMPORARY VALUES ARE INPUTTED FOR NOW ---
         #flight_dict = FlightScraper(output["initial_airport"], output["final_airport"], output["leave_date"], output["arrive_date"], output["seat_quality"])
-        flight_dict = FlightScraper("LAX", "DFW", "2023/08/22", "2023/09/05", "Premium Economy")
+        flight_dict = FlightScraper("LAX", "DFW", "2023/08/28", "2023/09/09", "Premium Economy")
 
         # Use this to implement data into website, it is a nested dictionary
         flight_one = Flights(

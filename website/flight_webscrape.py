@@ -15,7 +15,7 @@ import re
 
 def FlightScraper(start_input, destination_input, departure_date, return_date, seat):
 
-    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.11 Safari/537.36'
+    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
     opt = Options()
 
     opt.add_argument(r"--silent")
@@ -23,7 +23,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     opt.add_argument(r"--disable-dev-shm-usage")
     opt.add_argument(r'--ignore-certificate-errors')
     opt.add_experimental_option("detach", True)
-    #opt.add_argument('headless')
+    opt.add_argument('headless')
     opt.add_argument(f'user-agent={user_agent}')
     opt.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(options=opt)
@@ -63,12 +63,12 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
                 WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()'''
 
         except TimeoutException:
-            print("Couldn't click out of seat selection!")
+            print("Couldn't click out of seat selection! (TimeoutException)")
             print("Trying Again, Please Wait...")
             continue
             
         except ElementClickInterceptedException:
-            print("Couldn't click out of seat selection!")
+            print("Couldn't click out of seat selection! (ElementClickInterceptedException)")
             print("Trying Again, Please Wait...")
             continue
 
@@ -83,12 +83,12 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
             WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
 
         except TimeoutException:
-            print("Couldn't click starting destination!")
+            print("Couldn't click starting destination! (TimeoutException)")
             print("Trying Again, Please Wait...")
             continue
             
         except ElementClickInterceptedException:
-            print("Couldn't click starting destination!")
+            print("Couldn't click starting destination! (ElementClickInterceptedException)")
             print("Trying Again, Please Wait...")
             continue
 
@@ -107,12 +107,12 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
             WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(departure_date + '\n')
         
         except TimeoutException:
-            print("Couldn't click final destination!")
+            print("Couldn't click final destination! (TimeoutException)")
             print("Trying Again, Please Wait...")
             continue
             
         except ElementClickInterceptedException:
-            print("Couldn't click final destination!")
+            print("Couldn't click final destination! (ElementClickInterceptedException)")
             print("Trying Again, Please Wait...")
             continue
 
@@ -253,7 +253,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     while return_loop == True:
 
         try:
-            driver(get.url(pagenew))
+            driver.get(pagenew)
             switch_flights = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[3]/button'
             element = (By.XPATH, switch_flights)
             WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
@@ -265,12 +265,12 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
             return_loop = False
 
         except TimeoutException:
-            print("Couldn't switch to return flight!")
+            print("Couldn't switch to return flight! (TimeoutException)")
             print("Trying Again, Please Wait...")
             continue
                 
         except ElementClickInterceptedException:
-            print("Couldn't switch to return flight!")
+            print("Couldn't switch to return flight! (ElementClickInterceptedException)")
             print("Trying Again, Please Wait...")
             continue
 
@@ -403,6 +403,3 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     }
 
     return flight_info
-
-flight_dict = FlightScraper("DOH", "DFW", "2023/08/31", "2023/09/08", "First")
-print(flight_dict)
