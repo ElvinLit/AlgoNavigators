@@ -163,6 +163,7 @@ def home():
             first_arrival_time = flight_dict["flight 1"]["first arrival time"],
             first_duration = flight_dict["flight 1"]["first duration"],
             first_link = flight_dict["flight 1"]["first link"],
+            departure_date = "random date", #departure_date = output["leave_date"],
             second_cost = flight_dict["flight 1"]["second cost"],
             second_airline = flight_dict["flight 1"]["second airline"],
             second_departure_airport = flight_dict["flight 1"]["second departure airport"],
@@ -171,6 +172,7 @@ def home():
             second_arrival_time = flight_dict["flight 1"]["second arrival time"],
             second_duration = flight_dict["flight 1"]["second duration"],
             second_link = flight_dict["flight 1"]["second link"],
+            return_date = "random date", #output["arrive_date"],
             user_id = current_user.id
             )
 
@@ -183,6 +185,7 @@ def home():
             first_arrival_time = flight_dict["flight 2"]["first arrival time"],
             first_duration = flight_dict["flight 2"]["first duration"],
             first_link = flight_dict["flight 2"]["first link"],
+            departure_date = "random date", #departure_date = output["leave_date"],
             second_cost = flight_dict["flight 2"]["second cost"],
             second_airline = flight_dict["flight 2"]["second airline"],
             second_departure_airport = flight_dict["flight 2"]["second departure airport"],
@@ -191,6 +194,7 @@ def home():
             second_arrival_time = flight_dict["flight 2"]["second arrival time"],
             second_duration = flight_dict["flight 2"]["second duration"],
             second_link = flight_dict["flight 2"]["second link"],
+            return_date = "random date", #return_date = output["arrive_date"],
             user_id = current_user.id
             )
 
@@ -203,6 +207,7 @@ def home():
             first_arrival_time = flight_dict["flight 3"]["first arrival time"],
             first_duration = flight_dict["flight 3"]["first duration"],
             first_link = flight_dict["flight 3"]["first link"],
+            departure_date = "random date", #departure_date = output["leave_date"],
             second_cost = flight_dict["flight 3"]["second cost"],
             second_airline = flight_dict["flight 3"]["second airline"],
             second_departure_airport = flight_dict["flight 3"]["second departure airport"],
@@ -211,6 +216,7 @@ def home():
             second_arrival_time = flight_dict["flight 3"]["second arrival time"],
             second_duration = flight_dict["flight 3"]["second duration"],
             second_link = flight_dict["flight 3"]["second link"],
+            return_date = "random date", #return_date = output["arrive_date"],
             user_id = current_user.id
             )
         
@@ -253,7 +259,7 @@ def home():
         activities_string = "Activities String Placeholder"
         restaurants_string = "Restaurants String Placeholder"
 
-        return redirect(url_for('chat.planner')) find_flight
+        return redirect(url_for('chat.planner')), find_flight
         
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
     ai_responses = Note.query.filter_by(user_id=current_user.id).all()
