@@ -4,6 +4,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import ElementClickInterceptedException
+from selenium.common.exceptions import NoSuchElementException
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
@@ -20,7 +23,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     opt.add_argument(r"--disable-dev-shm-usage")
     opt.add_argument(r'--ignore-certificate-errors')
     opt.add_experimental_option("detach", True)
-    opt.add_argument('headless')
+    #opt.add_argument('headless')
     opt.add_argument(f'user-agent={user_agent}')
     opt.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(options=opt)
@@ -28,55 +31,111 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     url = 'https://www.google.com/travel/flights/search?tfs=CBwQAhonEgoyMDIzLTA5LTAyagwIAxIIL20vMGYyczZyCwgCEgcvbS8wdnptQAFIAXABggELCP___________wGYAQI&hl=en-US&curr=USD'
     driver.get(url)
 
-    if seat != "Economy":
-        seat_quality = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[1]/div[3]/div/div/div/div[1]'
-        element = (By.XPATH, seat_quality)
-        WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
+    start_loop = False
 
-        if seat == "Premium Economy":
-            seat_choice = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[1]/div[3]/div/div/div/div[2]/ul/li[2]'
-            element = (By.XPATH, seat_choice)
+    while start_loop == False:
+    
+        try:
+            url = 'https://www.google.com/travel/flights/search?tfs=CBwQAhonEgoyMDIzLTA5LTAyagwIAxIIL20vMGYyczZyCwgCEgcvbS8wdnptQAFIAXABggELCP___________wGYAQI&hl=en-US&curr=USD'
+            driver.get(url)
+
+            if seat != "Economy":
+                seat_quality = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[1]/div[3]/div/div/div/div[1]'
+                element = (By.XPATH, seat_quality)
+                WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
+
+                if seat == "Premium Economy":
+                    seat_choice = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[1]/div[3]/div/div/div/div[2]/ul/li[2]'
+                    element = (By.XPATH, seat_choice)
+                    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
+
+                if seat == "Business":
+                    seat_choice = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[1]/div[3]/div/div/div/div[2]/ul/li[3]'
+                    element = (By.XPAT, seat_choice)
+                    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
+
+                if seat == "First":
+                    seat_choice = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[1]/div[3]/div/div/div/div[2]/ul/li[4]'
+                    element = (By.XPATH, seat_choice)
+                    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
+
+                '''element = (By.XPATH, seat_quality)
+                WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()'''
+
+        except TimeoutException:
+            print("Couldn't click out of seat selection!")
+            print("Trying Again, Please Wait...")
+            continue
+            
+        except ElementClickInterceptedException:
+            print("Couldn't click out of seat selection!")
+            print("Trying Again, Please Wait...")
+            continue
+
+        try:
+            box_start = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[1]/div/div/div[1]/div/div/input'
+            element = driver.find_element(By.XPATH, box_start)
+            WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).clear()
+            WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(start_input)
+
+            start_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[6]/div[3]/ul/li[1]'
+            element = (By.XPATH, start_text)
             WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
 
-        if seat == "Business":
-            seat_choice = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[1]/div[3]/div/div/div/div[2]/ul/li[3]'
-            element = (By.XPAT, seat_choice)
+        except TimeoutException:
+            print("Couldn't click starting destination!")
+            print("Trying Again, Please Wait...")
+            continue
+            
+        except ElementClickInterceptedException:
+            print("Couldn't click starting destination!")
+            print("Trying Again, Please Wait...")
+            continue
+
+        try:
+            box_destination = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[4]/div/div/div[1]/div/div/input'
+            element = (By.XPATH, box_destination)
+            WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).clear()
+            WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(destination_input + '\n')
+
+            destination_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[6]/div[3]/ul/li[1]'
+            element = (By.XPATH, destination_text)
             WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
 
-        if seat == "First":
-            seat_choice = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[1]/div[3]/div/div/div/div[2]/ul/li[4]'
-            element = (By.XPATH, seat_choice)
-            WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
+            departure_date_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div/input'
+            element = (By.XPATH, departure_date_text)
+            WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(departure_date + '\n')
+        
+        except TimeoutException:
+            print("Couldn't click final destination!")
+            print("Trying Again, Please Wait...")
+            continue
+            
+        except ElementClickInterceptedException:
+            print("Couldn't click final destination!")
+            print("Trying Again, Please Wait...")
+            continue
 
-        element = (By.XPATH, seat_quality)
-        WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
+        no_flight = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[2]/div[3]/div[1]/h3'
 
-    box_start = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[1]/div/div/div[1]/div/div/input'
-    element = driver.find_element(By.XPATH, box_start)
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).clear()
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(start_input)
+        try:
+            element = (By.XPATH, no_flight)
+            WebDriverWait(driver, 2).until(EC.element_to_be_clickable(element)).click()
+            print("There are no flights!")
+            break
+        
+        except NoSuchElementException and TimeoutException:
+            print("There are flights!")
 
-    start_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[6]/div[3]/ul/li[1]'
-    element = (By.XPATH, start_text)
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
-
-    box_destination = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[4]/div/div/div[1]/div/div/input'
-    element = (By.XPATH, box_destination)
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).clear()
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(destination_input + '\n')
-
-    destination_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[6]/div[3]/ul/li[1]'
-    element = (By.XPATH, destination_text)
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
-
-    departure_date_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div/input'
-    element = (By.XPATH, departure_date_text)
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(departure_date + '\n')
-
+        start_loop = True
+        
     time.sleep(2)
 
+    page = driver.page_source
+    soup = BeautifulSoup(page, 'html.parser')
+    count = 0
 
-
+    flights = soup.find_all("li", class_="pIav2d")
     for i in range(0, 3):
         elements = driver.find_elements(By.CLASS_NAME, "pIav2d")
         count_1 = 0 
@@ -129,7 +188,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
         departure_match = re.search(r'Leaves (.+?) at', description)
         departure_airport_first = departure_match.group(1).strip()
 
-        arrival_match = re.search(r'arrives at (.+?)\ at', description)
+        arrival_match = re.search(r'arrives at (.+?)\.', description)
         arrival_airport_first = arrival_match.group(1).strip()
 
         # Extracting the departure and arrival times
@@ -187,13 +246,33 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     flight_info_2.update(flight_info_2_5)
     flight_info_3.update(flight_info_3_5)
 
-    switch_flights = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[3]/button'
-    element = (By.XPATH, switch_flights)
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
+    pagenew = driver.current_url
 
-    departure_date_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div/input'
-    element = (By.XPATH, departure_date_text)
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(return_date + '\n')
+    return_loop = True
+
+    while return_loop == True:
+
+        try:
+            driver(get.url(pagenew))
+            switch_flights = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[1]/div[3]/button'
+            element = (By.XPATH, switch_flights)
+            WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
+
+            departure_date_text = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div/input'
+            element = (By.XPATH, departure_date_text)
+            WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).send_keys(return_date + '\n')
+
+            return_loop = False
+
+        except TimeoutException:
+            print("Couldn't switch to return flight!")
+            print("Trying Again, Please Wait...")
+            continue
+                
+        except ElementClickInterceptedException:
+            print("Couldn't switch to return flight!")
+            print("Trying Again, Please Wait...")
+            continue
 
     time.sleep(2)
 
@@ -325,3 +404,5 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
 
     return flight_info
 
+flight_dict = FlightScraper("DOH", "DFW", "2023/08/31", "2023/09/08", "First")
+print(flight_dict)
