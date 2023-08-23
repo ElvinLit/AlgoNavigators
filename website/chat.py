@@ -42,7 +42,7 @@ current_date = cdt.date()
 #Chat creation
 history = ChatMessageHistory()
 output = ""
-flight_boolean = False # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
+flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
 
 '''TEMPLATE =  "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \
@@ -259,7 +259,7 @@ def home():
         #activities_string = output["activities"]
         #restaurants_string = output["restaurants"]
 
-        return redirect(url_for('chat.planner')), find_flight
+        return redirect(url_for('chat.planner'))
         
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()
     ai_responses = Note.query.filter_by(user_id=current_user.id).all()
@@ -272,7 +272,7 @@ def home():
 
     return render_template("chat.html", user=current_user, chat_log=chat_log), find_flight
 
-@chat.route('/planner')
+@chat.route('/planner/')
 def planner():
     
     # Fetch each database
@@ -301,8 +301,6 @@ def planner():
     }
 
     return render_template("planner.html", user=current_user, travel_dict=travel_dict)
-
-
 
 @chat.route('/flights')
 def flights():

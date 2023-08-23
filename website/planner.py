@@ -45,6 +45,7 @@ def my_plans():
         
         finalPlan = FinalPlan(
             first_cost = flight.first_cost,
+            first_airline = flight.first_airline,
             first_departure_airport = flight.first_departure_airport,
             first_arrival_airport = flight.first_arrival_airport,
             first_departure_time = flight.first_departure_time,
