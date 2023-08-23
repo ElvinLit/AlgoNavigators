@@ -74,7 +74,7 @@ class FinalPlan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
     # Flight Details
-    first_flight_cost = db.Column(db.Integer)
+    first_cost = db.Column(db.Integer)
     first_departure_airport = db.Column(db.String(10000))
     first_arrival_airport = db.Column(db.String(10000))
     first_departure_time = db.Column(db.String(10000))

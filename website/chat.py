@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session
 from flask_login import login_required, current_user
-from .db_objs import Note, UserMessage, Flights, Hotels, Activities, Restaurants
+from .db_objs import Note, UserMessage, Flights, Hotels, Activities, Restaurants, FinalPlan
 from . import db
 import json
 import os
@@ -42,7 +42,7 @@ current_date = cdt.date()
 #Chat creation
 history = ChatMessageHistory()
 output = ""
-flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
+flight_boolean = False # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
 
 '''TEMPLATE =  "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \
@@ -288,7 +288,6 @@ def planner():
     activities = "Activities String Placeholder"
     restaurants = "Restaurants String Placeholder"
     
-    print(flight1.first_cost)
 
     travel_dict = {
         "flight1" : flight1,
@@ -302,6 +301,7 @@ def planner():
     }
 
     return render_template("planner.html", user=current_user, travel_dict=travel_dict)
+
 
 
 @chat.route('/flights')
@@ -319,6 +319,7 @@ def delete_conversation():
     hotels = Hotels.query.filter_by(user_id=current_user.id).all()
     activities = Activities.query.filter_by(user_id=current_user.id).all()
     restaurants = Restaurants.query.filter_by(user_id=current_user.id).all()
+    final_plan = FinalPlan.query.filter_by(user_id=current_user.id).all()
 
     # Wipe database
     for ai_response in ai_responses:
@@ -333,6 +334,8 @@ def delete_conversation():
         db.session.delete(activity)
     for restaurant in restaurants:
         db.session.delete(restaurant)
+    for plan in final_plan:
+        db.session.delete(plan)
 
     # Commit the changes to the database
     db.session.commit()
