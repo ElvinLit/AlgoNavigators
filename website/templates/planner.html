@@ -30,32 +30,32 @@
           <div class="rectangular-mcq-container">
             <label class="rectangular-mcq-label">
               <input type="radio" name="mcq-option-flight" value="Flight 1" class="rectangular-mcq-option">
-              <div class="mcq-text" style="font-size: 25px">Flight 1</div>
+              <div class="mcq-text" style="font-size: 25px">Flight 1 ({{ travel_dict["flight1"].departure_date }} to {{ travel_dict["flight1"].return_date }})</div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 20px">Airport 1</div>
-                <div class="mcq-subtext" style="font-size: 20px">Airport 2</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["flight1"].first_departure_airport }}</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["flight1"].first_arrival_airport }}</div>
               </div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 15px">First Departure Time</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight1"].first_departure_time }}</div>
                 <div class="mcq-subtext" style="font-size: 15px">-----></div>
-                <div class="mcq-subtext" style="font-size: 15px">Flight Length</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight1"].first_duration }}</div>
                 <div class="mcq-subtext" style="font-size: 15px">-----></div>
-                <div class="mcq-subtext" style="font-size: 15px">First Arrival Time</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight1"].first_arrival_time }}</div>
               </div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 20px">Airport 2</div>
-                <div class="mcq-subtext" style="font-size: 20px">Airport 1</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["flight1"].second_departure_airport }}</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["flight1"].second_arrival_airport }}</div>
               </div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 15px">Second Departure Time</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight1"].second_departure_time }}</div>
                 <div class="mcq-subtext" style="font-size: 15px"><-----</div>
-                <div class="mcq-subtext" style="font-size: 15px">Flight Length</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight1"].second_duration }}</div>
                 <div class="mcq-subtext" style="font-size: 15px"><-----</div>
-                <div class="mcq-subtext" style="font-size: 15px">Second Arrival Time</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight1"].second_arrival_time }}</div>
               </div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 17px">Airline</div>
-                <div class="mcq-subtext" style="font-size: 17px">HERE IS TEMP VAR {{ travel_dict["flight1"].first_cost }}</div>
+                <div class="mcq-subtext" style="font-size: 17px">{{ travel_dict["flight1"].first_airline }} & {{ travel_dict["flight1"].second_airline }}</div>
+                <div class="mcq-subtext" style="font-size: 17px">{{ travel_dict["flight1"].first_cost + travel_dict["flight1"].second_cost }}</div>
               </div>
               <span class="checkmark"></span>
             </label>
@@ -64,32 +64,32 @@
           <div class="rectangular-mcq-container">
             <label class="rectangular-mcq-label">
               <input type="radio" name="mcq-option-flight" value="Flight 2" class="rectangular-mcq-option">
-              <div class="mcq-text" style="font-size: 25px">Flight 2</div>
+              <div class="mcq-text" style="font-size: 25px">Flight 2 ({{ travel_dict["flight2"].departure_date }} to {{ travel_dict["flight2"].return_date }})</div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 20px">Airport 1</div>
-                <div class="mcq-subtext" style="font-size: 20px">Airport 2</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["flight2"].first_departure_airport }}</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["flight2"].first_arrival_airport }}</div>
               </div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 15px">First Departure Time</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight2"].first_departure_time }}</div>
                 <div class="mcq-subtext" style="font-size: 15px">-----></div>
-                <div class="mcq-subtext" style="font-size: 15px">Flight Length</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight2"].first_duration }}</div>
                 <div class="mcq-subtext" style="font-size: 15px">-----></div>
-                <div class="mcq-subtext" style="font-size: 15px">First Arrival Time</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight2"].first_arrival_time }}</div>
               </div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 20px">Airport 2</div>
-                <div class="mcq-subtext" style="font-size: 20px">Airport 1</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["flight2"].second_departure_airport }}</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["flight2"].second_arrival_airport }}</div>
               </div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 15px">Second Departure Time</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight2"].second_departure_time }}</div>
                 <div class="mcq-subtext" style="font-size: 15px"><-----</div>
-                <div class="mcq-subtext" style="font-size: 15px">Flight Length</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight2"].second_duration }}</div>
                 <div class="mcq-subtext" style="font-size: 15px"><-----</div>
-                <div class="mcq-subtext" style="font-size: 15px">Second Arrival Time</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight2"].second_arrival_time }}</div>
               </div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 17px">Airline</div>
-                <div class="mcq-subtext" style="font-size: 17px">Cost</div>
+                <div class="mcq-subtext" style="font-size: 17px">{{ travel_dict["flight2"].first_airline }} & {{ travel_dict["flight2"].second_airline }}</div>
+                <div class="mcq-subtext" style="font-size: 17px">{{ travel_dict["flight2"].first_cost + travel_dict["flight2"].second_cost }}</div>
               </div>
               <span class="checkmark"></span>
             </label>
@@ -98,32 +98,32 @@
           <div class="rectangular-mcq-container">
             <label class="rectangular-mcq-label">
               <input type="radio" name="mcq-option-flight" value="Flight 3" class="rectangular-mcq-option">
-              <div class="mcq-text" style="font-size: 25px">Flight 3</div>
+              <div class="mcq-text" style="font-size: 25px">Flight 3 ({{ travel_dict["flight3"].departure_date }} to {{ travel_dict["flight3"].return_date }})</div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 20px">Airport 1</div>
-                <div class="mcq-subtext" style="font-size: 20px">Airport 2</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["flight3"].first_departure_airport }}</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["flight3"].first_arrival_airport }}</div>
               </div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 15px">First Departure Time</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight3"].first_departure_time }}</div>
                 <div class="mcq-subtext" style="font-size: 15px">-----></div>
-                <div class="mcq-subtext" style="font-size: 15px">Flight Length</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight3"].first_duration }}</div>
                 <div class="mcq-subtext" style="font-size: 15px">-----></div>
-                <div class="mcq-subtext" style="font-size: 15px">First Arrival Time</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight3"].first_arrival_time }}</div>
               </div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 20px">Airport 2</div>
-                <div class="mcq-subtext" style="font-size: 20px">Airport 1</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["flight3"].second_departure_airport }}</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["flight3"].second_arrival_airport }}</div>
               </div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 15px">Second Departure Time</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight3"].second_departure_time }}</div>
                 <div class="mcq-subtext" style="font-size: 15px"><-----</div>
-                <div class="mcq-subtext" style="font-size: 15px">Flight Length</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight3"].second_duration }}</div>
                 <div class="mcq-subtext" style="font-size: 15px"><-----</div>
-                <div class="mcq-subtext" style="font-size: 15px">Second Arrival Time</div>
+                <div class="mcq-subtext" style="font-size: 15px">{{ travel_dict["flight3"].second_arrival_time }}</div>
               </div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 17px">Airline</div>
-                <div class="mcq-subtext" style="font-size: 17px">Cost</div>
+                <div class="mcq-subtext" style="font-size: 17px">{{ travel_dict["flight3"].first_airline }} & {{ travel_dict["flight3"].second_airline }}</div>
+                <div class="mcq-subtext" style="font-size: 17px">{{ travel_dict["flight3"].first_cost + travel_dict["flight3"].second_cost }}</div>
               </div>
               <span class="checkmark"></span>
             </label>
@@ -134,9 +134,9 @@
               <input type="radio" name="mcq-option-hotel" value="Hotel 1" class="rectangular-mcq-option">
               <div class="mcq-text" style="font-size: 25px">Hotel 1</div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 20px">Location/Name</div>
-                <div class="mcq-subtext" style="font-size: 17px">Rating</div>
-                <div class="mcq-subtext" style="font-size: 17px">Cost</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["hotel1"].location }}</div>
+                <div class="mcq-subtext" style="font-size: 17px">{{ travel_dict["hotel1"].rating }}</div>
+                <div class="mcq-subtext" style="font-size: 17px">{{ travel_dict["hotel1"].price }}</div>
               </div>
               <span class="checkmark"></span>
             </label>
@@ -147,9 +147,9 @@
               <input type="radio" name="mcq-option-hotel" value="Hotel 2" class="rectangular-mcq-option">
               <div class="mcq-text" style="font-size: 25px">Hotel 2</div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 20px">Location/Name</div>
-                <div class="mcq-subtext" style="font-size: 17px">Rating</div>
-                <div class="mcq-subtext" style="font-size: 17px">Cost</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["hotel2"].location }}</div>
+                <div class="mcq-subtext" style="font-size: 17px">{{ travel_dict["hotel2"].rating }}</div>
+                <div class="mcq-subtext" style="font-size: 17px">{{ travel_dict["hotel2"].price }}</div>
               </div>
               <span class="checkmark"></span>
             </label>
@@ -160,9 +160,9 @@
               <input type="radio" name="mcq-option-hotel" value="Hotel 3" class="rectangular-mcq-option">
               <div class="mcq-text" style="font-size: 25px">Hotel 3</div>
               <div class="mcq-subtext-container">
-                <div class="mcq-subtext" style="font-size: 20px">Location/Name</div>
-                <div class="mcq-subtext" style="font-size: 17px">Rating</div>
-                <div class="mcq-subtext" style="font-size: 17px">Cost</div>
+                <div class="mcq-subtext" style="font-size: 20px">{{ travel_dict["hotel3"].location }}</div>
+                <div class="mcq-subtext" style="font-size: 17px">{{ travel_dict["hotel3"].rating }}</div>
+                <div class="mcq-subtext" style="font-size: 17px">{{ travel_dict["hotel3"].price }}</div>
               </div>
               <span class="checkmark"></span>
             </label>
@@ -171,14 +171,14 @@
           <div>
             <label>
               <div class="mcq-text" style="font-size: 25px">Activities</div>
-              <input type="text" name="mcq-option-hotel" value="Original Text Here!!!!" class="rectangular-mcq-option">
+              <input type="text" name="mcq-option-hotel" value="{{ travel_dict["activities"] }}" class="rectangular-mcq-option">
             </label>
           </div>
 
           <div>
             <label>
               <div class="mcq-text" style="font-size: 25px">Restaurants</div>
-              <input type="text" name="mcq-option-hotel" value="Original Text Here!!!!" class="rectangular-mcq-option">
+              <input type="text" name="mcq-option-hotel" value="{{ travel_dict["restaurants"] }}" class="rectangular-mcq-option">
             </label>
           </div>
 
