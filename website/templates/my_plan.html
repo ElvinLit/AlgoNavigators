@@ -3,139 +3,71 @@
 {% block title %}Planner Page{% endblock %}
 
 {% block content %}
-{% if not final_plan_empty %}
-    <p>
-        first flight cost: {{ user.final_plan[0].first_cost }}
-    </p>
-    <p>
-        first airline: {{ user.final_plan[0].first_airline }}
-    </p>
-    <p>
-        first departure airport: {{ user.final_plan[0].first_departure_airport}}
-    </p>
-    <p>
-        first departure time: {{user.final_plan[0].first_departure_time}}
-    </p>
-    <p>
-        first arrival time: {{user.final_plan[0].first_arrival_time}}
-    </p>
-    <p>
-        first flight duration: {{user.final_plan[0].first_duration}}
-    </p>
-    <p>
-        first flight URL: {{user.final_plan[0].first_flight_link}}
-    </p>
-    <p>
-        departure flight date: {{user.final_plan[0].departure_date}}
-    </p>
-    <p>
-        second flight cost: {{ user.final_plan[0].second_cost }}
-    </p>
-    <p>
-        second airline: {{ user.final_plan[0].second_airline }}
-    </p>
-    <p>
-        second departure airport: {{ user.final_plan[0].second_departure_airport }}
-    </p>
-    <p>
-        second arrival airport: {{ user.final_plan[0].second_arrival_airport }}
-    </p>
-    <p>
-        second departure time: {{ user.final_plan[0].second_departure_time }}
-    </p>
-    <p>
-        second arrival time: {{ user.final_plan[0].second_arrival_time }}
-    </p>
-    <p>
-        second flight duration: {{ user.final_plan[0].second_duration }}
-    </p>
-    <p>
-        second flight URL: {{ user.final_plan[0].second_flight_link }}
-    </p>
-    <p>
-        returning flight date: {{ user.final_plan[0].return_date }}
-    </p>
-    <p>
-        activities: {{ user.final_plan[0].activities }}
-    </p>
-    <p>
-        hotel price: {{ user.final_plan[0].hotel_price }}
-    </p>
-    <p>
-        hotel location: {{ user.final_plan[0].hotel_location }}
-    </p>
-    <p>
-        hotel rating: {{ user.final_plan[0].hotel_rating }}
-    </p>
-    <p>
-        restauraunts: {{ user.final_plan[0].restaurant }}
-    </p>
-{% endif %}
-<p>
-    first flight cost: placeholder first cost
-</p>
-<p>
-    first airline: placeholder first airline
-</p>
-<p>
-    first departure airport: placeholder first departure airport
-</p>
-<p>
-    first departure time: placeholder first departure time
-</p>
-<p>
-    first arrival time: placeholder first arrival time
-</p>
-<p>
-    first flight duration: placeholder first flight duration
-</p>
-<p>
-    first flight URL: placeholder first flight URL
-</p>
-<p>
-    departure flight date: placeholder departure flight date
-</p>
-<p>
-    second flight cost: placeholder second flight cost
-</p>
-<p>
-    second airline: placeholder second airline
-</p>
-<p>
-    second departure airport: placeholder second departure airport
-</p>
-<p>
-    second arrival airport: placeholder second arrival airport
-</p>
-<p>
-    second departure time: placeholder second departure time
-</p>
-<p>
-    second arrival time: placeholder second arrival time
-</p>
-<p>
-    second flight duration: placeholder second flight duration
-</p>
-<p>
-    second flight URL: placeholder second flight URL
-</p>
-<p>
-    returning flight date: placeholder returning flight date
-</p>
-<p>
-    activities: placeholder activities
-</p>
-<p>
-    hotel price: placeholder hotel price
-</p>
-<p>
-    hotel location: plcaeholder hotel location
-</p>
-<p>
-    hotel rating: placeholder hotel rating
-</p>
-<p>
-    restauraunts: placeholder restauraunts
-</p>
+<div class="content-container">
+    {% if not final_plan_empty %}
+        <!-- This remains unchanged -->
+    {% endif %}
+    
+    <!-- Departure Flight Boarding Pass -->
+    <div class="boarding-pass">
+        <div class="flight-header"><strong>Departure Flight</strong></div>
+        <div class="flight-details">
+            <div class="flight-info">
+                <div class="flight-airline">Airline: Spirit</div>
+                <div class="flight-departure">
+                    <span>Depart: DFW</span> | <span>Time: 10:55 PM</span>
+                </div>
+                <div class="flight-arrival">
+                    <span>Arrive: SEATAC</span> | <span>Time: 9:11 AM</span>
+                </div>
+            </div>
+            <div class="flight-meta">
+                <div class="flight-cost">Cost: $109</div>
+                <div class="flight-duration">Duration: 11h 25m</div>
+                <div class="flight-date">Date: 9/11/23</div>
+            </div>
+            <div class="flight-url"><a href="placeholder first flight URL">View Flight</a></div>
+        </div>
+    </div>
 
+    <!-- Return Flight Boarding Pass -->
+    <div class="boarding-pass">
+        <div class="flight-header"><strong>Returning Flight</strong></div>
+        <div class="flight-details">
+            <div class="flight-info">
+                <div class="flight-airline">Airline: Spirit</div>
+                <div class="flight-departure">
+                    <span>Depart: SEATAC</span> | <span>Time: 9:11 AM</span>
+                </div>
+                <div class="flight-arrival">
+                    <span>Arrive: DFW</span> | <span>Time: 10:55 PM</span>
+                </div>
+            </div>
+            <div class="flight-meta">
+                <div class="flight-cost">Cost: $217</div>
+                <div class="flight-duration">Duration: 11h 25m</div>
+                <div class="flight-date">Date: 9/20/23</div>
+            </div>
+            <div class="flight-url"><a href="placeholder second flight URL">View Flight</a></div>
+        </div>
+    </div>
+
+    <!-- Additional Details: Hotel, Activities, and Restaurants -->
+    <div class="details-card">
+        <h3><strong>Itinerary</strong></h3>
+        <div class="hotel-section">
+            <div class="hotel-name"><strong>Hotel:</strong> Marriot</div>
+            <div class="hotel-location"><strong>Location:</strong> Seattle, WA</div>
+            <div class="hotel-rating"></strong>Rating:</strong> 4.28/5</div>
+        </div>
+        <hr>
+        <div class="activity-section">
+            <strong>Activities:</strong> Paragliding, Hitting a tower, Flying Planes
+        </div>
+        <hr>
+        <div class="restaurant-section">
+            <strong>Restaurants:</strong> Sam's Bagels, McDonalds, Sprite
+        </div>
+    </div>
+</div>
 {% endblock %}

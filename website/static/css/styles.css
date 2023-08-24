@@ -9,7 +9,7 @@ body, html {
     overflow: hidden;
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(150deg, #3c4354, #0b1020);
+    background: linear-gradient(150deg, #3c4354, #0f2365);
 }
 .navbar {
     background: rgba(0, 0, 0, 0.08) !important;
@@ -583,4 +583,88 @@ h3.text-center {
 }
 .team-card ul li:hover {
     color: #00ffa2;
+}
+
+/* My_Plan */
+.boarding-pass {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    margin: 20px 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 85%;
+    max-width: 900px;
+    
+}
+.flight-header {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: left;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.flight-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+}
+.flight-meta {
+    align-self: flex-end;
+    text-align: right;
+}
+.flight-info, .flight-meta {
+    width: 40%;
+    padding-right: 10px;
+}
+.flight-url {
+    position: fixed;
+    top: 20px;
+    right: 15px;
+}
+.flight-url a {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 8px 13px;
+    border-radius: 15px;
+    color: #00ffa2;
+    text-decoration: none;
+    font-weight: bold;
+}
+.flight-url:hover a {
+    text-decoration: none;
+    background-color: rgba(0, 255, 162, 0.1);
+    transition: all 0.2s ease;
+}
+.details-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    margin: 20px 50px;
+    padding: 20px;
+    text-align: center;
+    width: 75%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.details-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.hotel-section, .activity-section, .restaurant-section {
+    margin-bottom: 20px;
 }
