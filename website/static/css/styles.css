@@ -9,7 +9,7 @@ body, html {
     overflow: hidden;
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(150deg, #3c4354, #0f2365);
+    background: linear-gradient(150deg, #3c4354, #0a163c);
 }
 .navbar {
     background: rgba(0, 0, 0, 0.08) !important;
@@ -667,4 +667,39 @@ hr {
 }
 .hotel-section, .activity-section, .restaurant-section {
     margin-bottom: 20px;
+}
+.empty-plan-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 20px 20px;
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+    margin: 40px auto;
+}
+.empty-plan-card h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.empty-plan-card p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+.chat-button {
+    position: relative;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 10px 20px;
+    border-radius: 15px;
+    color: #00ffa2;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+.chat-button:hover {
+    text-decoration: none;
+    background-color: rgba(0, 255, 162, 0.1);
 }

@@ -5,10 +5,6 @@
 {% block content %}
 <div class="content-container">
     {% if not final_plan_empty %}
-        <!-- This remains unchanged -->
-    {% endif %}
-    
-    <!-- Departure Flight Boarding Pass -->
     <div class="boarding-pass">
         <div class="flight-header"><strong>Departure Flight</strong></div>
         <div class="flight-details">
@@ -69,5 +65,12 @@
             <strong>Restaurants:</strong> {{ output["activities"] }}
         </div>
     </div>
+    {% else %}
+        <div class="empty-plan-card">
+            <h2>Your Plan Is Empty</h2>
+            <p>Go to our chat page to create your itinerary!</p>
+            <a href="/chat" class="chat-button">Go to Chat</a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
