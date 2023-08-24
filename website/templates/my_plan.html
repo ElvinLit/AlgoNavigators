@@ -9,20 +9,20 @@
         <div class="flight-header"><strong>Departure Flight</strong></div>
         <div class="flight-details">
             <div class="flight-info">
-                <div class="flight-airline">Airline : {{ travel_dict["flight1"].first_airline }}</div> 
+                <div class="flight-airline">Airline : {{ user.final_plan[0].first_airline }}</div> 
                 <div class="flight-departure">
-                    <span>Depart: {{ travel_dict["flight1"].first_departure_airport }}</span> | <span>Time: {{ travel_dict["flight1"].first_departure_time }}</span>
+                    <span>Depart: {{ user.final_plan[0].first_departure_airport }}</span> | <span>Time: {{ user.final_plan[0].first_departure_time }}</span>
                 </div>
                 <div class="flight-arrival">
-                    <span>Arrive: {{ travel_dict["flight1"].first_arrival_airport }}</span> | <span>Time: {{ travel_dict["flight1"].first_arrival_time }}</span>
+                    <span>Arrive: {{ user.final_plan[0].first_arrival_airport }}</span> | <span>Time: {{ user.final_plan[0].first_arrival_time }}</span>
                 </div>
             </div>
             <div class="flight-meta">
-                <div class="flight-cost">Cost: ${{ travel_dict["flight1"].first_cost }}</div>
-                <div class="flight-duration">Duration: {{ travel_dict["flight1"].first_duration}}</div>
-                <div class="flight-date">Date: output["leave_date"]</div>
+                <div class="flight-cost">Cost: ${{ user.final_plan[0].first_cost }}</div>
+                <div class="flight-duration">Duration: {{ user.final_plan[0].first_duration }}</div>
+                <div class="flight-date">Date: {{ user.final_plan[0].departure_date }}</div>
             </div>
-            <div class="flight-url"><a href="placeholder ">View Flight</a></div>
+            <div class="flight-url"><a href="{{ user.final_plan[0].first_flight_link }}">View Flight</a></div>
         </div>
     </div>
 
@@ -31,20 +31,20 @@
         <div class="flight-header"><strong>Returning Flight</strong></div>
         <div class="flight-details">
             <div class="flight-info">
-                <div class="flight-airline">Airline: {{ travel_dict["flight1"].second_airline }}</div>
+                <div class="flight-airline">Airline: {{ user.final_plan[0].second_airline }}</div>
                 <div class="flight-departure">
-                    <span>Depart: {{ travel_dict["flight1"].second_departure_airport }}</span> | <span>Time: {{ travel_dict["flight1"].second_departure_time }}</span>
+                    <span>Depart: {{ user.final_plan[0].second_departure_airport }}</span> | <span>Time: {{ user.final_plan[0].second_departure_time }}</span>
                 </div>
                 <div class="flight-arrival">
-                    <span>Arrive: {{ travel_dict["flight1"].second_arrival_airport }}</span> | <span>Time: {{ travel_dict["flight1"].second_arrival_time }}</span>
+                    <span>Arrive: {{ user.final_plan[0].second_arrival_airport }}</span> | <span>Time: {{ user.final_plan[0].second_arrival_time }}</span>
                 </div>
             </div>
             <div class="flight-meta">
-                <div class="flight-cost">Cost: ${{ travel_dict["flight1"].second_cost }}</div>
-                <div class="flight-duration">Duration: {{ travel_dict["flight1"].second_duration }}</div>
-                <div class="flight-date">Date: output["arrive_date"]</div> 
+                <div class="flight-cost">Cost: ${{ user.final_plan[0].second_cost }}</div>
+                <div class="flight-duration">Duration: {{ user.final_plan[0].second_duration }}</div>
+                <div class="flight-date">Date: {{ user.final_plan[0].return_date }}</div> 
             </div>
-            <div class="flight-url"><a href="placeholder second flight URL">View Flight</a></div>
+            <div class="flight-url"><a href="{{ user.final_plan[0].second_flight_link }}">View Flight</a></div>
         </div>
     </div>
 
@@ -52,17 +52,17 @@
     <div class="details-card">
         <h3><strong>Itinerary</strong></h3>
         <div class="hotel-section">
-            <div class="hotel-name"><strong>Hotel:</strong> {{ hotels_dict["hotel 1"]["Rating"] }}</div>
-            <div class="hotel-location"><strong>Location:</strong> {{ hotels_dict["hotel 1"]["Location"] }}</div>
-            <div class="hotel-rating"></strong>Rating:</strong> {{ hotels_dict["hotel 1"]["Rating"] }}</div>
+            <div class="hotel-name"><strong>Hotel:</strong> {{ user.final_plan[0].hotel_location }}</div>
+            <div class="hotel-location"><strong>Price:</strong> ${{ user.final_plan[0].hotel_price }}</div>
+            <div class="hotel-rating"></strong>Rating:</strong> {{ user.final_plan[0].hotel_rating }}</div>
         </div>
         <hr>
         <div class="activity-section">
-            <strong>Activities:</strong> {{ output["activities"] }}
+            <strong>Activities:</strong> {{ user.final_plan[0].activities }}
         </div>
         <hr>
         <div class="restaurant-section">
-            <strong>Restaurants:</strong> {{ output["activities"] }}
+            <strong>Restaurants:</strong> {{ user.final_plan[0].restaurant }}
         </div>
     </div>
     {% else %}
