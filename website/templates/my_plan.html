@@ -13,20 +13,20 @@
         <div class="flight-header"><strong>Departure Flight</strong></div>
         <div class="flight-details">
             <div class="flight-info">
-                <div class="flight-airline">Airline: Spirit</div>
+                <div class="flight-airline">Airline : {{ travel_dict["flight1"].first_airline }}</div> 
                 <div class="flight-departure">
-                    <span>Depart: DFW</span> | <span>Time: 10:55 PM</span>
+                    <span>Depart: {{ travel_dict["flight1"].first_departure_airport }}</span> | <span>Time: {{ travel_dict["flight1"].first_departure_time }}</span>
                 </div>
                 <div class="flight-arrival">
-                    <span>Arrive: SEATAC</span> | <span>Time: 9:11 AM</span>
+                    <span>Arrive: {{ travel_dict["flight1"].first_arrival_airport }}</span> | <span>Time: {{ travel_dict["flight1"].first_arrival_time }}</span>
                 </div>
             </div>
             <div class="flight-meta">
-                <div class="flight-cost">Cost: $109</div>
-                <div class="flight-duration">Duration: 11h 25m</div>
-                <div class="flight-date">Date: 9/11/23</div>
+                <div class="flight-cost">Cost: ${{ travel_dict["flight1"].first_cost }}</div>
+                <div class="flight-duration">Duration: {{ travel_dict["flight1"].first_duration}}</div>
+                <div class="flight-date">Date: output["leave_date"]</div>
             </div>
-            <div class="flight-url"><a href="placeholder first flight URL">View Flight</a></div>
+            <div class="flight-url"><a href="placeholder ">View Flight</a></div>
         </div>
     </div>
 
@@ -35,18 +35,18 @@
         <div class="flight-header"><strong>Returning Flight</strong></div>
         <div class="flight-details">
             <div class="flight-info">
-                <div class="flight-airline">Airline: Spirit</div>
+                <div class="flight-airline">Airline: {{ travel_dict["flight1"].second_airline }}</div>
                 <div class="flight-departure">
-                    <span>Depart: SEATAC</span> | <span>Time: 9:11 AM</span>
+                    <span>Depart: {{ travel_dict["flight1"].second_departure_airport }}</span> | <span>Time: {{ travel_dict["flight1"].second_departure_time }}</span>
                 </div>
                 <div class="flight-arrival">
-                    <span>Arrive: DFW</span> | <span>Time: 10:55 PM</span>
+                    <span>Arrive: {{ travel_dict["flight1"].second_arrival_airport }}</span> | <span>Time: {{ travel_dict["flight1"].second_arrival_time }}</span>
                 </div>
             </div>
             <div class="flight-meta">
-                <div class="flight-cost">Cost: $217</div>
-                <div class="flight-duration">Duration: 11h 25m</div>
-                <div class="flight-date">Date: 9/20/23</div>
+                <div class="flight-cost">Cost: ${{ travel_dict["flight1"].second_cost }}</div>
+                <div class="flight-duration">Duration: {{ travel_dict["flight1"].second_duration }}</div>
+                <div class="flight-date">Date: output["arrive_date"]</div> 
             </div>
             <div class="flight-url"><a href="placeholder second flight URL">View Flight</a></div>
         </div>
@@ -56,17 +56,17 @@
     <div class="details-card">
         <h3><strong>Itinerary</strong></h3>
         <div class="hotel-section">
-            <div class="hotel-name"><strong>Hotel:</strong> Marriot</div>
-            <div class="hotel-location"><strong>Location:</strong> Seattle, WA</div>
-            <div class="hotel-rating"></strong>Rating:</strong> 4.28/5</div>
+            <div class="hotel-name"><strong>Hotel:</strong> {{ hotels_dict["hotel 1"]["Rating"] }}</div>
+            <div class="hotel-location"><strong>Location:</strong> {{ hotels_dict["hotel 1"]["Location"] }}</div>
+            <div class="hotel-rating"></strong>Rating:</strong> {{ hotels_dict["hotel 1"]["Rating"] }}</div>
         </div>
         <hr>
         <div class="activity-section">
-            <strong>Activities:</strong> Paragliding, Hitting a tower, Flying Planes
+            <strong>Activities:</strong> {{ output["activities"] }}
         </div>
         <hr>
         <div class="restaurant-section">
-            <strong>Restaurants:</strong> Sam's Bagels, McDonalds, Sprite
+            <strong>Restaurants:</strong> {{ output["activities"] }}
         </div>
     </div>
 </div>
