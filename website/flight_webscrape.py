@@ -23,7 +23,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     opt.add_argument(r"--disable-dev-shm-usage")
     opt.add_argument(r'--ignore-certificate-errors')
     opt.add_experimental_option("detach", True)
-    opt.add_argument('headless')
+    #opt.add_argument('headless')
     opt.add_argument(f'user-agent={user_agent}')
     opt.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(options=opt)
@@ -195,19 +195,27 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
         departure_time_match = re.search(r'at (\d+:\d+ (?:AM|PM))', description)
         departure_time_first = departure_time_match.group(1)
 
-        arrival_string_match = re.search(r'arrives at (.+?\.)', description)
+        arrival_string_match = re.search(r'arrives at (.+?) Total', description)
         arrival_string = arrival_string_match.group(1)
 
         arrival_time_match = re.search(r'at (\d+:\d+ (?:AM|PM))', arrival_string)
+
         arrival_time_first = arrival_time_match.group(1)
 
         # Extracting the duration of the flight
-        duration_match = re.search(r'Total duration (\d+) hr (\d+) min', description)
-        duration_hours = int(duration_match.group(1))
-        duration_minutes = int(duration_match.group(2))
+        try:
+            duration_match = re.search(r'duration (\d+) hr (\d+) min', description)
+            duration_hours = int(duration_match.group(1))
+            duration_minutes = int(duration_match.group(2))
+            
+            # Convert duration to string format (e.g., "3 hr 8 min")
+            duration_string_first = f"{duration_hours} hr {duration_minutes} min"
+        except AttributeError:
+            duration_match = re.search(r'duration (\d+) hr', description)
+            duration_hours = int(duration_match.group(1))
 
-        # Convert duration to string format (e.g., "3 hr 8 min")
-        duration_string_first = f"{duration_hours} hr {duration_minutes} min"  
+            # Convert duration to string format (e.g., "3 hr")
+            duration_string_first = f"{duration_hours} hr"
 
         count += 1
         if count == 1:
@@ -338,20 +346,27 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
         departure_time_match = re.search(r'at (\d+:\d+ (?:AM|PM))', description)
         departure_time_second = departure_time_match.group(1)
 
-        arrival_string_match = re.search(r'arrives at (.+?\.)', description)
+        arrival_string_match = re.search(r'arrives at (.+?) Total', description)
         arrival_string = arrival_string_match.group(1)
 
         arrival_time_match = re.search(r'at (\d+:\d+ (?:AM|PM))', arrival_string)
         arrival_time_second = arrival_time_match.group(1)
 
         # Extracting the duration of the flight
-        duration_match = re.search(r'Total duration (\d+) hr (\d+) min', description)
-        duration_hours = int(duration_match.group(1))
-        duration_minutes = int(duration_match.group(2))
+        try:
+            duration_match = re.search(r'duration (\d+) hr (\d+) min', description)
+            duration_hours = int(duration_match.group(1))
+            duration_minutes = int(duration_match.group(2))
+            
+            # Convert duration to string format (e.g., "3 hr 8 min")
+            duration_string_second = f"{duration_hours} hr {duration_minutes} min"
+        except AttributeError:
+            duration_match = re.search(r'duration (\d+) hr', description)
+            duration_hours = int(duration_match.group(1))
 
-        # Convert duration to string format (e.g., "3 hr 8 min")
-        duration_string_second = f"{duration_hours} hr {duration_minutes} min"
-        
+            # Convert duration to string format (e.g., "3 hr")
+            duration_string_second = f"{duration_hours} hr"
+ 
         count += 1
 
         if count == 1:
