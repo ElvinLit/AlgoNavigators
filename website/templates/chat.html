@@ -7,36 +7,40 @@
     <!-- Chatbox -->
     <div id="chatbox">
         {% for entry in chat_log %}
-        <div class="chat-entry-container" style="{% if entry.type == 'user' %}background-color: rgba(33, 42, 62, 0.3);{% else %}background-color: rgba(57, 72, 103, 0.3){% endif %};">
-            <div class="chat-logo {% if entry.type == 'user' %}moon-logo{% endif %}">{% if entry.type == 'user' %}😎{% else %}🤖{% endif %}</div>
+        <div class="chat-entry-container"
+            style="{% if entry.type == 'user' %}background-color: rgba(33, 42, 62, 0.3);{% else %}background-color: rgba(57, 72, 103, 0.3){% endif %};">
+            <div class="chat-logo {% if entry.type == 'user' %}moon-logo{% endif %}">{% if entry.type == 'user' %}😎{%
+                else %}🤖{% endif %}</div>
             <div class="chat-entry {% if entry.type == 'user' %}user-message{% else %}response-message{% endif %}">
                 {{ entry.data }}
             </div>
         </div>
         {% endfor %}
     </div>
-    <form action="{{ url_for('chat.flights') }}" method="get">
-        <button style="display: none;" type="submit" class="btn-icon" id="flight_button"></button>
-    </form>
+
     <!-- Message Box & Button -->
     <form method="POST" id="message-form">
         <div id="userInput">
             <textarea name="note" id="userMessage" placeholder="Type a message..." class="form-control"></textarea>
             <div class="text-center button-container">
-                <button type="button" class="btn-icon" onClick="startNewConversation()"><i class="fa fa-refresh"></i></button>
-                <label style="font-size: 1.8em;" for="flight_button" class="btn-icon" data-toggle="modal" data-target="#myModal"><i class="fa fa-plane" id="flight_button_label"></i></label>
-                <button id="sendButton" type="submit" class="btn-icon btn-send"><i class="fa fa-paper-plane"></i></button>
+                <button type="button" class="btn-icon" onClick="startNewConversation()"><i
+                        class="fa fa-refresh"></i></button>
+                <label style="font-size: 24px;" for="flight_button" class="btn-icon" data-toggle="modal"
+                    data-target="#findFlightsModal" data-backdrop="static" data-keyboard="false"><i class="fa fa-search"
+                        id="flight_button_label"></i></label>
+                <button id="sendButton" type="submit" class="btn-icon btn-send"><i
+                        class="fa fa-paper-plane"></i></button>
                 <div class="loading-spinner" id="loadingSpinner"></div>
                 <script>
-                    document.getElementById('sendButton').addEventListener('click', function(event) {
-                        document.getElementById('userMessage').style.backgroundColor = 'rgba(51, 51, 51, 0.5)'; // Change background color to indicate processing
-                        document.getElementById('loadingSpinner').style.display = 'inline-block'; // Show the spinner
+                    document.getElementById('sendButton').addEventListener('click', function (event) {
+                        document.getElementById('userMessage').style.backgroundColor = 'rgba(51, 51, 51, 0.5)';
+                        document.getElementById('loadingSpinner').style.display = 'inline-block';
                     });
-                    document.getElementById('userMessage').addEventListener('keydown', function(event) {
+                    document.getElementById('userMessage').addEventListener('keydown', function (event) {
                         if (event.key === 'Enter' && !event.shiftKey) {
                             event.preventDefault();
-                            document.getElementById('userMessage').style.backgroundColor = 'rgba(51, 51, 51, 0.5)'; // Change background color to indicate processing
-                            document.getElementById('loadingSpinner').style.display = 'inline-block'; // Show the spinner
+                            document.getElementById('userMessage').style.backgroundColor = 'rgba(51, 51, 51, 0.5)';
+                            document.getElementById('loadingSpinner').style.display = 'inline-block';
                             document.getElementById('sendButton').click();
                         }
                     });
@@ -49,37 +53,37 @@
         </div>
     </form>
 </div>
-    
+
 <!-- Automatic scroll -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var chatbox = document.getElementById('chatbox');
         chatbox.scrollTop = chatbox.scrollHeight;
     });
 </script>
 
 <div class="container mt-5 text-center">
-
-    <div class="modal fade find-flights-modal" id="myModal">
+    <div class="modal fade find-flights-modal" id="findFlightsModal">
         <div class="modal-dialog">
-            <div class="modal-content">
-
-            <div class="modal-header">
-                <h4 class="modal-title">Flights</h4>
-            </div>
-
-            <div class="modal-body ">
-                <div class="clickable-box" onclick="alert('You clicked the box!')">
-                    <p class="find-flights-text">Please wait. Your travel plan is being generated...</p>
+            <div class="modal-content glassmorphism">
+                <div class="modal-header">
+                    <h4 class="modal-title">Please wait. Your travel plan is being generated...</h4>
                 </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-global-outline" data-dismiss="modal">Close</button>
-            </div>
-
+                <div class="modal-body text-center">
+                    <div class="lds-roller">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}
