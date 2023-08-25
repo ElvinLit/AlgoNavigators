@@ -22,4 +22,4 @@ Intelligent Travel Assistant
 Goal: Our goal is to create a highly versatile and user-friendly web application that enables consumers to interact naturally with a virtual AI assistant. Through this platform, users can collaboratively and effortlessly plan intricate travel itineraries, taking advantage of the AI's capabilities to enhance their journey.
 
 ### Demo Video
-
+dab
