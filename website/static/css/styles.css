@@ -67,7 +67,7 @@ html {
 }
 
 .navbar-brand:hover {
-    text-shadow: 0 0 5px rgba(0,255,162,0.25), 0 0 5px rgba(0,255,162,0.25);
+    text-shadow: 0 0 5px rgba(0, 255, 162, 0.25), 0 0 5px rgba(0, 255, 162, 0.25);
 }
 
 .navbar-nav .nav-link:hover {
@@ -321,7 +321,6 @@ html {
     font-weight: bold;
     transition: 0.3s;
     align-items: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding-bottom: 20px;
     user-select: none;
 }
@@ -330,12 +329,6 @@ html {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: none;
     text-align: center;
-}
-
-.modal-title:hover {
-    background: linear-gradient(69deg, #00ffa2, #0099cc);
-    -webkit-background-clip: text;
-    color: transparent;
 }
 
 .modal {
@@ -768,7 +761,7 @@ h3.text-center {
     margin-bottom: 25px;
 }
 
-.card label {
+.glass-card label {
     color: #ffffff;
 }
 

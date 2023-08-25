@@ -6,6 +6,7 @@
     align-items: center;
     margin-top: 200px;
 }
+
 .glass-card {
     background: rgba(0, 0, 0, 0.03);
     border-radius: 15px;
@@ -20,16 +21,23 @@
     max-width: 1000px;
     z-index: 1;
 }
+
 .planner-card-title {
     font-size: 1.8rem;
     margin-bottom: 20px;
 }
+
 .planner-card-text {
     font-size: 1.1rem;
     margin-bottom: 30px;
 }
 
 /* Modal Styling */
+.modal {
+    top: 0%;
+    bottom: 5%;
+}
+
 .modal-content {
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -39,10 +47,11 @@
     max-width: 100%;
     overflow: auto;
 }
+
 .planner-modal .modal-dialog {
     max-width: 1000px;
     width: 90%;
-    max-height: 90vh;
+    max-height: 50vh;
     border-radius: 15px;
 }
 
@@ -50,12 +59,14 @@
     background: linear-gradient(45deg, #4CAF50, #2196F3);
     color: white;
 }
+
 .modal-body {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
 .planner-modal .modal-body {
     padding: 15px;
     line-height: 1.6;
@@ -65,12 +76,14 @@
     backdrop-filter: blur(20px);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
+
 .rectangular-mcq-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 20px;
 }
+
 .rectangular-mcq-label {
     display: flex;
     flex-direction: column;
@@ -87,10 +100,12 @@
     margin-top: 10px;
     transition: border-color 0.3s ease;
 }
+
 .rectangular-mcq-label.selected {
     background-color: rgba(0, 0, 0, 0.03);
     box-shadow: 0 0 3px 2px #00ffa2;
 }
+
 .rectangular-mcq-option {
     width: 100%;
     box-sizing: border-box;
@@ -101,6 +116,7 @@
     color: white;
     backdrop-filter: blur(10px);
 }
+
 .mcq-text {
     display: flex;
     justify-content: space-between;
@@ -110,25 +126,30 @@
     margin-bottom: 15px;
     font-size: 1.1rem;
 }
+
 .expand-icon {
     cursor: pointer;
     padding: 5px;
     border-radius: 5px;
     transition: 0.3s background-color;
 }
+
 .expand-icon:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
+
 .flight-details-collapse {
     margin: 10px 0;
     display: none;
 }
+
 .sunken-flight-detail {
     background-color: rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     padding: 20px;
     margin: 5px 0;
 }
+
 .sunken-flight-detail h5:after {
     content: "";
     display: block;
@@ -139,6 +160,7 @@
     padding-bottom: 2px;
     background-color: rgba(255, 255, 255, 0.5);
 }
+
 .hotel-details-collapse {
     display: none;
     width: 100%;
@@ -146,6 +168,7 @@
     border-radius: 10px;
     margin-top: 10px;
 }
+
 .modal-submit-button {
     text-decoration: none;
     color: #00ffa2;
@@ -153,41 +176,48 @@
     background: rgba(255, 255, 255, 0.13);
     border-radius: 15px;
     backdrop-filter: blur(10px);
-    border: none; 
+    border: none;
     transition: all 0.2s ease;
-    position: relative; 
+    position: relative;
     display: block;
     margin: 20px auto 10px;
     padding: 10px 20px;
 }
+
 .modal-submit-button:hover {
     text-decoration: none;
     background-color: rgba(0, 255, 162, 0.1);
     transition: all 0.2s ease;
 }
+
 .modal-body input[type="text"] {
     width: 100%;
     box-sizing: border-box;
 }
+
 .flight-detail-label {
     font-weight: bold;
     display: inline-block;
     margin-right: 2px;
 }
+
 .flight-detail {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 10px;
 }
+
 .flight-detail span {
     margin-bottom: 5px;
 }
+
 .flight-title-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .flight-price {
     display: block;
     font-size: 1.2rem;
@@ -195,28 +225,37 @@
     text-align: center;
     font-weight: bold;
 }
+
 .flight-price-title {
     font-size: 1.2rem;
     font-weight: bold;
     margin-left: 15px;
     margin-bottom: 15px;
 }
+
 .hotel-card {
     width: 100%;
 }
-.hotel-title, .activities-title, .restaurant-title {
+
+.hotel-title,
+.activities-title,
+.restaurant-title {
     text-align: left;
 }
+
 .rectangular-mcq-label:last-child {
     margin-bottom: 20px;
 }
+
 .full-width {
     width: 100%;
 }
+
 .full-width label {
     display: block;
     width: 100%;
 }
+
 .left-align {
     text-align: left;
 }
@@ -230,4 +269,4 @@
     opacity: 0;
     margin: 0;
     padding: 0;
-  }
+}

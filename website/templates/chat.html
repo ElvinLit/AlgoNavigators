@@ -18,6 +18,10 @@
         {% endfor %}
     </div>
 
+    <form action="{{ url_for('chat.flights') }}" method="get">
+        <button style="display: none;" type="submit" class="btn-icon" id="flight_button"></button>
+    </form>
+
     <!-- Message Box & Button -->
     <form method="POST" id="message-form">
         <div id="userInput">
