@@ -36,6 +36,7 @@
 
             <!-- First Flight -->
             <label class="rectangular-mcq-label">
+              <input type="radio" name="mcq-option-flight" value="Flight 1" class="rectangular-mcq-option hidden-radio">
               <div class="mcq-text">
                 Flight 1 ({{ travel_dict["flight1"].departure_date }} to {{ travel_dict["flight1"].return_date }})
                 <span class="expand-icon">[+]</span>
@@ -94,6 +95,7 @@
 
             <!-- Second Flight -->
             <label class="rectangular-mcq-label">
+              <input type="radio" name="mcq-option-flight" value="Flight 2" class="rectangular-mcq-option hidden-radio">
               <div class="mcq-text">
                 Flight 2 ({{ travel_dict["flight2"].departure_date }} to {{ travel_dict["flight2"].return_date }})
                 <span class="expand-icon">[+]</span>
@@ -152,6 +154,7 @@
 
             <!-- Third Flight -->
             <label class="rectangular-mcq-label">
+              <input type="radio" name="mcq-option-flight" value="Flight 3" class="rectangular-mcq-option hidden-radio">
               <div class="mcq-text">
                 Flight 3 ({{ travel_dict["flight3"].departure_date }} to {{ travel_dict["flight3"].return_date }})
                 <span class="expand-icon">[+]</span>
@@ -203,8 +206,8 @@
                     </span>
                   </div>
                 </div>
-                <span class="flight-price">${{ travel_dict["flight3"].first_cost + travel_dict["flight3"].second_cost
-                  }}</span>
+                <span class="flight-price">${{ travel_dict["flight3"].first_cost + travel_dict["flight3"].second_cost }}
+                </span>
               </div>
             </label>
           </div>
@@ -213,6 +216,7 @@
 
             <!-- Hotel 1 -->
             <label class="rectangular-mcq-label">
+              <input type="radio" name="mcq-option-hotel" value="Hotel 1" class="rectangular-mcq-option hidden-radio">
               <div class="mcq-text">
                 Hotel 1
                 <span class="expand-icon">[+]</span>
@@ -220,8 +224,8 @@
               <div class="flight-details-collapse">
                 <div class="sunken-flight-detail">
                   <div class="flight-detail">
-                    <span class="flight-detail-label"><strong>Location</strong>: {{ travel_dict["hotel1"].location
-                      }}</span>
+                    <span class="flight-detail-label"><strong>Location</strong>: {{ travel_dict["hotel1"].location }}
+                    </span>
                   </div>
                   <div class="flight-detail">
                     <span class="flight-detail-label"><strong>Price</strong>: ${{ travel_dict["hotel1"].price }}</span>
@@ -235,6 +239,7 @@
 
             <!-- Hotel 2 -->
             <label class="rectangular-mcq-label">
+              <input type="radio" name="mcq-option-hotel" value="Hotel 2" class="rectangular-mcq-option hidden-radio">
               <div class="mcq-text">
                 Hotel 2
                 <span class="expand-icon">[+]</span>
@@ -242,8 +247,7 @@
               <div class="flight-details-collapse">
                 <div class="sunken-flight-detail">
                   <div class="flight-detail">
-                    <span class="flight-detail-label"><strong>Location</strong>: {{ travel_dict["hotel2"].location
-                      }}</span>
+                    <span class="flight-detail-label"><strong>Location</strong>: {{ travel_dict["hotel2"].location }}</span>
                   </div>
                   <div class="flight-detail">
                     <span class="flight-detail-label"><strong>Price</strong>: ${{ travel_dict["hotel2"].price }}</span>
@@ -257,6 +261,7 @@
 
             <!-- Hotel 3 -->
             <label class="rectangular-mcq-label">
+              <input type="radio" name="mcq-option-hotel" value="Hotel 3" class="rectangular-mcq-option hidden-radio">
               <div class="mcq-text">
                 Hotel 3
                 <span class="expand-icon">[+]</span>
@@ -264,8 +269,7 @@
               <div class="flight-details-collapse">
                 <div class="sunken-flight-detail">
                   <div class="flight-detail">
-                    <span class="flight-detail-label"><strong>Location</strong>: {{ travel_dict["hotel3"].location
-                      }}</span>
+                    <span class="flight-detail-label"><strong>Location</strong>: {{ travel_dict["hotel3"].location }}</span>
                   </div>
                   <div class="flight-detail">
                     <span class="flight-detail-label"><strong>Price</strong>: ${{ travel_dict["hotel3"].price }}</span>
@@ -281,7 +285,7 @@
           <div class="full-width">
             <label>
               <div class="mcq-text left-align">Activities</div>
-              <input type="text" name="text-option-activities" value="{{ travel_dict[" activities"] }}"
+              <input type="text" name="text-option-activities" value="{{ travel_dict['activities'] }}"
                 class="rectangular-mcq-option">
             </label>
           </div>
@@ -289,7 +293,7 @@
           <div class="full-width">
             <label>
               <div class="mcq-text left-align">Restaurants</div>
-              <input type="text" name="text-option-restaurants" value="{{ travel_dict[" restaurants"] }}"
+              <input type="text" name="text-option-restaurants" value="{{ travel_dict['restaurants'] }}"
                 class="rectangular-mcq-option">
             </label>
           </div>
