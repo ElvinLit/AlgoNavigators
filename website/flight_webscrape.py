@@ -128,8 +128,11 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
             print("There are flights!")
 
         start_loop = True
-        
-    time.sleep(2)
+
+    #Makes sure page is loaded before beautiful soup is activated
+    page_body = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]'
+    element = (By.XPATH, page_body)
+    WebDriverWait(driver, 3).until(EC.presence_of_element_located(element))
 
     page = driver.page_source
     soup = BeautifulSoup(page, 'html.parser')
@@ -145,9 +148,9 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
             if count_1 == i:
                 WebDriverWait(driver, 15).until(EC.element_to_be_clickable(elemen)).click()
                 pagenew = driver.current_url
-                time.sleep(2)
+                time.sleep(0.5)
                 driver.back()
-                time.sleep(2)
+                time.sleep(0.5)
                 if count_1 == 0:
                     flight_info_1_5 ={
                         "first link": pagenew
@@ -165,7 +168,10 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
             count_1 += 1
  
 
-    time.sleep(4)
+    #Makes sure page is loaded before beautiful soup is activated
+    page_body = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]'
+    element = (By.XPATH, page_body)
+    WebDriverWait(driver, 3).until(EC.presence_of_element_located(element))
 
     # Extracting departure flight options
 
@@ -282,7 +288,9 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
             print("Trying Again, Please Wait...")
             continue
 
+    #Makes sure page is loaded before beautiful soup is activated
     time.sleep(2)
+    #Need to find something that is different from one page versus another...
 
     for i in range(0, 3):
         elements = driver.find_elements(By.CLASS_NAME, "pIav2d")
@@ -293,9 +301,9 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
             if count_1 == i:
                 WebDriverWait(driver, 15).until(EC.element_to_be_clickable(elemen)).click()
                 pagenew = driver.current_url
-                time.sleep(2)
+                time.sleep(0.5)
                 driver.back()
-                time.sleep(2)
+                time.sleep(0.5)
                 if count_1 == 0:
                     flight_info_4_5 ={
                         "second link": pagenew
@@ -311,9 +319,10 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
 
             count_1 += 1
 
-            
-
-    time.sleep(4)
+    #Makes sure page is loaded before beautiful soup is activated
+    page_body = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]'
+    element = (By.XPATH, page_body)
+    WebDriverWait(driver, 3).until(EC.presence_of_element_located(element))
 
     count = 0
 
