@@ -132,4 +132,6 @@ def HotelScraper(destination_input):
         "hotel 3": hotel_3
     }
 
+    driver.close()
+
     return hotel_options

@@ -23,7 +23,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     opt.add_argument(r"--disable-dev-shm-usage")
     opt.add_argument(r'--ignore-certificate-errors')
     opt.add_experimental_option("detach", True)
-    #opt.add_argument('headless')
+    opt.add_argument('headless')
     opt.add_argument(f'user-agent={user_agent}')
     opt.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(options=opt)
@@ -416,5 +416,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
         "flight 2": flight_info_2,
         "flight 3": flight_info_3,
     }
+
+    driver.close()
 
     return flight_info
