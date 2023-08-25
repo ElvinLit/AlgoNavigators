@@ -66,6 +66,7 @@ class Hotels(db.Model):
     price = db.Column(db.Integer)
     location = db.Column(db.String(10000))
     rating = db.Column(db.String(10000))
+    link = db.Column(db.String(10000))
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
@@ -100,6 +101,7 @@ class FinalPlan(db.Model):
     hotel_price = db.Column(db.Integer)
     hotel_location = db.Column(db.String(10000))
     hotel_rating = db.Column(db.String(10000))
+    link = db.Column(db.String(10000))
 
     # Restaurants
     restaurant = db.Column(db.String(10000))

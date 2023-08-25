@@ -234,6 +234,7 @@ def home():
             price = hotels_dict["hotel 1"]["Price"],
             location = hotels_dict["hotel 1"]["Location"],
             rating = hotels_dict["hotel 1"]["Rating"],
+            link = hotels_dict["hotel 1"]["Link"],
             user_id = current_user.id,
             )
 
@@ -241,6 +242,7 @@ def home():
             price = hotels_dict["hotel 2"]["Price"],
             location = hotels_dict["hotel 2"]["Location"],
             rating = hotels_dict["hotel 2"]["Rating"],
+            link = hotels_dict["hotel 1"]["Link"],
             user_id = current_user.id,
             )
 
@@ -248,6 +250,7 @@ def home():
             price = hotels_dict["hotel 3"]["Price"],
             location = hotels_dict["hotel 3"]["Location"],
             rating = hotels_dict["hotel 3"]["Rating"],
+            link = hotels_dict["hotel 1"]["Link"],
             user_id = current_user.id,
             )
 
@@ -255,9 +258,6 @@ def home():
         db.session.add(hotel_two)
         db.session.add(hotel_three)
         db.session.commit()
-
-        #activities_string = output["activities"]
-        #restaurants_string = output["restaurants"]
 
         return redirect(url_for('chat.planner'))
         
