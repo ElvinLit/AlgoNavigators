@@ -19,7 +19,7 @@ def HotelScraper(destination_input):
     opt.add_argument(r"--disable-dev-shm-usage")
     opt.add_argument(r'--ignore-certificate-errors')
     opt.add_experimental_option("detach", True)
-    opt.add_argument('headless')
+    #opt.add_argument('headless')
     opt.add_argument(f'user-agent={user_agent}')
     opt.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(options=opt)
@@ -135,3 +135,6 @@ def HotelScraper(destination_input):
     driver.close()
 
     return hotel_options
+
+hotels_dict = HotelScraper("Barcelona Spain")
+print(hotels_dict)
