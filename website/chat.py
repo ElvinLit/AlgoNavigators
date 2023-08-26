@@ -7,12 +7,6 @@ import os
 
 from datetime import datetime
 
-import pandas as pd
-import numpy as np
-import random
-import tqdm
-import selenium
-
 from .apikey import apikey 
 
 from langchain.llms import OpenAI
@@ -22,8 +16,7 @@ from langchain.memory import ConversationBufferMemory
 from langchain.utilities import WikipediaAPIWrapper 
 
 from langchain.output_parsers import PydanticOutputParser
-from pydantic import BaseModel, Field, validator
-from typing import List, Dict, Any
+from pydantic import BaseModel, Field
 from langchain.memory import ChatMessageHistory
 
 from .flight_webscrape import FlightScraper
@@ -43,7 +36,7 @@ current_date = cdt.date()
 #Chat creation
 history = ChatMessageHistory()
 output = ""
-flight_boolean = False # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
+flight_boolean = False # Toggles Selenium, change to opposite if accessing chat.html automatically prompts selenium
 
 TEMPLATE =  "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \

@@ -7,7 +7,6 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
 import re
-import sqlite3
 
 def HotelScraper(destination_input):
 

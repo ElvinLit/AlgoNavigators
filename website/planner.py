@@ -1,10 +1,8 @@
-from flask import Blueprint, render_template, request, flash, jsonify, request
-from flask_login import login_required, current_user
-from .db_objs import Note
+from flask import Blueprint, render_template, request, request
+from flask_login import login_required, current_user\
+
 from . import db
-import json
-import os
-from .db_objs import Note, UserMessage, Flights, Hotels, FinalPlan
+from .db_objs import Flights, Hotels, FinalPlan
 
 
 my_plan = Blueprint('my_plan', __name__)
