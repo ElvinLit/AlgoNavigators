@@ -130,9 +130,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
         start_loop = True
 
     #Makes sure page is loaded before beautiful soup is activated
-    page_body = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]'
-    element = (By.XPATH, page_body)
-    WebDriverWait(driver, 3).until(EC.presence_of_element_located(element))
+    time.sleep(2)
 
     page = driver.page_source
     soup = BeautifulSoup(page, 'html.parser')
