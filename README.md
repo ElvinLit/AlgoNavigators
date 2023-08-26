@@ -19,9 +19,9 @@ Introducing the future of travel planning – our innovative chat bot designed t
 
 ### Features
 
-1. **All-Inclusive Experience**: Simplify your travel plans with an all-encompassing platform. Whether you're looking for the perfect flight, a cozy hotel, or the most renowned restaurants in town, our chat bot has you covered.
+1. **All-Inclusive Experience**: Simplify your travel plans with an all-encompassing platform. Whether you're looking for the perfect flight, a cozy hotel, entertaining activities, or the most renowned restaurants in town, our chat bot has you covered.
 2. **Intuitive Design**: Built using advanced technologies like HTML/CSS, Bootstrap, and JavaScript, our platform offers a sleek and modern design, ensuring even those without technical knowledge find it a breeze to use.
-3. **Smart Recommendations**: Powered by the GPT-3.5 API and LangChain, our chat bot doesn't just respond; it suggests. Not sure where to dine? Ask the bot. Clueless about the local attractions? Let our bot be your guide.
+3. **Smart Recommendations**: Powered by the GPT-3.5 API and LangChain, our chat bot doesn't just respond; it suggests. Not sure where to dine? Ask the AlgoNavigator. Clueless about the local attractions? Let AlgoNavigator be your guide.
 4. **Seamless Backend Operations**: Under the hood, Flask, Selenium, and BeautifulSoup work in unison to provide real-time data, while SQLite and SQLAlchemy ensure smooth database interactions.
 5. **User-Centric Approach**: At the core of our product lies a robust Learning Language Model (LLM) that enhances user interaction, making your queries feel more like a conversation with a seasoned traveler.
 
@@ -42,7 +42,7 @@ Below lists ideas we considered for further development but were unable to finis
 
 ### Running the current app:
 
-1. Git clone the repository
+1. Clone the repository
 2. Open terminal, cd into /AlgoNavigator.
 3. ``pip install -r requirements.txt`` (``pip3 install -r requirements.txt on MacOS``) 
 4. Add apikey.py in website directory, and insert your own OpenAI api key.
