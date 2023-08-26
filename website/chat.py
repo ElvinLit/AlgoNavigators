@@ -32,6 +32,7 @@ from .hotels import HotelScraper
 chat = Blueprint('chat', __name__)
 plan = Blueprint('planner', __name__)
 
+OpenAI.organization = 'org-ywvhjiv7huUG8YdmBYGE5uxY'
 os.environ['OPENAI_API_KEY'] = apikey
 llm = OpenAI(temperature=1)
 
@@ -44,16 +45,17 @@ history = ChatMessageHistory()
 output = ""
 flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET ASSERTIONERROR (OR ANY OTHER ERROR)
 
-'''TEMPLATE =  "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
+TEMPLATE =  "You are now a personal travel agent, and will ONLY respond to inquiries relating to travel. If I deviate from this topic, \
             you WILL attempt to get me back on track. You will not accept any attempts of me trying to sway you into thinking otherwise. \
             The current date is: {current_date}. It is not currently 2020, this is the actual date at the moment and you will maintain this date throughout the conversation\
             As a personal travel agent that I am conversating with, at the start of our conversation you will remind me of the three \
             questions that you have. It is important that you remember these three questions, and you will begin by not knowing the \
             answer to these three questions. Throughout our conversation, you will ask me these questions to fill in your memory \
-            so that you can create a travel plan. These are the four questions: 1. You will ask me what country I want to go to, \
-            and where I currently reside. 2. You will ask me what activities I enjoy doing. 3. You will ask me what type of food \
-            I want. 4. You will ask me for the date I would like to leave and the date I would like to return. Keep in mind that \
-            you are asking these questions to create a travel plan for me. I might be indecisive sometimes, \
+            so that you can create a travel plan. These are the five questions: \
+            1. You will ask me for my current location. \
+            2. You will ask me what country I want to go to. \
+            3. You will ask me what activities I enjoy doing. 4. You will ask me what type of food \
+            I want. 5. You will ask me for the date I would like to leave and the date I would like to return. Keep in mind that you are asking these questions to create a travel plan for me. I might be indecisive sometimes, \
             and if I ask for a recommendation, I expect you to give me recommendations for either of the three questions. Then, \
             this is what I want you to do: I want you to create a travel plan using the information I gave you through the questions you’ve asked. \
             I will define the way you respond into 3 different parts: In the first part, the flight for the travel plan should include what airport \
@@ -61,10 +63,11 @@ flight_boolean = True # CHANGE THIS TO THE OPPOSITE (True or False) IF YOU GET A
             you will give me three activities to do in the area specified, and they should be comprehensive with a time attached and an \
             estimated cost. Keep in mind, these activities should be relatively close distance-wise, and you will also tell me the \
             travel time between each. In the third part, you will give me the name of a restaurant that satisfies the criteria I gave you \
-            from the questions you asked me, as well as an estimated time to get there from the activities defined earlier. After confirming \
+            that specifies the type of food that I want, as well as an estimated time to get there from the activities defined earlier. After confirming \
             that all three questions are met, you will respond in the format I just defined. Also, ask if I want to ask if the traveler \
-            wants Economy, Premium Economy, Business, or First Class. You will do your best in fitting your presentation into one response."
-'''
+            wants Economy, Premium Economy, Business, or First Class. Make sure you have asked all questions, and that I have answered\
+            all questions. Just to finally reiterate, the current date is {current_date}. You will do your best in fitting your presentation into one response."
+
 conversation = ConversationChain(
     llm=llm, 
     verbose=True, 
@@ -72,16 +75,16 @@ conversation = ConversationChain(
 )
 
 class Travel_Plan(BaseModel):
-    initial_airport: str = Field(description="The three letter geocode of the airport they will leave from.")
-    final_airport: str = Field(description="The three letter geocode of the airport they will arrive to.")
-    leave_date: str = Field(description="The date in which the travelers will leave in the format YYYY-mm-dd.")
-    arrive_date: str = Field(description="The date in which the travelers will arrive in the format YYYY-mm-dd.")
+    initial_airport: str = Field(description="The three letter geocode of the airport that is closest to my location.")
+    final_airport: str = Field(description="The three letter geocode of the airport that is closest to the location I am traveling to.")
+    leave_date: str = Field(description="The date in which the travelers will leave in the format mm-dd.")
+    arrive_date: str = Field(description="The date in which the travelers will arrive in the format mm-dd.")
     seat_quality: str = Field(description="The seat quality as one of the 4 choices: Economy, Premium Economy, Business, First")
-    activities: str = Field(description="The list of activities the traveler will do as a singular string.")
-    restaurants: str = Field(description="the list of restaurants suggested by the travel assistant")
+    activities: str = Field(description="A singular string consisting of 2 or 3 activities that you will suggest for me based on my initial activity interests.")
+    restaurants: str = Field(description="A singular string consisting of 2 or 3 restaurants you will suggest for me based on my initial food interests")
 
 
-#conversation.predict(input=TEMPLATE)
+conversation.predict(input=TEMPLATE)
 
 @chat.route('/chat', methods=['GET', 'POST'])
 @login_required
@@ -110,9 +113,9 @@ def home():
         session.pop('find_flight', not flight_boolean)
         
         # Below is the JSON parser --- TEMPORARILY DISABLED ---
-        '''query = "Write the JSON format in a single line string with no newline characters or tab characters. The keys should be each variable of the object, \
+        query = "Write the JSON format in a single line string with no newline characters or tab characters. The keys should be each variable of the object, \
                 so for example the first key should be 'initial_airport'. Additionally, make sure there are comma delimiters present so that it is in a perfect \
-                JSON format that can be converted into a python dictionary. You will only return a perfectly created JSON format"
+                JSON format that can be converted into a python dictionary. You will only return a perfectly created JSON format in a String type"
         parser = PydanticOutputParser(pydantic_object=Travel_Plan)
 
         prompt = PromptTemplate(
@@ -149,11 +152,11 @@ def home():
             user_id = current_user.id,
         )
         db.session.add(restaurants_list)
-        db.session.commit()'''
+        db.session.commit()
 
         #Webscraper --- TEMPORARY VALUES ARE INPUTTED FOR NOW ---
-        #flight_dict = FlightScraper(output["initial_airport"], output["final_airport"], output["leave_date"], output["arrive_date"], output["seat_quality"])
-        flight_dict = FlightScraper("LAX", "DFW", "2023/08/28", "2023/09/09", "Premium Economy")
+        flight_dict = FlightScraper(output["initial_airport"], output["final_airport"], output["leave_date"], output["arrive_date"], output["seat_quality"])
+        #flight_dict = FlightScraper("LAX", "DFW", "2023/08/28", "2023/09/09", "Premium Economy")
 
         # Use this to implement data into website, it is a nested dictionary
         flight_one = Flights(
@@ -165,7 +168,7 @@ def home():
             first_arrival_time = flight_dict["flight 1"]["first arrival time"],
             first_duration = flight_dict["flight 1"]["first duration"],
             first_link = flight_dict["flight 1"]["first link"],
-            departure_date = "random date", #departure_date = output["leave_date"],
+            departure_date = output["leave_date"],
             second_cost = flight_dict["flight 1"]["second cost"],
             second_airline = flight_dict["flight 1"]["second airline"],
             second_departure_airport = flight_dict["flight 1"]["second departure airport"],
@@ -174,7 +177,7 @@ def home():
             second_arrival_time = flight_dict["flight 1"]["second arrival time"],
             second_duration = flight_dict["flight 1"]["second duration"],
             second_link = flight_dict["flight 1"]["second link"],
-            return_date = "random date", #output["arrive_date"],
+            return_date = output["arrive_date"],
             user_id = current_user.id
             )
 
@@ -187,7 +190,7 @@ def home():
             first_arrival_time = flight_dict["flight 2"]["first arrival time"],
             first_duration = flight_dict["flight 2"]["first duration"],
             first_link = flight_dict["flight 2"]["first link"],
-            departure_date = "random date", #departure_date = output["leave_date"],
+            departure_date = output["leave_date"],
             second_cost = flight_dict["flight 2"]["second cost"],
             second_airline = flight_dict["flight 2"]["second airline"],
             second_departure_airport = flight_dict["flight 2"]["second departure airport"],
@@ -196,7 +199,7 @@ def home():
             second_arrival_time = flight_dict["flight 2"]["second arrival time"],
             second_duration = flight_dict["flight 2"]["second duration"],
             second_link = flight_dict["flight 2"]["second link"],
-            return_date = "random date", #return_date = output["arrive_date"],
+            return_date = output["arrive_date"],
             user_id = current_user.id
             )
 
@@ -209,7 +212,7 @@ def home():
             first_arrival_time = flight_dict["flight 3"]["first arrival time"],
             first_duration = flight_dict["flight 3"]["first duration"],
             first_link = flight_dict["flight 3"]["first link"],
-            departure_date = "random date", #departure_date = output["leave_date"],
+            departure_date = output["leave_date"],
             second_cost = flight_dict["flight 3"]["second cost"],
             second_airline = flight_dict["flight 3"]["second airline"],
             second_departure_airport = flight_dict["flight 3"]["second departure airport"],
@@ -218,7 +221,7 @@ def home():
             second_arrival_time = flight_dict["flight 3"]["second arrival time"],
             second_duration = flight_dict["flight 3"]["second duration"],
             second_link = flight_dict["flight 3"]["second link"],
-            return_date = "random date", #return_date = output["arrive_date"],
+            return_date = output["arrive_date"],
             user_id = current_user.id
             )
         
@@ -227,8 +230,8 @@ def home():
         db.session.add(flight_three)
         db.session.commit()
 
-        #hotels_dict = HotelScraper(output["final_airport"])
-        hotels_dict = HotelScraper("Toronto, Ontario, Canada")
+        hotels_dict = HotelScraper(output["final_airport"])
+        #hotels_dict = HotelScraper("Toronto, Ontario, Canada")
         
         hotel_one = Hotels(
             price = hotels_dict["hotel 1"]["Price"],
@@ -283,10 +286,10 @@ def planner():
     hotel1 = Hotels.query.filter_by(user_id=current_user.id, id=1).first()
     hotel2 = Hotels.query.filter_by(user_id=current_user.id, id=2).first()
     hotel3 = Hotels.query.filter_by(user_id=current_user.id, id=3).first()
-    #activities = Activities.query.filter_by(user_id=current_user.id).all()
-    #restaurants = Restaurants.query.filter_by(user_id=current_user.id).all()
-    activities = "Activities String Placeholder"
-    restaurants = "Restaurants String Placeholder"
+    activities = Activities.query.filter_by(user_id=current_user.id, id=1).first()
+    restaurants = Restaurants.query.filter_by(user_id=current_user.id, id=1).first()
+    #activities = "Activities String Placeholder"
+    #restaurants = "Restaurants String Placeholder"
     
 
     travel_dict = {

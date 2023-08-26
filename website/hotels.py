@@ -107,15 +107,15 @@ def HotelScraper(destination_input):
         hyperlink = link.get("href")
         if count == 1:
             hotel_1_link = {
-                "Link": hyperlink
+                "Link": "https://www.google.com" + hyperlink
             }
         if count == 2:
             hotel_2_link = {
-                "Link": hyperlink
+                "Link": "https://www.google.com" + hyperlink
             }
         if count == 3:
             hotel_3_link = {
-                "Link": hyperlink
+                "Link": "https://www.google.com" + hyperlink
             }
             break
         

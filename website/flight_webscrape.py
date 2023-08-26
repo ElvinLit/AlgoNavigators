@@ -23,7 +23,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
     opt.add_argument(r"--disable-dev-shm-usage")
     opt.add_argument(r'--ignore-certificate-errors')
     opt.add_experimental_option("detach", True)
-    opt.add_argument('headless')
+    #opt.add_argument('headless')
     opt.add_argument(f'user-agent={user_agent}')
     opt.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(options=opt)
@@ -51,7 +51,7 @@ def FlightScraper(start_input, destination_input, departure_date, return_date, s
 
                 if seat == "Business":
                     seat_choice = '/html/body/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div/div[1]/div[3]/div/div/div/div[2]/ul/li[3]'
-                    element = (By.XPAT, seat_choice)
+                    element = (By.XPATH, seat_choice)
                     WebDriverWait(driver, 15).until(EC.element_to_be_clickable(element)).click()
 
                 if seat == "First":
