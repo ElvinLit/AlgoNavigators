@@ -10,6 +10,8 @@
 4. Vishnu Nambiar
 5. Noah Chin
 
+### [Demo](https://drive.google.com/file/d/1lvXn1j6pRhy4rH6POvBbbVf_8w1go3AW/view?usp=sharing)
+
 ### Product Description
 
 Introducing the future of travel planning – our innovative chat bot designed to streamline your entire travel experience. From flights and accommodations to sightseeing and dining, our chat bot ensures you have everything at your fingertips using the natural flow of the English language.
