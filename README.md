@@ -11,7 +11,7 @@
 5. Noah Chin
 
 ### Demo
-<iframe width="560" height="315" src="https://www.youtube.com/embed/YZk3eAnWgmc?si=JT4tfnF6sV4EpkzC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+[![Demo_Video](https://img.youtube.com/vi/YZk3eAnWgmc/0.jpg)](https://www.youtube.com/watch?v=YZk3eAnWgmc)
 
 ### Product Description
 
