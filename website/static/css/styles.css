@@ -635,8 +635,7 @@ hr {
 .activity-section,
 .restaurant-section {
     display: flex;
-    justify-content: space-between;
-    align-items: auto;
+    flex-direction: column;
     margin-bottom: 20px;
 }
 
@@ -645,7 +644,9 @@ hr {
 .hotel-rating {
     margin: 0;
     padding: 0;
+    text-align: left;
 }
+
 .hotel-section > div {
     display: flex;
     flex-direction: column;
