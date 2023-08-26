@@ -11,9 +11,8 @@ from .apikey import apikey
 
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain, SequentialChain, ConversationChain
+from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
-from langchain.utilities import WikipediaAPIWrapper 
 
 from langchain.output_parsers import PydanticOutputParser
 from pydantic import BaseModel, Field
@@ -82,6 +81,9 @@ conversation.predict(input=TEMPLATE)
 @chat.route('/chat', methods=['GET', 'POST'])
 @login_required
 def home():
+    """
+    Main chatting functionality between the user and AlgoNavigator
+    """
 
     find_flight = session.get('find_flight', not flight_boolean)
 
@@ -270,7 +272,9 @@ def home():
 
 @chat.route('/planner/')
 def planner():
-    
+    """
+    Responsible for translating information from our conversation to the planner page
+    """
     # Fetch each database
     flight1 = Flights.query.filter_by(user_id=current_user.id, id=1).first()
     flight2 = Flights.query.filter_by(user_id=current_user.id, id=2).first()
@@ -281,8 +285,6 @@ def planner():
     hotel3 = Hotels.query.filter_by(user_id=current_user.id, id=3).first()
     activities = Activities.query.filter_by(user_id=current_user.id, id=1).first()
     restaurants = Restaurants.query.filter_by(user_id=current_user.id, id=1).first()
-    #activities = "Activities String Placeholder"
-    #restaurants = "Restaurants String Placeholder"
     
 
     travel_dict = {
@@ -300,12 +302,18 @@ def planner():
 
 @chat.route('/flights')
 def flights():
+    """
+    Enables Selenium to find flights and hotels
+    """
     session['find_flight'] = flight_boolean
     print("Flight Button Works")
     return redirect(url_for('chat.home'))
 
 @chat.route('/delete-conversation', methods=['POST'])
 def delete_conversation():
+    """
+    Wipes the current conversation between the user and the chatbot, as well as the database
+    """
     # Fetch all notes belonging to the current user
     ai_responses = Note.query.filter_by(user_id=current_user.id).all()
     user_messages = UserMessage.query.filter_by(user_id=current_user.id).all()

@@ -1,6 +1,6 @@
-from . import db # importing from . means that we are importing from current directory location
+from . import db 
 from flask_login import UserMixin
-from sqlalchemy.sql import func # func gets current date and time 
+from sqlalchemy.sql import func  
 
 # Database Objects
 

@@ -12,34 +12,34 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
 
-        user = User.query.filter_by(email=email).first() # Query (think SQL ig)
+        user = User.query.filter_by(email=email).first() 
         if user:
-            if check_password_hash(user.password, password): # Compares equality with first and second parameter
-                login_user(user, remember=True) # Sets a user as being logged in
+            if check_password_hash(user.password, password): 
+                login_user(user, remember=True) 
                 return redirect(url_for('test.home'))
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
             flash('Email does not exist.', category='error')
 
-    return render_template("login.html", user=current_user) #Inside login.html, we can access variable 'user'!
+    return render_template("login.html", user=current_user) 
 
 @auth.route('/logout')
-@login_required # Users can only logout after logging in (makes sense)
+@login_required 
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-@auth.route('/sign-up', methods=['GET', 'POST']) # We can specify different types of requests
+@auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
-    if request.method == 'POST': # Specifying POST
-        # See sign_up.html for where this is used
+    if request.method == 'POST': 
+        
         email = request.form.get('email')
         first_name = request.form.get('firstName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2') 
 
-        # Creating error messages
+        
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='error')
