@@ -247,7 +247,8 @@
               <div class="flight-details-collapse">
                 <div class="sunken-flight-detail">
                   <div class="flight-detail">
-                    <span class="flight-detail-label"><strong>Location</strong>: {{ travel_dict["hotel2"].location }}</span>
+                    <span class="flight-detail-label"><strong>Location</strong>: {{ travel_dict["hotel2"].location
+                      }}</span>
                   </div>
                   <div class="flight-detail">
                     <span class="flight-detail-label"><strong>Price</strong>: ${{ travel_dict["hotel2"].price }}</span>
@@ -269,7 +270,8 @@
               <div class="flight-details-collapse">
                 <div class="sunken-flight-detail">
                   <div class="flight-detail">
-                    <span class="flight-detail-label"><strong>Location</strong>: {{ travel_dict["hotel3"].location }}</span>
+                    <span class="flight-detail-label"><strong>Location</strong>: {{ travel_dict["hotel3"].location
+                      }}</span>
                   </div>
                   <div class="flight-detail">
                     <span class="flight-detail-label"><strong>Price</strong>: ${{ travel_dict["hotel3"].price }}</span>
@@ -306,34 +308,39 @@
 </div>
 
 <script>
-  // JavaScript for collapse functionality goes here
-  document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     const expandIcons = document.querySelectorAll('.expand-icon');
+    const hiddenRadios = document.querySelectorAll('.hidden-radio');
 
     expandIcons.forEach(icon => {
-      icon.addEventListener('click', function (event) {
-        const details = event.target.parentElement.nextElementSibling;
+        icon.addEventListener('click', function (event) {
+            const details = event.target.parentElement.nextElementSibling;
 
-        if (details.style.display === 'none' || !details.style.display) {
-          details.style.display = 'block';
-          icon.textContent = '[-]'; // Change icon to collapse indication
-        } else {
-          details.style.display = 'none';
-          icon.textContent = '[+]'; // Change icon to expand indication
-        }
-      });
+            if (details.style.display === 'none' || !details.style.display) {
+                details.style.display = 'block';
+                icon.textContent = '[-]';
+            } else {
+                details.style.display = 'none';
+                icon.textContent = '[+]';
+            }
+
+            event.preventDefault();
+            console.log('Expand icon clicked'); 
+        });
     });
 
-    const mcqLabels = document.querySelectorAll('.rectangular-mcq-label');
-    mcqLabels.forEach(label => {
-      label.addEventListener('click', function (event) {
-        if (!event.target.classList.contains('expand-icon')) {
-          const siblings = event.target.closest('.rectangular-mcq-container').querySelectorAll('.rectangular-mcq-label');
-          siblings.forEach(l => l.classList.remove('selected'));
-          label.classList.add('selected');
-        }
-      });
+    hiddenRadios.forEach(radio => {
+        radio.addEventListener('change', function(event) {
+            const label = event.target.closest('.rectangular-mcq-label');
+            const siblings = label.closest('.rectangular-mcq-container').querySelectorAll('.rectangular-mcq-label');
+            
+            siblings.forEach(l => l.classList.remove('selected'));
+            label.classList.add('selected');
+            
+        });
     });
-  });
+});
+
+
 </script>
 {% endblock %}
