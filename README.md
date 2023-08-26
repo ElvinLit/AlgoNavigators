@@ -44,6 +44,6 @@ Below lists ideas we considered for further development but were unable to finis
 
 1. Git clone the repository
 2. Open terminal, cd into /AlgoNavigator.
-3. ``pip install -r requirements.txt`` (``pip3 install -r requirements.txt on MacOS``)
-4. ``python main.py`` (``python3 main.py`` on MacOS)
-5. Add apikey.py in website directory, and insert apikey.
+3. ``pip install -r requirements.txt`` (``pip3 install -r requirements.txt on MacOS``) 
+4. Add apikey.py in website directory, and insert your own OpenAI api key.
+5. ``python main.py`` (``python3 main.py`` on MacOS)
