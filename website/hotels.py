@@ -135,6 +135,3 @@ def HotelScraper(destination_input):
     driver.close()
 
     return hotel_options
-
-hotels_dict = HotelScraper("Barcelona Spain")
-print(hotels_dict)

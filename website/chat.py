@@ -230,7 +230,7 @@ def home():
         db.session.add(flight_three)
         db.session.commit()
 
-        hotels_dict = HotelScraper(output["final_airport"])
+        hotels_dict = HotelScraper(flight_dict["flight 1"]["second departure airport"])
         #hotels_dict = HotelScraper("Toronto, Ontario, Canada")
         
         hotel_one = Hotels(
@@ -245,7 +245,7 @@ def home():
             price = hotels_dict["hotel 2"]["Price"],
             location = hotels_dict["hotel 2"]["Location"],
             rating = hotels_dict["hotel 2"]["Rating"],
-            link = hotels_dict["hotel 1"]["Link"],
+            link = hotels_dict["hotel 2"]["Link"],
             user_id = current_user.id,
             )
 
@@ -253,7 +253,7 @@ def home():
             price = hotels_dict["hotel 3"]["Price"],
             location = hotels_dict["hotel 3"]["Location"],
             rating = hotels_dict["hotel 3"]["Rating"],
-            link = hotels_dict["hotel 1"]["Link"],
+            link = hotels_dict["hotel 3"]["Link"],
             user_id = current_user.id,
             )
 
