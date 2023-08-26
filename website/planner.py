@@ -66,6 +66,7 @@ def my_plans():
             hotel_price = hotel.price,
             hotel_location = hotel.location,
             hotel_rating = hotel.rating,
+            link = hotel.link,
             restaurant = restaurants_text,
             user_id = current_user.id
         )
