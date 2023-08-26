@@ -1,10 +1,8 @@
 Flask==2.3.2
 Flask-Login==0.6.2
 Flask-SQLAlchemy==3.0.5
-pandas
-numpy
 langchain
 pydantic
-google-flight-analysis
-tqdm
+bs4
 selenium
+sql
