@@ -1,7 +1,7 @@
 # AlgoNavigators
 
 ## Project Submission for the DFW IT Talent Champion Competition
-# Placed Top 3 Overall, secured funding from Locke Lord LLP
+### Placed Top 3 Overall, secured funding from Locke Lord LLP
 
 ### Team Members
 
